@@ -393,7 +393,7 @@ open class CometChatSnackBoard {
      - Parameter config: The configuration options.
      - Parameter view: The view to be displayed.
      */
-    public func show(view: UIView) {
+    open func show(view: UIView) {
         show(config: defaultConfig, view: view)
     }
     
@@ -428,7 +428,7 @@ open class CometChatSnackBoard {
      
      - Parameter viewProvider: A block that returns the view to be displayed.
      */
-    public func show(viewProvider: @escaping ViewProvider) {
+    open func show(viewProvider: @escaping ViewProvider) {
         show(config: defaultConfig, viewProvider: viewProvider)
     }
     
@@ -497,7 +497,7 @@ open class CometChatSnackBoard {
     /**
      Get the count of a message with the given ID (see `hideCounted(id:)`)
      */
-    public func count(id: String) -> Int {
+    open func count(id: String) -> Int {
         return counts[id] ?? 0
     }
 
@@ -505,7 +505,7 @@ open class CometChatSnackBoard {
      Explicitly set the count of a message with the given ID (see `hideCounted(id:)`).
      Not sure if there's a use case for this, but why not?!
      */
-    public func set(count: Int, for id: String) {
+    open func set(count: Int, for id: String) {
         guard counts[id] != nil else { return }
         return counts[id] = count
     }
@@ -681,7 +681,7 @@ extension CometChatSnackBoard {
 
      - Returns: The view of type `T` if it is currently being shown or hidden.
      */
-    public func current<T: UIView>() -> T? {
+    open func current<T: UIView>() -> T? {
         var view: T?
         messageQueue.sync {
             view = _current?.view as? T
@@ -695,7 +695,7 @@ extension CometChatSnackBoard {
      - Parameter id: The id of a message that adopts `Identifiable`.
      - Returns: The view with matching id if currently being shown or hidden.
     */
-    public func current<T: UIView>(id: String) -> T? {
+    open func current<T: UIView>(id: String) -> T? {
         var view: T?
         messageQueue.sync {
             if let current = _current, current.id == id {
@@ -711,7 +711,7 @@ extension CometChatSnackBoard {
      - Parameter id: The id of a message that adopts `Identifiable`.
      - Returns: The view with matching id if currently queued to be shown.
      */
-    public func queued<T: UIView>(id: String) -> T? {
+    open func queued<T: UIView>(id: String) -> T? {
         var view: T?
         messageQueue.sync {
             if let queued = queue.first(where: { $0.id == id }) {
@@ -728,7 +728,7 @@ extension CometChatSnackBoard {
      - Parameter id: The id of a message that adopts `Identifiable`.
      - Returns: The view with matching id if currently queued to be shown.
      */
-    public func currentOrQueued<T: UIView>(id: String) -> T? {
+    open func currentOrQueued<T: UIView>(id: String) -> T? {
         return current(id: id) ?? queued(id: id)
     }
 }
@@ -745,18 +745,18 @@ extension CometChatSnackBoard: PresenterDelegate {
         }
     }
 
-    public func hide(animator: Animator) {
+    open func hide(animator: Animator) {
         messageQueue.sync {
             guard let presenter = self.presenter(forAnimator: animator) else { return }
             self.internalHide(presenter: presenter)
         }
     }
 
-    public func panStarted(animator: Animator) {
+    open func panStarted(animator: Animator) {
         autohideToken = nil
     }
 
-    public func panEnded(animator: Animator) {
+    open func panEnded(animator: Animator) {
         queueAutoHide()
     }
 
@@ -793,7 +793,7 @@ extension CometChatSnackBoard {
      
      - Returns: An instance of generic view type `T`.
      */
-    public class func viewFromNib<T: UIView>(_ filesOwner: AnyObject = NSNull.init()) throws -> T {
+    open class func viewFromNib<T: UIView>(_ filesOwner: AnyObject = NSNull.init()) throws -> T {
         let name = T.description().components(separatedBy: ".").last
         assert(name != nil)
         let view: T = try internalViewFromNib(named: name!, bundle: nil, filesOwner: filesOwner)
@@ -812,7 +812,7 @@ extension CometChatSnackBoard {
      
      - Returns: An instance of generic view type `T`.
      */
-    public class func viewFromNib<T: UIView>(named name: String, filesOwner: AnyObject = NSNull.init()) throws -> T {
+    open class func viewFromNib<T: UIView>(named name: String, filesOwner: AnyObject = NSNull.init()) throws -> T {
         let view: T = try internalViewFromNib(named: name, bundle: nil, filesOwner: filesOwner)
         return view
     }
@@ -830,7 +830,7 @@ extension CometChatSnackBoard {
      
      - Returns: An instance of generic view type `T`.
      */
-    public class func viewFromNib<T: UIView>(named name: String, bundle: Bundle, filesOwner: AnyObject = NSNull.init()) throws -> T {
+    open class func viewFromNib<T: UIView>(named name: String, bundle: Bundle, filesOwner: AnyObject = NSNull.init()) throws -> T {
         let view: T = try internalViewFromNib(named: name, bundle: bundle, filesOwner: filesOwner)
         return view
     }

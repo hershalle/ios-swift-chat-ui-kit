@@ -343,7 +343,7 @@ extension BaseView {
      have `backgroundView` as a subview of `MessageView`, the background view should
      be pinned to the left and right `layoutMargins` in order for this configuration to work.
      */
-    public func configureBackgroundView(sideMargin: CGFloat) {
+    open func configureBackgroundView(sideMargin: CGFloat) {
         layoutMargins.left = sideMargin
         layoutMargins.right = sideMargin
     }
@@ -354,7 +354,7 @@ extension BaseView {
      other constraints. The CardView.nib and TabView.nib layouts are compatible with
      this method.
      */
-    public func configureBackgroundView(width: CGFloat) {
+    open func configureBackgroundView(width: CGFloat) {
         guard let backgroundView = backgroundView else { return }
         let constraint = NSLayoutConstraint(item: backgroundView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width)
         backgroundView.addConstraint(constraint)

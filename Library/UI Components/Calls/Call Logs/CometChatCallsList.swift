@@ -34,7 +34,7 @@ public protocol CallsListDelegate: AnyObject {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-public class CometChatCallsList: UIViewController {
+open class CometChatCallsList: UIViewController {
     
     // MARK: - Declaration of Variables
     
@@ -49,7 +49,7 @@ public class CometChatCallsList: UIViewController {
     
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
         view.backgroundColor = .white
         safeArea = view.layoutMarginsGuide
@@ -82,7 +82,7 @@ public class CometChatCallsList: UIViewController {
      - Copyright:  ©  2020 CometChat Inc.
     
      */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
         if navigationController != nil{
             navigationItem.title = title.localized()
             navigationItem.largeTitleDisplayMode = mode
@@ -373,7 +373,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 0
     }
@@ -382,7 +382,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width - 20, height: 0.5))
         return returnedView
     }
@@ -391,7 +391,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
@@ -401,7 +401,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     
     /// This method specifies the number of sections to display list of Conversations.
     /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
@@ -409,7 +409,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if calls.isEmpty  {
             self.tableView.setEmptyMessage("NO_HISTORY_FOUND".localized())
@@ -428,7 +428,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
     
@@ -436,7 +436,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView.
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch segmentControl.selectedSegmentIndex {
         case 0:
@@ -458,7 +458,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let selectedCall = tableView.cellForRow(at: indexPath) as? CometChatCallListItem else{
             return
@@ -498,7 +498,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: A view that presents data using rows arranged in a single column.
     ///   - indexPath: A list of indexes that together represent the path to a specific location in a tree of nested arrays.
-    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -508,7 +508,7 @@ extension CometChatCallsList: UITableViewDelegate , UITableViewDataSource {
     ///   - tableView: A view that presents data using rows arranged in a single column.
     ///   - editingStyle: The visual representation of a single row in a table view.
     ///   - indexPath: A list of indexes that together represent the path to a specific location in a tree of nested arrays.
-    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if let selectedCall = tableView.cellForRow(at: indexPath) as? CometChatCallListItem {
                 CometChat.delete(messageId: selectedCall.call.id, onSuccess: { (success) in
@@ -549,7 +549,7 @@ extension CometChatCallsList : CometChatMessageDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onTextMessageReceived(textMessage: TextMessage) {
+    open func onTextMessageReceived(textMessage: TextMessage) {
         refreshCalls()
     }
     
@@ -559,7 +559,7 @@ extension CometChatCallsList : CometChatMessageDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onMediaMessageReceived(mediaMessage: MediaMessage) {
+    open func onMediaMessageReceived(mediaMessage: MediaMessage) {
         refreshCalls()
     }
 }

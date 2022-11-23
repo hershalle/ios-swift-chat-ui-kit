@@ -12,7 +12,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-@objc public class CometChatCallManager : NSObject {
+@objc open class CometChatCallManager : NSObject {
     
      // MARK: - Declaration of Variables
     
@@ -27,7 +27,7 @@ import CometChatPro
     - Author: CometChat Team
     - Copyright:  ©  2020 CometChat Inc.
     */
-    @objc public func registerForCalls(application: UIResponder){
+    @objc open func registerForCalls(application: UIResponder){
         CometChat.calldelegate = application as? CometChatCallDelegate
     }
     
@@ -40,7 +40,7 @@ import CometChatPro
     - Author: CometChat Team
     - Copyright:  ©  2020 CometChat Inc.
     */
-    @objc public func makeCall(call: CometChat.CallType, to: AppEntity){
+    @objc open func makeCall(call: CometChat.CallType, to: AppEntity){
         if let user = to as? CometChatPro.User {
             if user.blockedByMe == true {
                 CometChatSnackBoard.display(message: "UNBLOCK_USER_MESSAGE".localized(), mode: .error, duration: .short)
@@ -50,7 +50,7 @@ import CometChatPro
                     let outgoingCall = CometChatOutgoingCall()
                     outgoingCall.makeCall(call: call, to: user)
                     outgoingCall.modalPresentationStyle = .fullScreen
-                    if let window = UIApplication.shared.windows.first , let rootViewController = window.rootViewController {
+                    if let window = UIKitSettings.applicationShared!.windows.first , let rootViewController = window.rootViewController {
                         var currentController = rootViewController
                         while let presentedController = currentController.presentedViewController {
                             currentController = presentedController
@@ -65,7 +65,7 @@ import CometChatPro
                 let outgoingCall = CometChatOutgoingCall()
                 outgoingCall.makeCall(call: call, to: group)
                 outgoingCall.modalPresentationStyle = .fullScreen
-                if let window = UIApplication.shared.windows.first , let rootViewController = window.rootViewController {
+                if let window = UIKitSettings.applicationShared!.windows.first , let rootViewController = window.rootViewController {
                     var currentController = rootViewController
                     while let presentedController = currentController.presentedViewController {
                         currentController = presentedController
@@ -96,84 +96,84 @@ import CometChatPro
 //  MARK: - CometChatCallDelegate Methods (For Swift Project)
 //
 //  Since, Objective C dosen't extend Appdelegate, kindly register for `CometChatCallDelegate` in AppDelegate and add those methods in AppDelegate.
-@available(iOS 11, *)
-extension AppDelegate : CometChatCallDelegate {
-
-    /**
-    This method triggers when incoming call received from Server.
-     - Parameters:
-      - incomingCall: Specifies a Call Object
-        - error:  triggers when error occurs
-    - Author: CometChat Team
-    - Copyright:  ©  2020 CometChat Inc.
-    */
-    func onIncomingCallReceived(incomingCall: CometChatPro.Call?, error: CometChatException?) {
-        print(#function)
-        if let currentCall = incomingCall {
-            DispatchQueue.main.async {
-                let call = CometChatIncomingCall()
-                call.modalPresentationStyle = .custom
-                call.setCall(call: currentCall)
-                if let window = self.window, let rootViewController = window.rootViewController {
-                    var currentController = rootViewController
-                    while let presentedController = currentController.presentedViewController {
-                        currentController = presentedController
-                    }
-                    currentController.present(call, animated: true, completion: nil)
-                }
-                if let call = incomingCall {
-                    CometChatCallManager.incomingCallDelegate?.onIncomingCallReceived(incomingCall: call, error: error)
-                }
-            }
-        }
-
-    }
-
-    /**
-    This method triggers when outgoing call accepted from User or group.
-     - Parameters:
-      - acceptedCall: Specifies a Call Object
-        - error:  triggers when error occurs
-    - Author: CometChat Team
-    - Copyright:  ©  2020 CometChat Inc.
-    */
-    func onOutgoingCallAccepted(acceptedCall: CometChatPro.Call?, error: CometChatException?) {
-        print(#function)
-        if let call = acceptedCall {
-            CometChatCallManager.outgoingCallDelegate?.onOutgoingCallAccepted(acceptedCall: call, error: error)
-        }
-    }
-
-    /**
-    This method triggers when ourgoing call rejected from User or group.
-     - Parameters:
-      - rejectedCall: Specifies a Call Object
-        - error:  triggers when error occurs
-    - Author: CometChat Team
-    - Copyright:  ©  2020 CometChat Inc.
-    */
-    func onOutgoingCallRejected(rejectedCall: CometChatPro.Call?, error: CometChatException?) {
-        print(#function)
-        if let call = rejectedCall {
-            CometChatCallManager.outgoingCallDelegate?.onOutgoingCallRejected(rejectedCall: call, error: error)
-        }
-    }
-
-    /**
-    This method triggers when incoming call cancelled from User or group.
-     - Parameters:
-      - rejectedCall: Specifies a Call Object
-        - error:  triggers when error occurs
-    - Author: CometChat Team
-    - Copyright:  ©  2020 CometChat Inc.
-    */
-    func onIncomingCallCancelled(canceledCall: CometChatPro.Call?, error: CometChatException?) {
-        print(#function)
-        if let call = canceledCall {
-            CometChatCallManager.incomingCallDelegate?.onIncomingCallCancelled(canceledCall: call, error: error)
-        }
-    }
-}
+//@available(iOS 11, *)
+//extension AppDelegate : CometChatCallDelegate {
+//
+//    /**
+//    This method triggers when incoming call received from Server.
+//     - Parameters:
+//      - incomingCall: Specifies a Call Object
+//        - error:  triggers when error occurs
+//    - Author: CometChat Team
+//    - Copyright:  ©  2020 CometChat Inc.
+//    */
+//    func onIncomingCallReceived(incomingCall: CometChatPro.Call?, error: CometChatException?) {
+//        print(#function)
+//        if let currentCall = incomingCall {
+//            DispatchQueue.main.async {
+//                let call = CometChatIncomingCall()
+//                call.modalPresentationStyle = .custom
+//                call.setCall(call: currentCall)
+//                if let window = self.window, let rootViewController = window.rootViewController {
+//                    var currentController = rootViewController
+//                    while let presentedController = currentController.presentedViewController {
+//                        currentController = presentedController
+//                    }
+//                    currentController.present(call, animated: true, completion: nil)
+//                }
+//                if let call = incomingCall {
+//                    CometChatCallManager.incomingCallDelegate?.onIncomingCallReceived(incomingCall: call, error: error)
+//                }
+//            }
+//        }
+//
+//    }
+//
+//    /**
+//    This method triggers when outgoing call accepted from User or group.
+//     - Parameters:
+//      - acceptedCall: Specifies a Call Object
+//        - error:  triggers when error occurs
+//    - Author: CometChat Team
+//    - Copyright:  ©  2020 CometChat Inc.
+//    */
+//    func onOutgoingCallAccepted(acceptedCall: CometChatPro.Call?, error: CometChatException?) {
+//        print(#function)
+//        if let call = acceptedCall {
+//            CometChatCallManager.outgoingCallDelegate?.onOutgoingCallAccepted(acceptedCall: call, error: error)
+//        }
+//    }
+//
+//    /**
+//    This method triggers when ourgoing call rejected from User or group.
+//     - Parameters:
+//      - rejectedCall: Specifies a Call Object
+//        - error:  triggers when error occurs
+//    - Author: CometChat Team
+//    - Copyright:  ©  2020 CometChat Inc.
+//    */
+//    func onOutgoingCallRejected(rejectedCall: CometChatPro.Call?, error: CometChatException?) {
+//        print(#function)
+//        if let call = rejectedCall {
+//            CometChatCallManager.outgoingCallDelegate?.onOutgoingCallRejected(rejectedCall: call, error: error)
+//        }
+//    }
+//
+//    /**
+//    This method triggers when incoming call cancelled from User or group.
+//     - Parameters:
+//      - rejectedCall: Specifies a Call Object
+//        - error:  triggers when error occurs
+//    - Author: CometChat Team
+//    - Copyright:  ©  2020 CometChat Inc.
+//    */
+//    func onIncomingCallCancelled(canceledCall: CometChatPro.Call?, error: CometChatException?) {
+//        print(#function)
+//        if let call = canceledCall {
+//            CometChatCallManager.incomingCallDelegate?.onIncomingCallCancelled(canceledCall: call, error: error)
+//        }
+//    }
+//}
 
 ///*  ----------------------------------------------------------------------------------------- */
 //
@@ -189,7 +189,7 @@ extension AppDelegate : CometChatCallDelegate {
 //    - Author: CometChat Team
 //    - Copyright:  ©  2020 CometChat Inc.
 //    */
-//    public func onIncomingCallReceived(incomingCall: Call?, error: CometChatException?) {
+//    open func onIncomingCallReceived(incomingCall: Call?, error: CometChatException?) {
 //
 //        if let currentCall = incomingCall {
 //            DispatchQueue.main.async {
@@ -212,7 +212,7 @@ extension AppDelegate : CometChatCallDelegate {
 //    - Author: CometChat Team
 //    - Copyright:  ©  2020 CometChat Inc.
 //    */
-//    public func onOutgoingCallAccepted(acceptedCall: Call?, error: CometChatException?) {
+//    open func onOutgoingCallAccepted(acceptedCall: Call?, error: CometChatException?) {
 //
 //        if let call = acceptedCall {
 //            CometChatCallManager.outgoingCallDelegate?.onOutgoingCallAccepted(acceptedCall: call, error: error)
@@ -227,7 +227,7 @@ extension AppDelegate : CometChatCallDelegate {
 //    - Author: CometChat Team
 //    - Copyright:  ©  2020 CometChat Inc.
 //    */
-//    public func onOutgoingCallRejected(rejectedCall: Call?, error: CometChatException?) {
+//    open func onOutgoingCallRejected(rejectedCall: Call?, error: CometChatException?) {
 //
 //        if let call = rejectedCall {
 //            CometChatCallManager.outgoingCallDelegate?.onOutgoingCallRejected(rejectedCall: call, error: error)
@@ -242,7 +242,7 @@ extension AppDelegate : CometChatCallDelegate {
 //    - Author: CometChat Team
 //    - Copyright:  ©  2020 CometChat Inc.
 //    */
-//    public func onIncomingCallCancelled(canceledCall: Call?, error: CometChatException?) {
+//    open func onIncomingCallCancelled(canceledCall: Call?, error: CometChatException?) {
 //
 //        if let call = canceledCall {
 //            CometChatCallManager.incomingCallDelegate?.onIncomingCallCancelled(canceledCall: call, error: error)

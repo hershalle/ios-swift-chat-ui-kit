@@ -285,7 +285,7 @@ class CometChatSenderLinkPreviewBubble: UITableViewCell {
 
 extension UITableViewCell {
     
-    public func calculateHeightForReactions(reactionView: CometChatMessageReactions, heightReactions: NSLayoutConstraint) {
+    open func calculateHeightForReactions(reactionView: CometChatMessageReactions, heightReactions: NSLayoutConstraint) {
         /// Count the number of reactions.
         let count = reactionView.reactions.count
         /// numberOfItemInARow. MaxWidth is 228 and one item width is 45.

@@ -34,7 +34,7 @@ public protocol ForwardMessageListDelegate : AnyObject{
 
 /*  ----------------------------------------------------------------------------------------- */
 
-public class CometChatForwardMessageList: UIViewController {
+open class CometChatForwardMessageList: UIViewController {
     
     // MARK: - Declaration of Variables
     
@@ -52,7 +52,7 @@ public class CometChatForwardMessageList: UIViewController {
     
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
         view.backgroundColor = .white
         safeArea = view.layoutMarginsGuide
@@ -85,7 +85,7 @@ public class CometChatForwardMessageList: UIViewController {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
         if navigationController != nil{
             navigationItem.title = title.localized()
             navigationItem.largeTitleDisplayMode = mode
@@ -101,7 +101,7 @@ public class CometChatForwardMessageList: UIViewController {
     }
     
     
-    @objc public func set(message: BaseMessage){
+    @objc open func set(message: BaseMessage){
         
         self.message = message
         
@@ -423,7 +423,7 @@ extension CometChatForwardMessageList: UITableViewDelegate , UITableViewDataSour
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
     
@@ -431,14 +431,14 @@ extension CometChatForwardMessageList: UITableViewDelegate , UITableViewDataSour
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width - 20, height: 0.5))
         return returnedView
     }
     
     /// This method specifies the number of sections to display list of Conversations.
     /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
@@ -446,7 +446,7 @@ extension CometChatForwardMessageList: UITableViewDelegate , UITableViewDataSour
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return conversations.count
         
@@ -456,7 +456,7 @@ extension CometChatForwardMessageList: UITableViewDelegate , UITableViewDataSour
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
     
@@ -464,7 +464,7 @@ extension CometChatForwardMessageList: UITableViewDelegate , UITableViewDataSour
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView.
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CometChatConversationListItem", for: indexPath) as! CometChatConversationListItem
         let  conversation = conversations[safe:indexPath.row]
         cell.conversation = conversation
@@ -475,7 +475,7 @@ extension CometChatForwardMessageList: UITableViewDelegate , UITableViewDataSour
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedConversation = tableView.cellForRow(at: indexPath) as? CometChatConversationListItem else{
             return
         }
@@ -492,7 +492,7 @@ extension CometChatForwardMessageList: UITableViewDelegate , UITableViewDataSour
     }
     
     
-    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
         guard let selectedConversation = tableView.cellForRow(at: indexPath) as? CometChatConversationListItem else{
             return
@@ -524,7 +524,7 @@ extension CometChatForwardMessageList : CometChatMessageDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onTextMessageReceived(textMessage: TextMessage) {
+    open func onTextMessageReceived(textMessage: TextMessage) {
         refreshConversations()
     }
     
@@ -536,7 +536,7 @@ extension CometChatForwardMessageList : CometChatMessageDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onMediaMessageReceived(mediaMessage: MediaMessage) {
+    open func onMediaMessageReceived(mediaMessage: MediaMessage) {
         refreshConversations()
     }
     
@@ -548,7 +548,7 @@ extension CometChatForwardMessageList : CometChatMessageDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onTypingStarted(_ typingDetails: TypingIndicator) {
+    open func onTypingStarted(_ typingDetails: TypingIndicator) {
         if let row = self.conversations.firstIndex(where: {($0.conversationWith as? CometChatPro.User)?.uid == typingDetails.sender?.uid && $0.conversationType.rawValue == typingDetails.receiverType.rawValue }) {
             let indexPath = IndexPath(row: row, section: 0)
             DispatchQueue.main.async {
@@ -605,7 +605,7 @@ extension CometChatForwardMessageList : CometChatMessageDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onTypingEnded(_ typingDetails: TypingIndicator) {
+    open func onTypingEnded(_ typingDetails: TypingIndicator) {
         if let row = self.conversations.firstIndex(where: {($0.conversationWith as? CometChatPro.User)?.uid == typingDetails.sender?.uid && $0.conversationType.rawValue == typingDetails.receiverType.rawValue}) {
             let indexPath = IndexPath(row: row, section: 0)
             DispatchQueue.main.async {
@@ -646,7 +646,7 @@ extension CometChatForwardMessageList : CometChatUserDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onUserOnline(user: CometChatPro.User) {
+    open func onUserOnline(user: CometChatPro.User) {
         if let row = self.conversations.firstIndex(where: {($0.conversationWith as? CometChatPro.User)?.uid == user.uid}) {
             let indexPath = IndexPath(row: row, section: 0)
             DispatchQueue.main.async {
@@ -666,7 +666,7 @@ extension CometChatForwardMessageList : CometChatUserDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onUserOffline(user: CometChatPro.User) {
+    open func onUserOffline(user: CometChatPro.User) {
         if let row = self.conversations.firstIndex(where: {($0.conversationWith as? CometChatPro.User)?.uid == user.uid}) {
             let indexPath = IndexPath(row: row, section: 0)
             DispatchQueue.main.async {
@@ -696,7 +696,7 @@ extension CometChatForwardMessageList : CometChatGroupDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onGroupMemberJoined(action: ActionMessage, joinedUser: CometChatPro.User, joinedGroup: CometChatPro.Group) {
+    open func onGroupMemberJoined(action: ActionMessage, joinedUser: CometChatPro.User, joinedGroup: CometChatPro.Group) {
         refreshConversations()
     }
     
@@ -711,7 +711,7 @@ extension CometChatForwardMessageList : CometChatGroupDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onGroupMemberLeft(action: ActionMessage, leftUser: CometChatPro.User, leftGroup: CometChatPro.Group) {
+    open func onGroupMemberLeft(action: ActionMessage, leftUser: CometChatPro.User, leftGroup: CometChatPro.Group) {
         refreshConversations()
     }
     
@@ -727,7 +727,7 @@ extension CometChatForwardMessageList : CometChatGroupDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onGroupMemberKicked(action: ActionMessage, kickedUser: CometChatPro.User, kickedBy: CometChatPro.User, kickedFrom: CometChatPro.Group) {
+    open func onGroupMemberKicked(action: ActionMessage, kickedUser: CometChatPro.User, kickedBy: CometChatPro.User, kickedFrom: CometChatPro.Group) {
         refreshConversations()
     }
     
@@ -743,7 +743,7 @@ extension CometChatForwardMessageList : CometChatGroupDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onGroupMemberBanned(action: ActionMessage, bannedUser: CometChatPro.User, bannedBy: CometChatPro.User, bannedFrom: CometChatPro.Group) {
+    open func onGroupMemberBanned(action: ActionMessage, bannedUser: CometChatPro.User, bannedBy: CometChatPro.User, bannedFrom: CometChatPro.Group) {
         refreshConversations()
     }
     
@@ -759,7 +759,7 @@ extension CometChatForwardMessageList : CometChatGroupDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onGroupMemberUnbanned(action: ActionMessage, unbannedUser: CometChatPro.User, unbannedBy: CometChatPro.User, unbannedFrom: CometChatPro.Group) {
+    open func onGroupMemberUnbanned(action: ActionMessage, unbannedUser: CometChatPro.User, unbannedBy: CometChatPro.User, unbannedFrom: CometChatPro.Group) {
         refreshConversations()
     }
     
@@ -777,7 +777,7 @@ extension CometChatForwardMessageList : CometChatGroupDelegate {
      - See Also:
      [CometChatForwardMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-3-comet-chat-conversation-list)
      */
-    public func onGroupMemberScopeChanged(action: ActionMessage, scopeChangeduser: CometChatPro.User, scopeChangedBy: CometChatPro.User, scopeChangedTo: String, scopeChangedFrom: String, group: CometChatPro.Group) {
+    open func onGroupMemberScopeChanged(action: ActionMessage, scopeChangeduser: CometChatPro.User, scopeChangedBy: CometChatPro.User, scopeChangedTo: String, scopeChangedFrom: String, group: CometChatPro.Group) {
         refreshConversations()
     }
     
@@ -788,7 +788,7 @@ extension CometChatForwardMessageList : CometChatGroupDelegate {
     ///   - addedBy: Specifies `User` Object
     ///   - addedUser: Specifies `User` Object
     ///   - addedTo: Specifies `Group` Object
-    public func onMemberAddedToGroup(action: ActionMessage, addedBy: CometChatPro.User, addedUser: CometChatPro.User, addedTo: CometChatPro.Group) {
+    open func onMemberAddedToGroup(action: ActionMessage, addedBy: CometChatPro.User, addedUser: CometChatPro.User, addedTo: CometChatPro.Group) {
         refreshConversations()
     }
 }

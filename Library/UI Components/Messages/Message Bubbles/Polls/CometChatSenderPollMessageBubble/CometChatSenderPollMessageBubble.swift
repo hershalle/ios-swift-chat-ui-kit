@@ -426,7 +426,7 @@ class CometChatSenderPollMessageBubble: UITableViewCell {
 }
 
     
-    public func calculatePercentage(value:Double, total: Double)-> Int {
+    open func calculatePercentage(value:Double, total: Double)-> Int {
         if total == 0 {
             return 0
         }else{

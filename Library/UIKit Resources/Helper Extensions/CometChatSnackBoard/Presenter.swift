@@ -276,12 +276,13 @@ class Presenter: NSObject {
             }
             return conflicts
         } else {
-            #if CometChatSnackBoard_APP_EXTENSIONS
+#if CometChatSnackBoard_APP_EXTENSIONS
             return []
-            #else
-            if UIApplication.shared.isStatusBarHidden { return [] }
+#else
+            guard let applicationShared = UIKitSettings.applicationShared else { return [] }
+            if applicationShared.isStatusBarHidden { return [] }
             if (windowLevel > UIWindow.Level.normal) || underNavigationBar { return [] }
-            let statusBarFrame = UIApplication.shared.statusBarFrame
+            let statusBarFrame = applicationShared.statusBarFrame
             let statusBarWindowFrame = window.convert(statusBarFrame, from: nil)
             let statusBarViewFrame = maskingView.convert(statusBarWindowFrame, from: nil)
             return statusBarViewFrame.intersects(maskingView.bounds) ? SafeZoneConflicts.statusBar : []

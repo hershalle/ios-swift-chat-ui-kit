@@ -49,13 +49,13 @@ import CometChatPro
     }
     
     @discardableResult
-    public func set(messageObject: BaseMessage) -> Self {
+    open func set(messageObject: BaseMessage) -> Self {
         self.message = messageObject
         return self
     }
     
     @discardableResult
-    public func set(controller: UIViewController) -> Self {
+    open func set(controller: UIViewController) -> Self {
         self.controller = controller
         return self
     }
@@ -120,7 +120,7 @@ extension CometChatMessageReactions: UICollectionViewDataSource, UICollectionVie
     /// - Parameters:
     ///   - collectionView: An object that manages an ordered collection of data items and presents them using customizable layouts.
     ///   - section: A signed integer value type.
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return reactions.count
     }
     
@@ -129,7 +129,7 @@ extension CometChatMessageReactions: UICollectionViewDataSource, UICollectionVie
     /// - Parameters:
     ///   - collectionView: An object that manages an ordered collection of data items and presents them using customizable layouts.
     ///   - indexPath: A list of indexes that together represent the path to a specific location in a tree of nested arrays.
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reactionCountCell", for: indexPath) as! ReactionCountCell
         let reaction = reactions[safe: indexPath.row]
         cell.addReactionsIcon.isHidden = true
@@ -138,7 +138,7 @@ extension CometChatMessageReactions: UICollectionViewDataSource, UICollectionVie
        return cell
     }
     
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? ReactionCountCell, let reaction = cell.reaction {
             CometChatMessageReactions.cometChatMessageReactionsDelegate?.didReactionPressed(reaction: reaction)
         }
@@ -146,7 +146,7 @@ extension CometChatMessageReactions: UICollectionViewDataSource, UICollectionVie
 }
 
 extension CometChatMessageReactions: UICollectionViewDelegateFlowLayout {
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 44, height: 30)
     }
 }

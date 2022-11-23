@@ -210,7 +210,7 @@ open class CometChatSnackBoardSegue: UIStoryboardSegue {
 
 extension CometChatSnackBoardSegue {
     /// A convenience method for configuring some pre-defined layouts that mirror a subset of `MessageView.Layout`.
-    public func configure(layout: Layout) {
+    open func configure(layout: Layout) {
         messageView.bounceAnimationOffset = 0
         containerView.cornerRadius = 0
         containerView.roundsLeadingCorners = false
@@ -343,7 +343,7 @@ extension CometChatSnackBoardSegue {
 }
 
 extension CometChatSnackBoardSegue: UIViewControllerTransitioningDelegate {
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    open func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let shower = TransitioningPresenter(segue: self)
         messenger.defaultConfig.eventListeners.append { [unowned self] in
             switch $0 {
@@ -365,7 +365,7 @@ extension CometChatSnackBoardSegue: UIViewControllerTransitioningDelegate {
         return shower
     }
 
-    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    open func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return hider
     }
 }

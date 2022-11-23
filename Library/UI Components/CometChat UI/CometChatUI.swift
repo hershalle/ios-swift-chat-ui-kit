@@ -57,7 +57,7 @@ public enum Controller : String {
      - See Also:
      [CometChatUI Documentation](https://prodocs.cometchat.com/docs/ios-ui-unified)
      */
-    @objc public func set(controllers: [UIViewController]?){
+    @objc open func set(controllers: [UIViewController]?){
        
         // Adding Navigation controllers for view controllers.
         conversations.viewControllers = [conversationList]
@@ -111,7 +111,7 @@ public enum Controller : String {
      - See Also:
      [CometChatUI Documentation](https://prodocs.cometchat.com/docs/ios-ui-unified)
      */
-    @objc public func setup(withStyle: UIModalPresentationStyle){
+    @objc open func setup(withStyle: UIModalPresentationStyle){
         self.modalPresentationStyle = withStyle
         var controllers = [UIViewController]()
 

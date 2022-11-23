@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class PhysicsAnimation: NSObject, Animator {
+open class PhysicsAnimation: NSObject, Animator {
 
     public enum Placement {
         case top
@@ -35,13 +35,13 @@ public class PhysicsAnimation: NSObject, Animator {
         self.delegate = delegate
     }
 
-    public func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
+    open func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
         NotificationCenter.default.addObserver(self, selector: #selector(adjustMargins), name: UIDevice.orientationDidChangeNotification, object: nil)
         install(context: context)
         showAnimation(context: context, completion: completion)
     }
 
-    public func hide(context: AnimationContext, completion: @escaping AnimationCompletion) {
+    open func hide(context: AnimationContext, completion: @escaping AnimationCompletion) {
         NotificationCenter.default.removeObserver(self)
         if panHandler.isOffScreen {
             context.messageView.alpha = 0
@@ -112,7 +112,7 @@ public class PhysicsAnimation: NSObject, Animator {
         installInteractive(context: context)
     }
 
-    @objc public func adjustMargins() {
+    @objc open func adjustMargins() {
         guard let adjustable = messageView as? MarginAdjustable & UIView,
             let context = context else { return }
         adjustable.preservesSuperviewLayoutMargins = false

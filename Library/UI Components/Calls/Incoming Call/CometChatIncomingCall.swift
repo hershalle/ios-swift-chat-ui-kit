@@ -11,7 +11,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-public class CometChatIncomingCall: UIViewController {
+open class CometChatIncomingCall: UIViewController {
     
      // MARK: - Declaration of Outlets
     
@@ -30,7 +30,7 @@ public class CometChatIncomingCall: UIViewController {
     
     // MARK: - View controller lifecycle methods
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         if let call = currentCall {
@@ -46,7 +46,7 @@ public class CometChatIncomingCall: UIViewController {
         self.view  = view
     }
     
-    override public func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         CometChatCallManager.incomingCallDelegate = self
         CometChatCallManager.outgoingCallDelegate = self
     }
@@ -59,7 +59,7 @@ public class CometChatIncomingCall: UIViewController {
     - Author: CometChat Team
     - Copyright:  ©  2020 CometChat Inc.
     */
-    @objc public func setCall(call: CometChatPro.Call){
+    @objc open func setCall(call: CometChatPro.Call){
         currentCall = call
     }
     
@@ -130,7 +130,7 @@ public class CometChatIncomingCall: UIViewController {
         self.callStatus.text = callStatus
         self.callStatusIcon.image = callStatusIcon
     }
-    public func acceptCall(withCall: CometChatPro.Call?) {
+    open func acceptCall(withCall: CometChatPro.Call?) {
         if let call = withCall  {
             CometChatSoundManager().play(sound: .incomingCall, bool: false)
             CometChat.acceptCall(sessionID: call.sessionID ?? "", onSuccess: { (acceptedCall) in
@@ -252,7 +252,7 @@ extension CometChatIncomingCall: IncomingCallDelegate {
     - Author: CometChat Team
     - Copyright:  ©  2020 CometChat Inc.
     */
-    public func onIncomingCallReceived(incomingCall: CometChatPro.Call, error: CometChatException?) {
+    open func onIncomingCallReceived(incomingCall: CometChatPro.Call, error: CometChatException?) {
         self.setupAppearance(forCall: incomingCall)
     }
     
@@ -264,7 +264,7 @@ extension CometChatIncomingCall: IncomingCallDelegate {
        - Author: CometChat Team
        - Copyright:  ©  2020 CometChat Inc.
        */
-    public func onIncomingCallCancelled(canceledCall: CometChatPro.Call, error: CometChatException?) {
+    open func onIncomingCallCancelled(canceledCall: CometChatPro.Call, error: CometChatException?) {
         if canceledCall != nil {
             if let session = canceledCall.sessionID {
                 CometChat.rejectCall(sessionID: session, status: .cancelled, onSuccess: {(cancelledCall) in
@@ -302,7 +302,7 @@ extension CometChatIncomingCall: OutgoingCallDelegate {
        - Author: CometChat Team
        - Copyright:  ©  2020 CometChat Inc.
        */
-    public func onOutgoingCallAccepted(acceptedCall: CometChatPro.Call, error: CometChatException?) {
+    open func onOutgoingCallAccepted(acceptedCall: CometChatPro.Call, error: CometChatException?) {
         DispatchQueue.main.async {
             if acceptedCall.sender?.uid == LoggedInUser.uid {
                 self.dismiss()
@@ -318,7 +318,7 @@ extension CometChatIncomingCall: OutgoingCallDelegate {
        - Author: CometChat Team
        - Copyright:  ©  2020 CometChat Inc.
        */
-    public func onOutgoingCallRejected(rejectedCall: CometChatPro.Call, error: CometChatException?) {
+    open func onOutgoingCallRejected(rejectedCall: CometChatPro.Call, error: CometChatException?) {
         DispatchQueue.main.async {
             if rejectedCall.sender?.uid == LoggedInUser.uid {
                 self.dismiss()

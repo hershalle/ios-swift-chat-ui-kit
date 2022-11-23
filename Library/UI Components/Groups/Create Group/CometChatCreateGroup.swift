@@ -70,7 +70,7 @@ class CometChatCreateGroup: UIViewController {
     - Author: CometChat Team
     - Copyright:  ©  2020 CometChat Inc.
     */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
           if navigationController != nil{
               navigationItem.title = title.localized()
               navigationItem.largeTitleDisplayMode = mode

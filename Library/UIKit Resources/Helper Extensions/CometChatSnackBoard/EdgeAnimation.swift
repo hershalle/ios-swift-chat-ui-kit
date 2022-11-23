@@ -11,7 +11,7 @@ import UIKit
 @available(*, deprecated, message: "Class renamed to `EdgeAnimation` to reflect new ability to do leading and trailing animations.")
 public typealias TopBottomAnimation = EdgeAnimation
 
-public class EdgeAnimation: NSObject, Animator {
+open class EdgeAnimation: NSObject, Animator {
 
     public enum Style {
         case top
@@ -55,13 +55,13 @@ public class EdgeAnimation: NSObject, Animator {
         self.delegate = delegate
     }
 
-    public func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
+    open func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
         NotificationCenter.default.addObserver(self, selector: #selector(adjustMargins), name: UIDevice.orientationDidChangeNotification, object: nil)
         install(context: context)
         showAnimation(completion: completion)
     }
 
-    public func hide(context: AnimationContext, completion: @escaping AnimationCompletion) {
+    open func hide(context: AnimationContext, completion: @escaping AnimationCompletion) {
         NotificationCenter.default.removeObserver(self)
         let view = context.messageView
         self.context = context
@@ -81,7 +81,8 @@ public class EdgeAnimation: NSObject, Animator {
             completion(completed)
             #else
             // Fix #131 by always completing if application isn't active.
-            completion(completed || UIApplication.shared.applicationState != .active)
+            guard let applicationShared = UIKitSettings.applicationShared else { return }
+            completion(completed || applicationShared.applicationState != .active)
             #endif
         }
     }
@@ -179,7 +180,7 @@ public class EdgeAnimation: NSObject, Animator {
         }
     }
 
-    @objc public func adjustMargins() {
+    @objc open func adjustMargins() {
         guard let adjustable = messageView as? MarginAdjustable & UIView,
             let context = context else { return }
         adjustable.preservesSuperviewLayoutMargins = false
@@ -216,7 +217,8 @@ public class EdgeAnimation: NSObject, Animator {
             #if CometChatSnackBoard_APP_EXTENSIONS
             completion(completed)
             #else
-            completion(completed || UIApplication.shared.applicationState != .active)
+            guard let applicationShared = UIKitSettings.applicationShared else { return }
+            completion(completed || applicationShared.applicationState != .active)
             #endif
         })
     }

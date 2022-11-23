@@ -44,7 +44,7 @@ class CometChatMessageInformation: UIViewController {
     }
     
     
-    public func set(message: BaseMessage) {
+    open func set(message: BaseMessage) {
         self.message = message
     }
     
@@ -231,7 +231,7 @@ extension CometChatMessageInformation: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
@@ -565,7 +565,7 @@ extension CometChatMessageInformation: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.beginUpdates()
         UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
             
@@ -643,7 +643,7 @@ extension CometChatMessageInformation: UITableViewDelegate, UITableViewDataSourc
         tableView.endUpdates()
     }
     
-    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.beginUpdates()
         UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
             
@@ -764,9 +764,8 @@ extension CometChatMessageInformation: LocationCellDelegate {
     }
     
     func openGoogleMapsForPlace(latitude: String, longitude: String) {
-        
-        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-          UIApplication.shared.openURL(URL(string:
+        if (UIKitSettings.applicationShared!.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            UIKitSettings.openURL?(URL(string:
             "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
         } else {
         }

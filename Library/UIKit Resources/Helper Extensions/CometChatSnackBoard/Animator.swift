@@ -43,7 +43,7 @@ public struct SafeZoneConflicts: OptionSet {
     public static let overStatusBar = SafeZoneConflicts(rawValue: 1 << 3)
 }
 
-public class AnimationContext {
+open class AnimationContext {
     public let messageView: UIView
     public let containerView: UIView & LayoutInstalling
     public let safeZoneConflicts: SafeZoneConflicts

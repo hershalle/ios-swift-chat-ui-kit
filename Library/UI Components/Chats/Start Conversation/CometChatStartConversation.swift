@@ -36,7 +36,7 @@ public protocol StartConversationDelegate: AnyObject {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-public class CometChatStartConversation: UIViewController {
+open class CometChatStartConversation: UIViewController {
     
     
     // MARK: - Declaration of Variables
@@ -59,7 +59,7 @@ public class CometChatStartConversation: UIViewController {
     
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
         
         view.backgroundColor = .white
@@ -93,7 +93,7 @@ public class CometChatStartConversation: UIViewController {
      - See Also:
      [CometChatStartConversation Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-1-comet-chat-user-list)
      */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
         if navigationController != nil{
             navigationItem.title = title.localized()
             navigationItem.largeTitleDisplayMode = mode
@@ -119,7 +119,7 @@ public class CometChatStartConversation: UIViewController {
      - See Also:
      [CometChatStartConversation Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-1-comet-chat-user-list)
      */
-    @objc public func set(barColor :UIColor, titleColor color: UIColor){
+    @objc open func set(barColor :UIColor, titleColor color: UIColor){
         if navigationController != nil{
             // NavigationBar Appearance
             if #available(iOS 13.0, *) {
@@ -514,7 +514,7 @@ extension CometChatStartConversation: UITableViewDelegate , UITableViewDataSourc
     
     /// This method specifies the number of sections to display list of users. In CometChatStartConversation, the users which has same starting alphabets are clubbed in single section.
     /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             if isSearching() {
@@ -532,7 +532,7 @@ extension CometChatStartConversation: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             return 25
         }else{
@@ -545,7 +545,7 @@ extension CometChatStartConversation: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             if isSearching(){
                 return filteredUsers.count
@@ -571,7 +571,7 @@ extension CometChatStartConversation: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             return 60
         }else{
@@ -584,7 +584,7 @@ extension CometChatStartConversation: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             guard let section = indexPath.section as? Int else { return UITableViewCell() }
@@ -628,7 +628,7 @@ extension CometChatStartConversation: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width - 20, height: 25))
@@ -658,7 +658,7 @@ extension CometChatStartConversation: UITableViewDelegate , UITableViewDataSourc
     ///   - tableView: The table-view object requesting this information.
     ///   - cell: The TableViewCell object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             let lastSectionIndex = tableView.numberOfSections - 1
@@ -682,7 +682,7 @@ extension CometChatStartConversation: UITableViewDelegate , UITableViewDataSourc
     ///   - tableView: The table-view object requesting this information.
     ///   - title: specifies current index title.
     ///   - index: specifies current index.
-    public func tableView(_ tableView: UITableView,
+    open func tableView(_ tableView: UITableView,
                           sectionForSectionIndexTitle title: String,
                           at index: Int) -> Int{
         return index
@@ -693,7 +693,7 @@ extension CometChatStartConversation: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             guard let selectedUser = tableView.cellForRow(at: indexPath) as? CometChatUserListItem else{
@@ -783,7 +783,7 @@ extension CometChatStartConversation : UISearchBarDelegate, UISearchResultsUpdat
     
     /// This method update the list of users as per string provided in search bar
     /// - Parameter searchController: The UISearchController object used as the search bar.
-    public func updateSearchResults(for searchController: UISearchController) {
+    open func updateSearchResults(for searchController: UISearchController) {
         
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             
@@ -837,7 +837,7 @@ extension CometChatStartConversation : UISearchBarDelegate, UISearchResultsUpdat
     }
     
     
-    public func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    open func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
             
             switch selectedScope {
             case 0:

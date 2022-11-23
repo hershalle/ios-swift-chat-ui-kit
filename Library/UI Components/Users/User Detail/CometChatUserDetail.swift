@@ -37,7 +37,7 @@ class CometChatUserDetails: UIViewController {
     
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
        
         view.backgroundColor = .white
@@ -55,7 +55,7 @@ class CometChatUserDetails: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func set(user: CometChatPro.User){
+    open func set(user: CometChatPro.User){
         currentUser = user
         CometChat.getUser(UID: user.uid ?? "", onSuccess: { (updatedUser) in
             self.currentUser = updatedUser
@@ -79,7 +79,7 @@ class CometChatUserDetails: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
         if navigationController != nil{
             navigationItem.title = title.localized()
             navigationItem.largeTitleDisplayMode = mode
@@ -207,7 +207,7 @@ extension CometChatUserDetails: UITableViewDelegate , UITableViewDataSource {
     
     /// This method specifies the number of sections to display list of items.
     /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
@@ -215,7 +215,7 @@ extension CometChatUserDetails: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0  {
             return 0
         }else{
@@ -236,7 +236,7 @@ extension CometChatUserDetails: UITableViewDelegate , UITableViewDataSource {
 //    / - Parameters:
 //    /   - tableView: The table-view object requesting this information.
 //    /   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width - 20, height: 25))
         let sectionTitle = UILabel(frame: CGRect(x: 10, y: 2, width: returnedView.frame.size.width, height: 20))
         if section == 0 {
@@ -261,7 +261,7 @@ extension CometChatUserDetails: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return settingItems.count
         case 1: return actionsItems.count
@@ -275,7 +275,7 @@ extension CometChatUserDetails: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if  indexPath.section == 0 && indexPath.row == 0 {
             return 100
         }else if indexPath.section == 3 {
@@ -297,7 +297,7 @@ extension CometChatUserDetails: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
         switch indexPath.section {
         case 0:
@@ -377,7 +377,7 @@ extension CometChatUserDetails: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
@@ -527,14 +527,14 @@ extension CometChatUserDetails :QLPreviewControllerDataSource, QLPreviewControll
     
     /// Invoked when the Quick Look preview controller needs to know the number of preview items to include in the preview navigation list.
     /// - Parameter controller: A specialized view for previewing an item.
-    public func numberOfPreviewItems(in controller: QLPreviewController) -> Int { return 1 }
+    open func numberOfPreviewItems(in controller: QLPreviewController) -> Int { return 1 }
     
     
     /// Invoked when the Quick Look preview controller needs the preview item for a specified index position.
     /// - Parameters:
     ///   - controller: A specialized view for previewing an item.
     ///   - index: The index position, within the preview navigation list, of the item to preview.
-    public func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+    open func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         return self.previewItem as QLPreviewItem
     }
 }

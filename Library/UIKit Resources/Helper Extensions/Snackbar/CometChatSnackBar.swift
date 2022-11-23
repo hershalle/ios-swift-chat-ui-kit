@@ -562,7 +562,7 @@ extension UIColor {
         addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
         
         // Get super view to show
-        if let superView = containerView ?? (UIApplication.shared.delegate?.window ?? nil) ?? UIApplication.shared.keyWindow {
+        if let superView = containerView ?? (UIKitSettings.applicationShared!.delegate?.window ?? nil) ?? UIKitSettings.applicationShared!.keyWindow {
             superView.addSubview(self)
             
             // Left margin constraint

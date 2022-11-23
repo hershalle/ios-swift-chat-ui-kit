@@ -33,7 +33,7 @@ public protocol GroupListDelegate: AnyObject {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-public class CometChatGroupList: UIViewController {
+open class CometChatGroupList: UIViewController {
     
     // MARK: - Declaration of Variables
     var groupRequest = GroupsRequest.GroupsRequestBuilder(limit: 20).build()
@@ -49,7 +49,7 @@ public class CometChatGroupList: UIViewController {
     
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
         view.backgroundColor = .white
         safeArea = view.layoutMarginsGuide
@@ -79,7 +79,7 @@ public class CometChatGroupList: UIViewController {
      - See Also:
      [CometChatGroupList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-2-comet-chat-group-list)
      */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
         if navigationController != nil{
             navigationItem.title = title.localized()
             navigationItem.largeTitleDisplayMode = mode
@@ -393,7 +393,7 @@ extension CometChatGroupList: UITableViewDelegate , UITableViewDataSource {
     
   /// This method specifies the number of sections to display list of Groups.
   /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
@@ -401,7 +401,7 @@ extension CometChatGroupList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if groups.isEmpty {
             self.tableView.setEmptyMessage("NO_GROUPS_FOUND".localized())
         } else{
@@ -418,7 +418,7 @@ extension CometChatGroupList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
     
@@ -426,7 +426,7 @@ extension CometChatGroupList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width - 20, height: 0.5))
         return returnedView
     }
@@ -435,7 +435,7 @@ extension CometChatGroupList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
     
@@ -443,7 +443,7 @@ extension CometChatGroupList: UITableViewDelegate , UITableViewDataSource {
      /// - Parameters:
      ///   - tableView: The table-view object requesting this information.
      ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let selectedGroup = (tableView.cellForRow(at: indexPath) as? CometChatGroupListItem)?.group else{
             return
@@ -516,7 +516,7 @@ extension CometChatGroupList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex && groups.count > 10 {
@@ -528,7 +528,7 @@ extension CometChatGroupList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView.
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CometChatGroupListItem", for: indexPath) as! CometChatGroupListItem
         let group: CometChatPro.Group?
         
@@ -559,7 +559,7 @@ extension CometChatGroupList : UISearchBarDelegate, UISearchResultsUpdating {
     - See Also:
     [CometChatGroupList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-2-comet-chat-group-list)
     */
-    public func updateSearchResults(for searchController: UISearchController) {
+    open func updateSearchResults(for searchController: UISearchController) {
         groupRequest  = GroupsRequest.GroupsRequestBuilder(limit: 20).set(searchKeyword: searchController.searchBar.text ?? "").build()
         groupRequest.fetchNext(onSuccess: { (groups) in
             if groups.count != 0 {

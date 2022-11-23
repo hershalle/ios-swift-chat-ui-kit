@@ -20,7 +20,7 @@ extension MarginAdjustable where Self: UIView {
                 #if CometChatSnackBoard_APP_EXTENSIONS
                 let application: UIApplication? = nil
                 #else
-                let application: UIApplication? = UIApplication.shared
+                let application: UIApplication? = UIKitSettings.applicationShared
                 #endif
                 if !context.safeZoneConflicts.isDisjoint(with: [.statusBar]),
                    let app = application,

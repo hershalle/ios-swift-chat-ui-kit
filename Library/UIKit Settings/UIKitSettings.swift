@@ -44,7 +44,8 @@ enum ChatDisplayMode {
 
 
 
-public struct UIKitSettings {
+open class UIKitSettings {
+    private init() {}
     
     static var bundle = Bundle.main
     
@@ -159,4 +160,7 @@ public struct UIKitSettings {
     static var viewProfile: SwitchMode =  .enabled
     static var startConversation: SwitchMode =  .enabled
     public static var tabs: [Controller] = [.chats, .calls, .users , .groups, .settings]
+    
+    public static var openURL: ((URL) -> Void)?
+    public static var applicationShared: UIApplication?
 }

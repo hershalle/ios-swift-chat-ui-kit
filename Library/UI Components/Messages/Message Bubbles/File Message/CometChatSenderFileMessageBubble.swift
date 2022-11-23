@@ -11,13 +11,13 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatSenderFileMessageBubble: UITableViewCell {
+open class CometChatSenderFileMessageBubble: UITableViewCell {
 
     // MARK: - Declaration of IBOutlets
     @IBOutlet weak var reactionView: CometChatMessageReactions!
     @IBOutlet weak var heightReactions: NSLayoutConstraint!
     @IBOutlet weak var replybutton: UIButton!
-    @IBOutlet weak var name: UILabel!
+    @IBOutlet open weak var name: UILabel!
     @IBOutlet weak var type: UILabel!
     @IBOutlet weak var size: UILabel!
     @IBOutlet weak var icon: UIImageView!
@@ -114,7 +114,7 @@ class CometChatSenderFileMessageBubble: UITableViewCell {
 
     }
     
-    override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         if #available(iOS 13.0, *) {
             selectionColor = .systemBackground
@@ -123,7 +123,7 @@ class CometChatSenderFileMessageBubble: UITableViewCell {
         }
     }
 
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    open override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         if #available(iOS 13.0, *) {
             
@@ -133,7 +133,7 @@ class CometChatSenderFileMessageBubble: UITableViewCell {
         
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    open override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if #available(iOS 13.0, *) {
             
@@ -142,7 +142,7 @@ class CometChatSenderFileMessageBubble: UITableViewCell {
         }
     }
      
-    override func prepareForReuse() {
+    open override func prepareForReuse() {
         reactionView.reactions.removeAll()
     }
  

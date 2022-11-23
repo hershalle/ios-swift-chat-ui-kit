@@ -26,7 +26,7 @@ class CometChatBlockedUsers: UIViewController {
     
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
        
         view.backgroundColor = .white
@@ -51,7 +51,7 @@ class CometChatBlockedUsers: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
         if navigationController != nil{
             navigationItem.title = title.localized()
             navigationItem.largeTitleDisplayMode = mode
@@ -74,7 +74,7 @@ class CometChatBlockedUsers: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    @objc public func set(barColor :UIColor, titleColor color: UIColor){
+    @objc open func set(barColor :UIColor, titleColor color: UIColor){
         if navigationController != nil{
             // NavigationBar Appearance
             if #available(iOS 13.0, *) {
@@ -218,13 +218,13 @@ extension CometChatBlockedUsers: UITableViewDelegate , UITableViewDataSource {
     
     /// This method specifies the number of sections to display list of blocked users.
     /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int { return 1 }
+    open func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
     /// This method specifiesnumber of rows in CometChatBlockedUsers
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return blockedUsers.count
     }
     
@@ -232,7 +232,7 @@ extension CometChatBlockedUsers: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView.
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
@@ -240,7 +240,7 @@ extension CometChatBlockedUsers: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView.
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let user = blockedUsers[safe:indexPath.row]
         let blockedUserCell = tableView.dequeueReusableCell(withIdentifier: "CometChatUserListItem", for: indexPath) as! CometChatUserListItem
         blockedUserCell.user = user
@@ -251,7 +251,7 @@ extension CometChatBlockedUsers: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
@@ -314,7 +314,7 @@ extension CometChatBlockedUsers: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         

@@ -10,15 +10,16 @@ import UIKit
 
 extension UIWindow {
     static var keyWindow: UIWindow? {
+        guard let applicationShared = UIKitSettings.applicationShared else { return nil }
         if #available(iOS 13.0, *) {
-            return UIApplication.shared.connectedScenes
+            return applicationShared.connectedScenes
                 .filter { $0.activationState == .foregroundActive }
                 .compactMap { $0 as? UIWindowScene }
                 .first?.windows
                 .filter { $0.isKeyWindow }
                 .first
         } else {
-            return UIApplication.shared.keyWindow
+            return applicationShared.keyWindow
         }
     }
 }

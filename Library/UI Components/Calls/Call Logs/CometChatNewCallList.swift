@@ -33,7 +33,7 @@ public protocol NewCallListDelegate: AnyObject {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-public class CometChatNewCallList: UIViewController {
+open class CometChatNewCallList: UIViewController {
     
     // MARK: - Declaration of Variables
     
@@ -51,7 +51,7 @@ public class CometChatNewCallList: UIViewController {
     var globalGroupedUsers: [String : [CometChatPro.User]] = [:]
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
     
         view.backgroundColor = .white
@@ -79,7 +79,7 @@ public class CometChatNewCallList: UIViewController {
      - Copyright:  ©  2020 CometChat Inc.
     
      */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
         if navigationController != nil{
             navigationItem.title = title.localized()
             navigationItem.largeTitleDisplayMode = mode
@@ -104,7 +104,7 @@ public class CometChatNewCallList: UIViewController {
      - Copyright:  ©  2020 CometChat Inc.
     
      */
-    @objc public func set(barColor :UIColor, titleColor color: UIColor){
+    @objc open func set(barColor :UIColor, titleColor color: UIColor){
         if navigationController != nil{
             // NavigationBar Appearance
             if #available(iOS 13.0, *) {
@@ -406,7 +406,7 @@ extension CometChatNewCallList: UITableViewDelegate , UITableViewDataSource {
     
     /// This method specifies the number of sections to display list of users. In CometChatNewCallList, the users which has same starting alphabets are clubbed in single section.
     /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         if isSearching() {
             return 1
         }else{
@@ -419,7 +419,7 @@ extension CometChatNewCallList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
     }
     
@@ -428,7 +428,7 @@ extension CometChatNewCallList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if isSearching(){
             return filteredUsers.count
@@ -442,7 +442,7 @@ extension CometChatNewCallList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
@@ -451,7 +451,7 @@ extension CometChatNewCallList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let section = indexPath.section as? Int else { return UITableViewCell() }
         if isSearching() {
@@ -478,7 +478,7 @@ extension CometChatNewCallList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width - 20, height: 25))
         sectionTitle = UILabel(frame: CGRect(x: 10, y: 2, width: returnedView.frame.size.width, height: 25))
@@ -503,7 +503,7 @@ extension CometChatNewCallList: UITableViewDelegate , UITableViewDataSource {
     ///   - tableView: The table-view object requesting this information.
     ///   - cell: The TableViewCell object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
@@ -517,7 +517,7 @@ extension CometChatNewCallList: UITableViewDelegate , UITableViewDataSource {
     ///   - tableView: The table-view object requesting this information.
     ///   - title: specifies current index title.
     ///   - index: specifies current index.
-    public func tableView(_ tableView: UITableView,
+    open func tableView(_ tableView: UITableView,
                           sectionForSectionIndexTitle title: String,
                           at index: Int) -> Int{
         return index
@@ -528,7 +528,7 @@ extension CometChatNewCallList: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedUser = tableView.cellForRow(at: indexPath) as? CometChatUserListItem else{
             return
         }
@@ -551,7 +551,7 @@ extension CometChatNewCallList : UISearchBarDelegate, UISearchResultsUpdating {
     
     /// This method update the list of users as per string provided in search bar
     /// - Parameter searchController: The UISearchController object used as the search bar.
-    public func updateSearchResults(for searchController: UISearchController) {
+    open func updateSearchResults(for searchController: UISearchController) {
         if UIKitSettings.userInMode == .all {
             userRequest = UsersRequest.UsersRequestBuilder(limit: 20).set(searchKeyword: searchController.searchBar.text ?? "").build()
         }else if UIKitSettings.userInMode == .friends {

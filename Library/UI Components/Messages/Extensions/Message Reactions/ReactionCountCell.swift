@@ -47,43 +47,43 @@ class ReactionCountCell: UICollectionViewCell {
     }
     
     @discardableResult
-    public func set(addReactionIconTint: UIColor) -> Self {
+    open func set(addReactionIconTint: UIColor) -> Self {
         self.addReactionsIcon.tintColor = addReactionIconTint
         return self
     }
     
     @discardableResult
-    public func set(addReactionIconbackground: UIColor) -> Self {
+    open func set(addReactionIconbackground: UIColor) -> Self {
         self.addReactionsIcon.backgroundColor = addReactionIconbackground
         return self
     }
     
     @discardableResult
-    public func set(textColor: UIColor) -> Self {
+    open func set(textColor: UIColor) -> Self {
         self.reactionLabel.textColor = textColor
         return self
     }
     
     @discardableResult
-    public func set(textFont: UIFont) -> Self {
+    open func set(textFont: UIFont) -> Self {
         self.reactionLabel.font = textFont
         return self
     }
     
     @discardableResult
-    public func set(background: UIColor) -> Self {
+    open func set(background: UIColor) -> Self {
         self.contentView.backgroundColor = background
         return self
     }
     
     @discardableResult
-    public func set(borderColor: UIColor) -> Self {
+    open func set(borderColor: UIColor) -> Self {
         self.contentView.layer.borderColor = borderColor.cgColor
         return self
     }
     
     @discardableResult
-    public func set(borderWidth: CGFloat) -> Self {
+    open func set(borderWidth: CGFloat) -> Self {
         self.contentView.layer.borderWidth = borderWidth
         return self
     }

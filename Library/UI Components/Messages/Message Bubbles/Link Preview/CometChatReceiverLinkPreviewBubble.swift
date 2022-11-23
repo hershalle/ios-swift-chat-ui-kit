@@ -12,7 +12,7 @@ import CometChatPro
 
 // MARK: - Importing Protocols.
 
- protocol LinkPreviewDelegate {
+protocol LinkPreviewDelegate {
     func didVisitButtonPressed(link: String,sender: UIButton)
     func didPlayButtonPressed(link: String,sender: UIButton)
 }

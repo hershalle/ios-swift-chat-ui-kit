@@ -217,7 +217,7 @@ extension MessageView {
      - Parameter size: The size to be translated into Auto Layout constraints.
      - Parameter contentMode: The optional content mode to apply.
      */
-    public func configureIcon(withSize size: CGSize, contentMode: UIView.ContentMode? = nil) {
+    open func configureIcon(withSize size: CGSize, contentMode: UIView.ContentMode? = nil) {
         var views: [UIView] = []
         if let iconImageView = iconImageView { views.append(iconImageView) }
         if let iconLabel = iconLabel { views.append(iconLabel) }
@@ -249,7 +249,7 @@ extension MessageView {
      - Parameter theme: The theme type to use.
      - Parameter iconStyle: The icon style to use. Defaults to `.Default`.
      */
-    public func configureTheme(_ theme: Theme, iconStyle: IconStyle = .default) {
+    open func configureTheme(_ theme: Theme, iconStyle: IconStyle = .default) {
         let iconImage = iconStyle.image(theme: theme)
         switch theme {
         case .info:
@@ -286,7 +286,7 @@ extension MessageView {
      - Parameter backgroundColor: The background color to use.
      - Parameter foregroundColor: The foreground color to use.
      */
-    public func configureTheme(backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage? = nil, iconText: String? = nil) {
+    open func configureTheme(backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage? = nil, iconText: String? = nil) {
         iconImageView?.image = iconImage
         iconImageView?.contentMode = .scaleAspectFit
         iconLabel?.text = iconText
@@ -326,7 +326,7 @@ extension MessageView {
      
      - Parameter body: The message body text to use.
      */
-    public func configureContent(body: String) {
+    open func configureContent(body: String) {
         bodyLabel?.text = body
     }
     
@@ -336,7 +336,7 @@ extension MessageView {
      - Parameter title: The message title to use.
      - Parameter body: The message body text to use.
      */
-    public func configureContent(title: String, body: String) {
+    open func configureContent(title: String, body: String) {
         configureContent(body: body)
         titleLabel?.text = title
     }
@@ -349,7 +349,7 @@ extension MessageView {
      - Parameter body: The message body text to use.
      - Parameter iconImage: The icon image to use.
      */
-    public func configureContent(title: String, body: String, iconImage: UIImage) {
+    open func configureContent(title: String, body: String, iconImage: UIImage) {
         configureContent(title: title, body: body)
         iconImageView?.image = iconImage
         iconImageView?.isHidden = false
@@ -365,7 +365,7 @@ extension MessageView {
      - Parameter body: The message body text to use.
      - Parameter iconText: The icon text to use (e.g. an emoji).
      */
-    public func configureContent(title: String, body: String, iconText: String) {
+    open func configureContent(title: String, body: String, iconText: String) {
         configureContent(title: title, body: body)
         iconLabel?.text = iconText
         iconLabel?.isHidden = false
@@ -384,7 +384,7 @@ extension MessageView {
      - Parameter buttonTitle: The button title to use.
      - Parameter buttonTapHandler: The button tap handler block to use.
      */
-    public func configureContent(title: String?, body: String?, iconImage: UIImage?, iconText: String?, buttonImage: UIImage?, buttonTitle: String?, buttonTapHandler: ((_ button: UIButton) -> Void)?) {
+    open func configureContent(title: String?, body: String?, iconImage: UIImage?, iconText: String?, buttonImage: UIImage?, buttonTitle: String?, buttonTapHandler: ((_ button: UIButton) -> Void)?) {
         titleLabel?.text = title
         bodyLabel?.text = body
         iconImageView?.image = iconImage

@@ -819,7 +819,7 @@ extension PanModalPresentationController: UIGestureRecognizerDelegate {
     /**
      Do not require any other gesture recognizers to fail
      */
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
 
@@ -827,7 +827,7 @@ extension PanModalPresentationController: UIGestureRecognizerDelegate {
      Allow simultaneous gesture recognizers only when the other gesture recognizer's view
      is the pan scrollable view
      */
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return otherGestureRecognizer.view == presentable?.panScrollable
     }
 }

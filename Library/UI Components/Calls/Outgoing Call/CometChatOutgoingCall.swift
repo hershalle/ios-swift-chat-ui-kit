@@ -12,7 +12,7 @@ import  AVFoundation
 
 /*  ----------------------------------------------------------------------------------------- */
 
-@objc  public class CometChatOutgoingCall: UIViewController {
+@objc  open class CometChatOutgoingCall: UIViewController {
     
       // MARK: - Declaration of Outlets
     @IBOutlet weak var avatar: CometChatAvatar!
@@ -25,7 +25,7 @@ import  AVFoundation
     var callSetting: CallSettings?
      // MARK: - View controller lifecycle methods
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         CometChatSoundManager().play(sound: .outgoingCall, bool: true)
          
@@ -39,7 +39,7 @@ import  AVFoundation
         self.view  = view
     }
     
-    override public func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             if let user = self.currentUser { self.setupAppearance(forEntity: user) }
             if let group = self.currentGroup { self.setupAppearance(forEntity: group) }
@@ -57,7 +57,7 @@ import  AVFoundation
         - Author: CometChat Team
         - Copyright:  ©  2020 CometChat Inc.
         */
-    public func makeCall(call: CometChat.CallType , to: AppEntity) {
+    open func makeCall(call: CometChat.CallType , to: AppEntity) {
         if let user = (to as? CometChatPro.User), let name = user.name {
             self.currentUser = user
             let call = Call(receiverId: user.uid ?? "", callType: call, receiverType: .user)
@@ -162,7 +162,7 @@ extension CometChatOutgoingCall: OutgoingCallDelegate {
     - Author: CometChat Team
     - Copyright:  ©  2020 CometChat Inc.
     */
-    public func onOutgoingCallAccepted(acceptedCall: CometChatPro.Call, error: CometChatException?) {
+    open func onOutgoingCallAccepted(acceptedCall: CometChatPro.Call, error: CometChatException?) {
         CometChatSoundManager().play(sound: .outgoingCall, bool: false)
         if acceptedCall != nil {
             if let session = acceptedCall.sessionID {
@@ -228,7 +228,7 @@ extension CometChatOutgoingCall: OutgoingCallDelegate {
        - Author: CometChat Team
        - Copyright:  ©  2020 CometChat Inc.
        */
-    public func onOutgoingCallRejected(rejectedCall: CometChatPro.Call, error: CometChatException?) {
+    open func onOutgoingCallRejected(rejectedCall: CometChatPro.Call, error: CometChatException?) {
         
         if rejectedCall != nil {
             if let session = rejectedCall.sessionID {

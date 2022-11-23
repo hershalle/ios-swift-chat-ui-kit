@@ -282,15 +282,15 @@ extension GrowingTextView {
 
 // MARK: - Public
 extension GrowingTextView {
-    public func scrollRangeToVisible(_ range: NSRange) {
+    open func scrollRangeToVisible(_ range: NSRange) {
         textView.scrollRangeToVisible(range)
     }
 
-    public func calculateHeight() -> CGFloat {
+    open func calculateHeight() -> CGFloat {
         return ceil(textView.sizeThatFits(textView.frame.size).height + contentInset.top + contentInset.bottom)
     }
 
-    public func updateHeight() {
+    open func updateHeight() {
         let updatedHeightInfo = updatedHeight()
         let newHeight = updatedHeightInfo.newHeight
         let difference = updatedHeightInfo.difference
@@ -421,33 +421,33 @@ extension GrowingTextView {
 
 // MARK: - TextView delegate
 extension GrowingTextView: UITextViewDelegate {
-    public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+    open func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if let delegate = delegate, delegate.responds(to: DelegateSelectors.shouldBeginEditing) {
             return delegate.growingTextViewShouldBeginEditing!(self)
         }
         return true
     }
 
-    public func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+    open func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         if let delegate = delegate, delegate.responds(to: DelegateSelectors.shouldEndEditing) {
             return delegate.growingTextViewShouldEndEditing!(self)
         }
         return true
     }
 
-    public func textViewDidBeginEditing(_ textView: UITextView) {
+    open func textViewDidBeginEditing(_ textView: UITextView) {
         if let delegate = delegate, delegate.responds(to: DelegateSelectors.didBeginEditing) {
             delegate.growingTextViewDidBeginEditing!(self)
         }
     }
 
-    public func textViewDidEndEditing(_ textView: UITextView) {
+    open func textViewDidEndEditing(_ textView: UITextView) {
         if let delegate = delegate, delegate.responds(to: DelegateSelectors.didEndEditing) {
             delegate.growingTextViewDidEndEditing!(self)
         }
     }
 
-    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    open func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if !hasText && text == "" {
             return false
         }
@@ -466,14 +466,14 @@ extension GrowingTextView: UITextViewDelegate {
         return true
     }
 
-    public func textViewDidChange(_ textView: UITextView) {
+    open func textViewDidChange(_ textView: UITextView) {
         updateHeight()
         if let delegate = delegate, delegate.responds(to: DelegateSelectors.didChange) {
             delegate.growingTextViewDidChange!(self)
         }
     }
 
-    public func textViewDidChangeSelection(_ textView: UITextView) {
+    open func textViewDidChangeSelection(_ textView: UITextView) {
         let willUpdateHeight = updatedHeight().difference != 0
         if !willUpdateHeight {
             updateScrollPosition(animated: true)

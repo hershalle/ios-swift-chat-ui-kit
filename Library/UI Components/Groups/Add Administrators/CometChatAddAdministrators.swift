@@ -17,7 +17,7 @@ enum Mode {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-public class CometChatAddAdministrators: UIViewController {
+open class CometChatAddAdministrators: UIViewController {
     
     // MARK: - Declaration of Variables
     
@@ -34,7 +34,7 @@ public class CometChatAddAdministrators: UIViewController {
     
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
        
         view.backgroundColor = .white
@@ -61,7 +61,7 @@ public class CometChatAddAdministrators: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func set(group: CometChatPro.Group){
+    open func set(group: CometChatPro.Group){
         self.currentGroup = group
     }
     
@@ -76,7 +76,7 @@ public class CometChatAddAdministrators: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
         if navigationController != nil{
             navigationItem.title = title.localized()
             navigationItem.largeTitleDisplayMode = mode
@@ -98,7 +98,7 @@ public class CometChatAddAdministrators: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    @objc public func set(barColor :UIColor, titleColor color: UIColor){
+    @objc open func set(barColor :UIColor, titleColor color: UIColor){
         if navigationController != nil{
             // NavigationBar Appearance
             if #available(iOS 13.0, *) {
@@ -263,7 +263,7 @@ extension CometChatAddAdministrators: UITableViewDelegate , UITableViewDataSourc
     
     /// This method specifies the number of sections to display list of admins.
     /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         switch  mode {
         case .fetchGroupMembers:
             return 1
@@ -278,7 +278,7 @@ extension CometChatAddAdministrators: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if mode == .fetchAdministrators {
             if section == 0 {
@@ -295,7 +295,7 @@ extension CometChatAddAdministrators: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
@@ -303,7 +303,7 @@ extension CometChatAddAdministrators: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 { return 20 } else { return 0 }
     }
     
@@ -312,7 +312,7 @@ extension CometChatAddAdministrators: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView.
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if mode == .fetchAdministrators {
             if indexPath.section == 0 {
@@ -346,7 +346,7 @@ extension CometChatAddAdministrators: UITableViewDelegate , UITableViewDataSourc
     ///   - indexPath: specifies current index for TableViewCell.
     ///   - point: A structure that contains a point in a two-dimensional coordinate system.
     @available(iOS 13.0, *)
-    public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    open func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
             
@@ -442,7 +442,7 @@ extension CometChatAddAdministrators: UITableViewDelegate , UITableViewDataSourc
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if mode == .fetchAdministrators {
@@ -549,7 +549,7 @@ extension CometChatAddAdministrators: CometChatGroupDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onGroupMemberJoined(action: ActionMessage, joinedUser: CometChatPro.User, joinedGroup: CometChatPro.Group) {
+    open func onGroupMemberJoined(action: ActionMessage, joinedUser: CometChatPro.User, joinedGroup: CometChatPro.Group) {
         if let group = currentGroup {
             if group == joinedGroup {
                 fetchAdmins(for: group)
@@ -567,7 +567,7 @@ extension CometChatAddAdministrators: CometChatGroupDelegate {
      - Copyright:  ©  2020 CometChat Inc.
      
      */
-    public func onGroupMemberLeft(action: ActionMessage, leftUser: CometChatPro.User, leftGroup: CometChatPro.Group) {
+    open func onGroupMemberLeft(action: ActionMessage, leftUser: CometChatPro.User, leftGroup: CometChatPro.Group) {
         if let group = currentGroup {
             if group == leftGroup {
                 fetchAdmins(for: group)
@@ -586,7 +586,7 @@ extension CometChatAddAdministrators: CometChatGroupDelegate {
      - Copyright:  ©  2020 CometChat Inc.
      
      */
-    public func onGroupMemberKicked(action: ActionMessage, kickedUser: CometChatPro.User, kickedBy: CometChatPro.User, kickedFrom: CometChatPro.Group) {
+    open func onGroupMemberKicked(action: ActionMessage, kickedUser: CometChatPro.User, kickedBy: CometChatPro.User, kickedFrom: CometChatPro.Group) {
         if let group = currentGroup {
             if group == kickedFrom {
                 fetchAdmins(for: group)
@@ -604,7 +604,7 @@ extension CometChatAddAdministrators: CometChatGroupDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onGroupMemberBanned(action: ActionMessage, bannedUser: CometChatPro.User, bannedBy: CometChatPro.User, bannedFrom: CometChatPro.Group) {
+    open func onGroupMemberBanned(action: ActionMessage, bannedUser: CometChatPro.User, bannedBy: CometChatPro.User, bannedFrom: CometChatPro.Group) {
         if let group = currentGroup {
             if group == bannedFrom {
                 fetchAdmins(for: group)
@@ -622,7 +622,7 @@ extension CometChatAddAdministrators: CometChatGroupDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onGroupMemberUnbanned(action: ActionMessage, unbannedUser: CometChatPro.User, unbannedBy: CometChatPro.User, unbannedFrom: CometChatPro.Group) {
+    open func onGroupMemberUnbanned(action: ActionMessage, unbannedUser: CometChatPro.User, unbannedBy: CometChatPro.User, unbannedFrom: CometChatPro.Group) {
         if let group = currentGroup {
             if group == unbannedFrom {
                 fetchAdmins(for: group)
@@ -642,7 +642,7 @@ extension CometChatAddAdministrators: CometChatGroupDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onGroupMemberScopeChanged(action: ActionMessage, scopeChangeduser: CometChatPro.User, scopeChangedBy: CometChatPro.User, scopeChangedTo: String, scopeChangedFrom: String, group: CometChatPro.Group) {
+    open func onGroupMemberScopeChanged(action: ActionMessage, scopeChangeduser: CometChatPro.User, scopeChangedBy: CometChatPro.User, scopeChangedTo: String, scopeChangedFrom: String, group: CometChatPro.Group) {
         if let group = currentGroup {
             if group == group {
                 fetchAdmins(for: group)
@@ -660,7 +660,7 @@ extension CometChatAddAdministrators: CometChatGroupDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onMemberAddedToGroup(action: ActionMessage, addedBy: CometChatPro.User, addedUser: CometChatPro.User, addedTo: CometChatPro.Group) {
+    open func onMemberAddedToGroup(action: ActionMessage, addedBy: CometChatPro.User, addedUser: CometChatPro.User, addedTo: CometChatPro.Group) {
         if let group = currentGroup {
             if group == group {
                 fetchAdmins(for: group)

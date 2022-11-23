@@ -32,7 +32,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-public class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIGestureRecognizerDelegate {
+open class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIGestureRecognizerDelegate {
     
     struct MessageActionsGroup: RowPresentable {
         let string: String = "MessageActionsGroup"
@@ -177,7 +177,7 @@ public class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDele
     
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
         setupSuperview()
         setupDelegates()
@@ -230,7 +230,7 @@ public class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDele
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    @objc public func set(threadFor message: BaseMessage, conversationWith: AppEntity, type: CometChat.ReceiverType){
+    @objc open func set(threadFor message: BaseMessage, conversationWith: AppEntity, type: CometChat.ReceiverType){
         
         switch type {
         case .user:
@@ -370,7 +370,7 @@ public class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDele
         }
     }
     
-    @objc public func incrementCount() {
+    @objc open func incrementCount() {
         let currentCount = self.getCount + 1
         self.set(replyCount: currentCount)
     }
@@ -553,7 +553,7 @@ public class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDele
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func fetchThread(forID: String, messageID: Int, type: CometChat.ReceiverType, scrollToBottom: Bool){
+    open func fetchThread(forID: String, messageID: Int, type: CometChat.ReceiverType, scrollToBottom: Bool){
         chatMessages.removeAll()
       
         switch type {
@@ -1960,7 +1960,7 @@ public class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDele
     }
     
     
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     
@@ -1976,7 +1976,7 @@ extension CometChatThreadedMessageList: UIDocumentPickerDelegate {
     /// - Parameters:
     ///   - controller: A view controller that provides access to documents or destinations outside your app’s sandbox.
     ///   - urls: A value that identifies the location of a resource, such as an item on a remote server or the path to a local file.
-    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    open func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if controller.documentPickerMode == UIDocumentPickerMode.import {
             // This is what it should be
             var mediaMessage: MediaMessage?
@@ -2082,7 +2082,7 @@ extension CometChatThreadedMessageList: UITableViewDelegate , UITableViewDataSou
     
     /// This method specifies the number of sections to display list of messages.
     /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         if chatMessages.isEmpty {
             return 0
         }else {
@@ -2092,7 +2092,7 @@ extension CometChatThreadedMessageList: UITableViewDelegate , UITableViewDataSou
     
     
     
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let firstMessageInSection = chatMessages[section].first {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -2113,7 +2113,7 @@ extension CometChatThreadedMessageList: UITableViewDelegate , UITableViewDataSou
     }
     
     
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
     
@@ -2121,7 +2121,7 @@ extension CometChatThreadedMessageList: UITableViewDelegate , UITableViewDataSou
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatMessages[section].count
     }
     
@@ -2129,7 +2129,7 @@ extension CometChatThreadedMessageList: UITableViewDelegate , UITableViewDataSou
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return UITableView.automaticDimension
     }
@@ -2139,7 +2139,7 @@ extension CometChatThreadedMessageList: UITableViewDelegate , UITableViewDataSou
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
@@ -2147,7 +2147,7 @@ extension CometChatThreadedMessageList: UITableViewDelegate , UITableViewDataSou
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView.
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if let message = chatMessages[indexPath.section][safe: indexPath.row] {
             
@@ -2320,7 +2320,7 @@ extension CometChatThreadedMessageList: UITableViewDelegate , UITableViewDataSou
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.beginUpdates()
         
@@ -2587,7 +2587,7 @@ extension CometChatThreadedMessageList: UITableViewDelegate , UITableViewDataSou
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.beginUpdates()
         
         UIView.animate(withDuration: 1,delay: 0.0, usingSpringWithDamping: 0.9,
@@ -2753,7 +2753,7 @@ extension CometChatThreadedMessageList : UITextViewDelegate {
     
     /// This method triggers when  user stops typing in textView.
     /// - Parameter textView: A scrollable, multiline text region.
-    public func textViewDidEndEditing(_ textView: UITextView) {
+    open func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             guard let indicator = typingIndicator else {
                 return
@@ -2770,7 +2770,7 @@ extension CometChatThreadedMessageList : UITextViewDelegate {
     
     /// This method triggers when  user starts typing in textView.
     /// - Parameter textView: A scrollable, multiline text region.
-    public func textViewDidChange(_ textView: UITextView) {
+    open func textViewDidChange(_ textView: UITextView) {
         guard let indicator = typingIndicator else {
             return
         }
@@ -2856,14 +2856,14 @@ extension CometChatThreadedMessageList:QLPreviewControllerDataSource, QLPreviewC
     
     /// Invoked when the Quick Look preview controller needs to know the number of preview items to include in the preview navigation list.
     /// - Parameter controller: A specialized view for previewing an item.
-    public func numberOfPreviewItems(in controller: QLPreviewController) -> Int { return 1 }
+    open func numberOfPreviewItems(in controller: QLPreviewController) -> Int { return 1 }
     
     
     /// Invoked when the Quick Look preview controller needs the preview item for a specified index position.
     /// - Parameters:
     ///   - controller: A specialized view for previewing an item.
     ///   - index: The index position, within the preview navigation list, of the item to preview.
-    public func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+    open func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         return self.previewItem as QLPreviewItem
     }
 }
@@ -2875,9 +2875,9 @@ extension CometChatThreadedMessageList:QLPreviewControllerDataSource, QLPreviewC
 extension CometChatThreadedMessageList : CometChatMessageComposerInternalDelegate {
     
     
-    public func didReactionButtonPressed() {}
+    open func didReactionButtonPressed() {}
     
-    public func didMicrophoneButtonPressed(with: UILongPressGestureRecognizer) {
+    open func didMicrophoneButtonPressed(with: UILongPressGestureRecognizer) {
         
     }
     
@@ -2888,7 +2888,7 @@ extension CometChatThreadedMessageList : CometChatMessageComposerInternalDelegat
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func didAttachmentButtonPressed() {
+    open func didAttachmentButtonPressed() {
         let group: RowPresentable = MessageActionsGroup()
         var actions = [MessageAction]()
         
@@ -3133,7 +3133,7 @@ extension CometChatThreadedMessageList : CometChatMessageComposerInternalDelegat
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func didStickerButtonPressed() {
+    open func didStickerButtonPressed() {
         
         
     }
@@ -3147,7 +3147,7 @@ extension CometChatThreadedMessageList : CometChatMessageComposerInternalDelegat
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func didSendButtonPressed() {
+    open func didSendButtonPressed() {
         var lastSection = 0
         if chatMessages.count == 0 {
             lastSection = (self.tableView?.numberOfSections ?? 0)
@@ -3475,7 +3475,7 @@ extension CometChatThreadedMessageList : CometChatMessageDelegate {
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func onTextMessageReceived(textMessage: TextMessage) {
+    open func onTextMessageReceived(textMessage: TextMessage) {
         
         DispatchQueue.main.async{ [weak self] in
             guard let strongSelf = self else { return }
@@ -3530,7 +3530,7 @@ extension CometChatThreadedMessageList : CometChatMessageDelegate {
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func onMediaMessageReceived(mediaMessage: MediaMessage) {
+    open func onMediaMessageReceived(mediaMessage: MediaMessage) {
         
         DispatchQueue.main.async{ [weak self] in
             guard let strongSelf = self else { return }
@@ -3563,7 +3563,7 @@ extension CometChatThreadedMessageList : CometChatMessageDelegate {
         }
     }
     
-    public func onCustomMessageReceived(customMessage: CustomMessage) {
+    open func onCustomMessageReceived(customMessage: CustomMessage) {
         DispatchQueue.main.async{ [weak self] in
             guard let strongSelf = self else { return }
             //Appending Real time text messages for User.
@@ -3602,7 +3602,7 @@ extension CometChatThreadedMessageList : CometChatMessageDelegate {
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func onMessagesRead(receipt: MessageReceipt) {
+    open func onMessagesRead(receipt: MessageReceipt) {
         DispatchQueue.main.async{ [weak self] in
             guard let strongSelf = self else { return }
             if receipt.sender?.uid == strongSelf.currentUser?.uid && receipt.receiverType == .user{
@@ -3631,7 +3631,7 @@ extension CometChatThreadedMessageList : CometChatMessageDelegate {
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func onMessagesDelivered(receipt: MessageReceipt) {
+    open func onMessagesDelivered(receipt: MessageReceipt) {
         DispatchQueue.main.async{ [weak self] in
             guard let strongSelf = self else { return }
             if receipt.sender?.uid == strongSelf.currentUser?.uid && receipt.receiverType == .user{
@@ -3654,7 +3654,7 @@ extension CometChatThreadedMessageList : CometChatMessageDelegate {
     
     
     
-    public func onMessageEdited(message: BaseMessage) {
+    open func onMessageEdited(message: BaseMessage) {
         
         if let indexpath = chatMessages.indexPath(where: {$0.id == message.id}), let section = indexpath.section as? Int, let row = indexpath.row as? Int{
             DispatchQueue.main.async {  [weak self] in
@@ -3667,7 +3667,7 @@ extension CometChatThreadedMessageList : CometChatMessageDelegate {
         }
     }
     
-    public func onMessageDeleted(message: BaseMessage) {
+    open func onMessageDeleted(message: BaseMessage) {
         
         FeatureRestriction.isHideDeletedMessagesEnabled { (success) in
             switch success {
@@ -3714,7 +3714,7 @@ extension CometChatThreadedMessageList : CometChatUserDelegate {
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func onUserOnline(user: CometChatPro.User) {
+    open func onUserOnline(user: CometChatPro.User) {
         if user.uid == currentUser?.uid{
             if user.status == .online {
                 DispatchQueue.main.async { [weak self] in
@@ -3733,7 +3733,7 @@ extension CometChatThreadedMessageList : CometChatUserDelegate {
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func onUserOffline(user: CometChatPro.User) {
+    open func onUserOffline(user: CometChatPro.User) {
         if user.uid == currentUser?.uid {
             if user.status == .offline {
                 DispatchQueue.main.async {  [weak self] in
@@ -3860,9 +3860,9 @@ extension CometChatThreadedMessageList: LinkPreviewDelegate {
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func didVisitButtonPressed(link: String, sender: UIButton) {
+    open func didVisitButtonPressed(link: String, sender: UIButton) {
         guard let url = URL(string: link) else { return }
-        UIApplication.shared.open(url)
+        UIKitSettings.openURL?(url)
     }
     
     /**
@@ -3875,9 +3875,9 @@ extension CometChatThreadedMessageList: LinkPreviewDelegate {
      - See Also:
      [CometChatThreadedMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func didPlayButtonPressed(link: String, sender: UIButton) {
+    open func didPlayButtonPressed(link: String, sender: UIButton) {
         guard let url = URL(string: link) else { return }
-        UIApplication.shared.open(url)
+        UIKitSettings.openURL?(url)
     }
 }
 
@@ -4409,7 +4409,7 @@ extension CometChatThreadedMessageList : LocationCellDelegate, CLLocationManager
     }
     
     
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    open func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let location = locations.last else {
             return
@@ -4456,8 +4456,8 @@ extension CometChatThreadedMessageList : LocationCellDelegate, CLLocationManager
     
     func openGoogleMapsForPlace(latitude: String, longitude: String) {
         
-        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-          UIApplication.shared.openURL(URL(string:
+        if (UIKitSettings.applicationShared!.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            UIKitSettings.openURL?(URL(string:
             "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
         } else {
         }
@@ -4516,19 +4516,19 @@ extension CometChatThreadedMessageList: PollExtensionDelegate {
 
 
 extension CometChatThreadedMessageList: GrowingTextViewDelegate {
-    public func growingTextView(_ growingTextView: GrowingTextView, willChangeHeight height: CGFloat, difference: CGFloat) {
+    open func growingTextView(_ growingTextView: GrowingTextView, willChangeHeight height: CGFloat, difference: CGFloat) {
        
         inputBarHeight.constant = height
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }
     
-    public func growingTextView(_ growingTextView: GrowingTextView, didChangeHeight height: CGFloat, difference: CGFloat) {
+    open func growingTextView(_ growingTextView: GrowingTextView, didChangeHeight height: CGFloat, difference: CGFloat) {
       
     }
     
     
-    public func growingTextViewDidChange(_ growingTextView: GrowingTextView) {
+    open func growingTextViewDidChange(_ growingTextView: GrowingTextView) {
         guard let indicator = typingIndicator else {
             return
         }
@@ -4550,11 +4550,11 @@ extension CometChatThreadedMessageList: GrowingTextViewDelegate {
         CometChat.startTyping(indicator: indicator)
     }
     
-    public func growingTextViewDidBeginEditing(_ growingTextView: GrowingTextView) {
+    open func growingTextViewDidBeginEditing(_ growingTextView: GrowingTextView) {
     }
     
     
-    public func growingTextViewDidEndEditing(_ growingTextView: GrowingTextView) {
+    open func growingTextViewDidEndEditing(_ growingTextView: GrowingTextView) {
         guard let indicator = typingIndicator else {
             return
         }
@@ -4579,7 +4579,7 @@ extension CometChatThreadedMessageList : HyperLinkDelegate, MFMailComposeViewCon
             .joined() as? String {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 let url = URL(string: "tel://\(number)")!
-                UIApplication.shared.open(url, options: [:])
+                UIKitSettings.openURL?(url, options: [:])
             }
         }
     }
@@ -4595,7 +4595,7 @@ extension CometChatThreadedMessageList : HyperLinkDelegate, MFMailComposeViewCon
         }
     }
     
-    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    open func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
 }

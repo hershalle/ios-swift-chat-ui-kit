@@ -33,7 +33,7 @@ class CometChatMeetingView: UIViewController {
     }
     
     
-    public func performCall(with sessionID: String, type: CometChatPro.CometChat.CallType){
+    open func performCall(with sessionID: String, type: CometChatPro.CometChat.CallType){
 
         switch type {
         case .audio:

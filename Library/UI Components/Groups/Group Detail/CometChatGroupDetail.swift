@@ -44,7 +44,7 @@ class CometChatGroupDetail: UIViewController {
     
     // MARK: - View controller lifecycle methods
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
       
         view.backgroundColor = .white
@@ -71,7 +71,7 @@ class CometChatGroupDetail: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func set(group: CometChatPro.Group){
+    open func set(group: CometChatPro.Group){
         currentGroup = group
         self.getGroup(group: group)
         if members.isEmpty {
@@ -93,7 +93,7 @@ class CometChatGroupDetail: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    @objc public func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
+    @objc open func set(title : String, mode: UINavigationItem.LargeTitleDisplayMode){
         if navigationController != nil{
             navigationItem.title = title.localized()
             navigationItem.largeTitleDisplayMode = mode
@@ -271,7 +271,7 @@ class CometChatGroupDetail: UIViewController {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func fetchGroupMembers(group: CometChatPro.Group){
+    open func fetchGroupMembers(group: CometChatPro.Group){
         memberRequest = GroupMembersRequest.GroupMembersRequestBuilder(guid: group.guid).set(limit: 100).build()
         memberRequest?.fetchNext(onSuccess: { (groupMember) in
             self.members = groupMember
@@ -378,7 +378,7 @@ extension CometChatGroupDetail: UITableViewDelegate , UITableViewDataSource {
     
     /// This method specifies the number of sections to display list of items.
     /// - Parameter tableView: An object representing the table view requesting this information.
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
     
@@ -386,7 +386,7 @@ extension CometChatGroupDetail: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 || section == 2 {
             return 0
         }else{
@@ -406,7 +406,7 @@ extension CometChatGroupDetail: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let returnedView = UIView(frame: CGRect(x: 5, y: 5, width: view.frame.size.width - 20, height: 25))
         let sectionTitle = UILabel(frame: CGRect(x: 10, y: 2, width: returnedView.frame.size.width, height: 20))
         if section == 0 {
@@ -433,7 +433,7 @@ extension CometChatGroupDetail: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return settingsItems.count
         case 1:
@@ -472,7 +472,7 @@ extension CometChatGroupDetail: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if  indexPath.section == 0 && indexPath.row == 0 {
             return 100
         }else if currentGroup?.owner == LoggedInUser.uid && indexPath.section == 1 {
@@ -490,7 +490,7 @@ extension CometChatGroupDetail: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - section: An index number identifying a section of tableView .
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         switch indexPath.section {
         case 0:
@@ -578,7 +578,7 @@ extension CometChatGroupDetail: UITableViewDelegate , UITableViewDataSource {
     /// - Parameters:
     ///   - tableView: The table-view object requesting this information.
     ///   - indexPath: specifies current index for TableViewCell.
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
@@ -857,7 +857,7 @@ extension CometChatGroupDetail: CometChatGroupDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onGroupMemberJoined(action: ActionMessage, joinedUser: CometChatPro.User, joinedGroup: CometChatPro.Group) {
+    open func onGroupMemberJoined(action: ActionMessage, joinedUser: CometChatPro.User, joinedGroup: CometChatPro.Group) {
         if let group = currentGroup {
             if group == joinedGroup {
                 fetchGroupMembers(group: group)
@@ -875,7 +875,7 @@ extension CometChatGroupDetail: CometChatGroupDelegate {
      - Copyright:  ©  2020 CometChat Inc.
      
      */
-    public func onGroupMemberLeft(action: ActionMessage, leftUser: CometChatPro.User, leftGroup: CometChatPro.Group) {
+    open func onGroupMemberLeft(action: ActionMessage, leftUser: CometChatPro.User, leftGroup: CometChatPro.Group) {
         if let group = currentGroup {
             if group == leftGroup {
                 getGroup(group: group)
@@ -895,7 +895,7 @@ extension CometChatGroupDetail: CometChatGroupDelegate {
      - Copyright:  ©  2020 CometChat Inc.
      
      */
-    public func onGroupMemberKicked(action: ActionMessage, kickedUser: CometChatPro.User, kickedBy: CometChatPro.User, kickedFrom: CometChatPro.Group) {
+    open func onGroupMemberKicked(action: ActionMessage, kickedUser: CometChatPro.User, kickedBy: CometChatPro.User, kickedFrom: CometChatPro.Group) {
         if let group = currentGroup {
             if group == kickedFrom {
                 getGroup(group: group)
@@ -916,7 +916,7 @@ extension CometChatGroupDetail: CometChatGroupDelegate {
      - See Also:
      [CometChatMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
-    public func onGroupMemberBanned(action: ActionMessage, bannedUser: CometChatPro.User, bannedBy: CometChatPro.User, bannedFrom: CometChatPro.Group) {
+    open func onGroupMemberBanned(action: ActionMessage, bannedUser: CometChatPro.User, bannedBy: CometChatPro.User, bannedFrom: CometChatPro.Group) {
         if let group = currentGroup {
             if group == bannedFrom {
                 getGroup(group: group)
@@ -935,7 +935,7 @@ extension CometChatGroupDetail: CometChatGroupDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onGroupMemberUnbanned(action: ActionMessage, unbannedUser: CometChatPro.User, unbannedBy: CometChatPro.User, unbannedFrom: CometChatPro.Group) {
+    open func onGroupMemberUnbanned(action: ActionMessage, unbannedUser: CometChatPro.User, unbannedBy: CometChatPro.User, unbannedFrom: CometChatPro.Group) {
         if let group = currentGroup {
             if group == unbannedFrom {
                 getGroup(group: group)
@@ -956,7 +956,7 @@ extension CometChatGroupDetail: CometChatGroupDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onGroupMemberScopeChanged(action: ActionMessage, scopeChangeduser: CometChatPro.User, scopeChangedBy: CometChatPro.User, scopeChangedTo: String, scopeChangedFrom: String, group: CometChatPro.Group) {
+    open func onGroupMemberScopeChanged(action: ActionMessage, scopeChangeduser: CometChatPro.User, scopeChangedBy: CometChatPro.User, scopeChangedTo: String, scopeChangedFrom: String, group: CometChatPro.Group) {
         if let group = currentGroup {
             if group == group {
                 getGroup(group: group)
@@ -976,7 +976,7 @@ extension CometChatGroupDetail: CometChatGroupDelegate {
      - Author: CometChat Team
      - Copyright:  ©  2020 CometChat Inc.
      */
-    public func onMemberAddedToGroup(action: ActionMessage, addedBy: CometChatPro.User, addedUser: CometChatPro.User, addedTo: CometChatPro.Group) {
+    open func onMemberAddedToGroup(action: ActionMessage, addedBy: CometChatPro.User, addedUser: CometChatPro.User, addedTo: CometChatPro.Group) {
         if let group = currentGroup {
             if group == group {
                 getGroup(group: group)
@@ -1044,14 +1044,14 @@ extension CometChatGroupDetail: QLPreviewControllerDataSource, QLPreviewControll
     
     /// Invoked when the Quick Look preview controller needs to know the number of preview items to include in the preview navigation list.
     /// - Parameter controller: A specialized view for previewing an item.
-    public func numberOfPreviewItems(in controller: QLPreviewController) -> Int { return 1 }
+    open func numberOfPreviewItems(in controller: QLPreviewController) -> Int { return 1 }
     
     
     /// Invoked when the Quick Look preview controller needs the preview item for a specified index position.
     /// - Parameters:
     ///   - controller: A specialized view for previewing an item.
     ///   - index: The index position, within the preview navigation list, of the item to preview.
-    public func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+    open func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         return self.previewItem as QLPreviewItem
     }
 }
