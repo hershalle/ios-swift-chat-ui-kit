@@ -22,13 +22,13 @@ import SafariServices
 import AudioToolbox
 import CometChatPro
 
-enum MessageMode {
+public enum MessageMode {
     case edit
     case send
     case reply
 }
 
-enum HideView {
+public enum HideView {
     case blockedView
     case smartRepliesView
     case editMessageView
@@ -5885,7 +5885,7 @@ extension CometChatMessageList: LocationCellDelegate, CLLocationManagerDelegate 
     
     func openGoogleMapsForPlace(latitude: String, longitude: String) {
         
-        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+        if (UIKitSettings.applicationShared!.canOpenURL(URL(string:"comgooglemaps://")!)) {
             UIKitSettings.openURL?(URL(string:
                                                 "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
         } else {
@@ -5963,7 +5963,7 @@ extension CometChatMessageList : HyperLinkDelegate, MFMailComposeViewControllerD
             .joined() as? String {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 let url = URL(string: "tel://\(number)")!
-                UIKitSettings.openURL?(url, options: [:])
+                UIKitSettings.openURL?(url)
             }
         }
     }

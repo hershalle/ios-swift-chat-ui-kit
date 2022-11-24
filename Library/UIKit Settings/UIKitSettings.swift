@@ -47,22 +47,22 @@ enum ChatDisplayMode {
 open class UIKitSettings {
     private init() {}
     
-    static var bundle = Bundle.main
+    public static var bundle = Bundle.main
     
     // Keys
-    static var googleApiKey = "ENTER YOUR GOOGLE API KEY HERE"
+    public static var googleApiKey = "ENTER YOUR GOOGLE API KEY HERE"
     
     // style
-    static var primaryColor: UIColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-    static var secondaryColor: UIColor = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
-    static var URLColor: UIColor = #colorLiteral(red: 0.01568627451, green: 0.1965779049, blue: 1, alpha: 1)
-    static var URLSelectedColor: UIColor = #colorLiteral(red: 0.01568627451, green: 0, blue: 0.6165823063, alpha: 1)
-    static var PhoneNumberColor: UIColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
-    static var PhoneNumberSelectedColor: UIColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
-    static var EmailIDColor: UIColor = #colorLiteral(red: 0.9529411793, green: 0.5480152855, blue: 0, alpha: 1)
-    static var EmailIDSelectedColor: UIColor = #colorLiteral(red: 0.9529411765, green: 0.4078431373, blue: 0, alpha: 1)
-    static var foregroundColor: UIColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)  //not added
-    static var backgroundColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)  //not added
+    public static var primaryColor: UIColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+    public static var secondaryColor: UIColor = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
+    public static var URLColor: UIColor = #colorLiteral(red: 0.01568627451, green: 0.1965779049, blue: 1, alpha: 1)
+    public static var URLSelectedColor: UIColor = #colorLiteral(red: 0.01568627451, green: 0, blue: 0.6165823063, alpha: 1)
+    public static var PhoneNumberColor: UIColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+    public static var PhoneNumberSelectedColor: UIColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
+    public static var EmailIDColor: UIColor = #colorLiteral(red: 0.9529411793, green: 0.5480152855, blue: 0, alpha: 1)
+    public static var EmailIDSelectedColor: UIColor = #colorLiteral(red: 0.9529411765, green: 0.4078431373, blue: 0, alpha: 1)
+    public static var foregroundColor: UIColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)  //not added
+    public static var backgroundColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)  //not added
     static var overrideSystemBackgroundColor: SwitchMode = .disabled  //not added
     
     // sidebar
@@ -116,7 +116,7 @@ open class UIKitSettings {
     static var setGroupInQnaModeByModerators: SwitchMode = .enabled //not added (feature not available)
     static var hideDeletedMessages: SwitchMode = .disabled
     static var highlightMessageFromModerators: SwitchMode = .enabled //not added (feature not available)
-    static var shareLocation: SwitchMode = .enabled 
+    static var shareLocation: SwitchMode = .enabled
     static var viewShareMedia: SwitchMode = .enabled
     static var showReadDeliveryReceipts: SwitchMode = .enabled
     static var showUserPresence: SwitchMode = .enabled

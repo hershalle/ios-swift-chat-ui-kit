@@ -4579,7 +4579,7 @@ extension CometChatThreadedMessageList : HyperLinkDelegate, MFMailComposeViewCon
             .joined() as? String {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 let url = URL(string: "tel://\(number)")!
-                UIKitSettings.openURL?(url, options: [:])
+                UIKitSettings.openURL?(url)
             }
         }
     }
