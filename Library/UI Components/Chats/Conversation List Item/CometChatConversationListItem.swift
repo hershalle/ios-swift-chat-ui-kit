@@ -36,10 +36,11 @@ class CometChatConversationListItem: UITableViewCell {
     
     lazy var searchedText: String = ""
     
-    let normalTitlefont = UIFont.systemFont(ofSize: 17, weight: .medium)
-    let boldTitlefont = UIFont.systemFont(ofSize: 17, weight: .bold)
-    let normalSubtitlefont = UIFont.systemFont(ofSize: 15, weight: .regular)
-    let boldSubtitlefont = UIFont.systemFont(ofSize: 15, weight: .bold)
+    // SafeUp changes: Changed valies of weight and size:
+    let normalTitlefont = UIFont.systemFont(ofSize: 18, weight: .regular)
+    let boldTitlefont = UIFont.systemFont(ofSize: 18, weight: .regular)
+    let normalSubtitlefont = UIFont.systemFont(ofSize: 14, weight: .regular)
+    let boldSubtitlefont = UIFont.systemFont(ofSize: 14, weight: .regular)
     
     weak var conversation: Conversation? {
         didSet {
@@ -273,6 +274,7 @@ class CometChatConversationListItem: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

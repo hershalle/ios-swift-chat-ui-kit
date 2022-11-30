@@ -20,7 +20,7 @@ import  CometChatPro
 /*  ----------------------------------------------------------------------------------------- */
 
 @IBDesignable
-@objc class CometChatAvatar: UIImageView {
+@objc public class CometChatAvatar: UIImageView {
     
     // MARK: - Declaration of IBInspectable
     
@@ -38,7 +38,7 @@ import  CometChatPro
     private var imageRequest: Cancellable?
     private lazy var imageService = ImageService()
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = cornerRadius
         self.layer.borderColor = borderColor.cgColor

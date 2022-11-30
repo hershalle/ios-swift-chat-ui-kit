@@ -157,19 +157,28 @@ class LanguageSelectionView: UITableViewController {
 
 extension String {
     
-    public func localized() ->String {
+    func localized() ->String {
         
         CometChatLanguageBundle.setLanguage(Locale.current.languageCode ?? "en")
         UserDefaults.standard.set(Locale.current.languageCode, forKey: "lang")
         
+        // SafeUp changes: if not found in framework locazliable, search the app localizable:
         if let lang = UserDefaults.standard.value(forKey: "lang") as? String {
-            let path = UIKitSettings.bundle.path(forResource: lang, ofType: "lproj")
-            let bundle = Bundle(path: path!)
-            return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+            let path = UIKitSettings.bundle.path(forResource: lang, ofType: "lproj") ?? Bundle.main.path(forResource: lang, ofType: "lproj")
+            if let path = path {
+                let bundle = Bundle(path: path)
+                return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+            } else {
+                return englishLocalizable()
+            }
         }else{
-            let path = UIKitSettings.bundle.path(forResource: "en", ofType: "lproj")
-            let bundle = Bundle(path: path!)
-            return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+            return englishLocalizable()
         }
+    }
+    
+    func englishLocalizable() -> String {
+        let path = UIKitSettings.bundle.path(forResource: "en", ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }
 }

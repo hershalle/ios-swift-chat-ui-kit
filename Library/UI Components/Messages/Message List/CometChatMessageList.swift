@@ -34,6 +34,18 @@ public enum HideView {
     case editMessageView
 }
 
+protocol CometChatMessageListSafeUpDelegate: AnyObject {
+    func didPickDocuments()
+    func didSendMedia()
+    func didTapSendButton()
+    func didTapCopy()
+    func didTapDelete()
+    func didTapReply()
+    func didTapShare()
+    
+    func didTapDocument()
+}
+
 /*  ----------------------------------------------------------------------------------------- */
 
 open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIGestureRecognizerDelegate {
@@ -139,7 +151,7 @@ open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAu
     public var totalSecond = 0
     public var timer:Timer?
     public var isAnimating = false
-    var messageMode: MessageMode = .send
+    public var messageMode: MessageMode = .send
     public var selectedIndexPath: IndexPath?
     public var selectedMessage: BaseMessage?
     public lazy var previewItem = NSURL()
@@ -155,6 +167,7 @@ open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAu
     public var isMessageInPrivateEnabled: Bool = false
     public let locationManager = CLLocationManager()
     public var lastMessage: BaseMessage?
+    weak var safeUpDelegate: CometChatMessageListSafeUpDelegate?
     
     private var currentState: AudioRecodingState = .ready {
         didSet {
@@ -175,16 +188,16 @@ open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAu
         registerCells()
         setupMessageComposer()
         setupKeyboard()
-        setupRecorder()
+//        setupRecorder()  // SafeUp change
         self.addObsevers()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+//        locationManager.distanceFilter = kCLDistanceFilterNone // SafeUp change
+//        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters // SafeUp change
         setupDelegates()
-        locationAuthStatus()
+//        locationAuthStatus() // SafeUp change
         hideSystemBackButton(bool: true)
         
         if messageMode == .reply {
@@ -334,7 +347,16 @@ open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAu
     private func groupMessages(messages: [BaseMessage]){
         DispatchQueue.main.async {  [weak self] in
             guard let strongSelf = self else { return }
-            if messages.isEmpty { strongSelf.tableView?.setEmptyMessage("NO_MESSAGES_FOUND".localized())
+            
+            //SafeUp Change:
+            let text: String
+            if let name = self?.currentUser?.name {
+                text = UIKitSettings.localizable.no_messages_say_hi + name
+            } else {
+                text = "NO_MESSAGES_FOUND".localized()
+            }
+            
+            if messages.isEmpty { strongSelf.tableView?.setEmptyMessage(text)
             }else{ strongSelf.tableView?.restore() }
         }
         let groupedMessages = Dictionary(grouping: messages) { (element) -> Date in
@@ -2262,9 +2284,11 @@ open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAu
         textView.delegate = self
         
         if #available(iOS 13.0, *) {
-            let edit = UIImage(named: "send-message-filled.png", in: UIKitSettings.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            let safeUpEditImageName = UIKitSettings.image.send_message
+            let safeUpBundle = UIKitSettings.image.bundle
+            let edit = UIImage(named: safeUpEditImageName, in: safeUpBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             send.setImage(edit, for: .normal)
-            send.tintColor = UIKitSettings.primaryColor
+//            send.tintColor = UIKitSettings.primaryColor // SafeUp change
         } else {}
         blockViewButton.backgroundColor  = UIKitSettings.primaryColor
         
@@ -2423,9 +2447,11 @@ open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAu
         messageComposer.internalDelegate = self
         
         if #available(iOS 13.0, *) {
-            let sendImage = UIImage(named: "send-message-filled.png", in: UIKitSettings.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            let safeUpEditImageName = UIKitSettings.image.send_message
+            let safeUpBundle = UIKitSettings.image.bundle
+            let sendImage = UIImage(named: safeUpEditImageName, in: safeUpBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             send.setImage(sendImage, for: .normal)
-            send.tintColor = UIKitSettings.primaryColor
+//            send.tintColor = UIKitSettings.primaryColor // SafeUp change
         } else {}
     }
     
@@ -2533,7 +2559,8 @@ extension CometChatMessageList: UIDocumentPickerDelegate {
     /// - Parameters:
     ///   - controller: A view controller that provides access to documents or destinations outside your app’s sandbox.
     ///   - urls: A value that identifies the location of a resource, such as an item on a remote server or the path to a local file.
-    open func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        safeUpDelegate?.didPickDocuments()
         if controller.documentPickerMode == UIDocumentPickerMode.import {
             // This is what it should be
             var mediaMessage: MediaMessage?
@@ -3788,7 +3815,8 @@ extension CometChatMessageList : CometChatMessageComposerInternalDelegate {
         presentPanModal(group.rowVC, sourceView: messageComposer.attachment.inputView)
     }
     
-    private func sendMedia(withURL: String, type: CometChat.MessageType){
+    func sendMedia(withURL: String, type: CometChat.MessageType){
+        safeUpDelegate?.didSendMedia()
         var lastSection = 0
         if chatMessages.count == 0 {
             lastSection = (self.tableView?.numberOfSections ?? 0)
@@ -4016,6 +4044,8 @@ extension CometChatMessageList : CometChatMessageComposerInternalDelegate {
      [CometChatMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
     open func didSendButtonPressed() {
+        safeUpDelegate?.didTapSendButton()
+        send.isHidden = true // SafeUp change
         var lastSection = 0
         if chatMessages.count == 0 {
             lastSection = (self.tableView?.numberOfSections ?? 0)
@@ -4104,7 +4134,10 @@ extension CometChatMessageList : CometChatMessageComposerInternalDelegate {
                                 DispatchQueue.main.async {  [weak self] in
                                     guard let strongSelf = self else { return }
                                     strongSelf.chatMessages[section][row] = message
-                                    strongSelf.tableView?.reloadRows(at:[IndexPath(row: row - 1, section: section)], with: .none)
+                                    // SafeUp crashfix
+                                    if row - 1 >= 0 {
+                                        strongSelf.tableView?.reloadRows(at:[IndexPath(row: row - 1, section: section)], with: .none)
+                                    }
                                     strongSelf.messageMode = .send
                                     strongSelf.didPreformCancel()
                                     strongSelf.send.isEnabled = true
@@ -5049,7 +5082,7 @@ extension CometChatMessageList: LinkPreviewDelegate {
 //    @available(iOSApplicationExtension, unavailable)
     public func didVisitButtonPressed(link: String, sender: UIButton) {
         guard let url = URL(string: link) else { return }
-        UIKitSettings.openURL?(url)
+        UIKitSettings.openURL?(url) // SafeUp change
     }
     
     /**
@@ -5064,7 +5097,7 @@ extension CometChatMessageList: LinkPreviewDelegate {
      */
     public func didPlayButtonPressed(link: String, sender: UIButton) {
         guard let url = URL(string: link) else { return }
-        UIKitSettings.openURL?(url)
+        UIKitSettings.openURL?(url) // SafeUp change
     }
 }
 
@@ -5273,7 +5306,7 @@ extension CometChatMessageList: ThreadDelegate {
 extension CometChatMessageList : MessageActionsDelegate {
     
     
-    func didReplyInPrivatePressed() {
+    @objc open func didReplyInPrivatePressed() {
         if let message = selectedMessage, let user = message.sender {
             let messageList = CometChatMessageList()
             messageList.set(conversationWith: user, type: .user)
@@ -5440,6 +5473,7 @@ extension CometChatMessageList : MessageActionsDelegate {
     }
     
     func copyPressed() {
+        safeUpDelegate?.didTapCopy()
         if let message = selectedMessage {
             var messageText = ""
             switch message.messageType {
@@ -5471,6 +5505,7 @@ extension CometChatMessageList : MessageActionsDelegate {
     }
     
     func documentPressed() {
+        safeUpDelegate?.didTapDocument()
         self.documentPicker.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.present(self.documentPicker, animated: true, completion: nil)
     }
@@ -5669,6 +5704,7 @@ extension CometChatMessageList : MessageActionsDelegate {
      [CometChatMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
     func didDeletePressed() {
+        safeUpDelegate?.didTapDelete()
         guard let message = selectedMessage else { return }
         guard let indexPath = selectedIndexPath else { return }
         CometChat.delete(messageId: message.id, onSuccess: { (deletedMessage) in
@@ -5712,6 +5748,7 @@ extension CometChatMessageList : MessageActionsDelegate {
     }
     
     func didReplyPressed() {
+        safeUpDelegate?.didTapReply()
         self.messageMode = .reply
         self.hide(view: .editMessageView, false)
         guard let message = selectedMessage else { return }
@@ -5777,7 +5814,7 @@ extension CometChatMessageList : MessageActionsDelegate {
     }
     
     func didSharePressed() {
-        
+        safeUpDelegate?.didTapShare()
         if let message = selectedMessage {
             var textToShare = ""
             if message.messageType == .text {
@@ -5799,8 +5836,10 @@ extension CometChatMessageList : MessageActionsDelegate {
                 }
             }
             
-            
-            let sendItems = [ textToShare]
+            let safeUpText1 = "You've got a new message from SafeUP member: "
+            let safeUpText2 = UIKitSettings.localizable.downloadAppPath
+            let safeUpText3 = safeUpText1 + textToShare + safeUpText2
+            let sendItems = [safeUpText3]
             let activityViewController = UIActivityViewController(activityItems: sendItems, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
             activityViewController.excludedActivityTypes = [.airDrop]
@@ -5886,6 +5925,7 @@ extension CometChatMessageList: LocationCellDelegate, CLLocationManagerDelegate 
     func openGoogleMapsForPlace(latitude: String, longitude: String) {
         
         if (UIKitSettings.applicationShared!.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            // SafeUp change
             UIKitSettings.openURL?(URL(string:
                                                 "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
         } else {
@@ -5963,7 +6003,7 @@ extension CometChatMessageList : HyperLinkDelegate, MFMailComposeViewControllerD
             .joined() as? String {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 let url = URL(string: "tel://\(number)")!
-                UIKitSettings.openURL?(url)
+                UIKitSettings.openURL?(url) // SafeUp change
             }
         }
     }

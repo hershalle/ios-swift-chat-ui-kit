@@ -28,11 +28,11 @@ class CometChatLanguageBundle: Bundle {
 
 extension Bundle {
     class func setLanguage(_ language: String) {
-        
-        defer {
-            object_setClass(UIKitSettings.bundle, CometChatLanguageBundle.self)
-        }
-        objc_setAssociatedObject(Bundle.main, &bundleKey,    Bundle.main.path(forResource: language, ofType: "lproj"), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        // SafeUp change:
+//        defer {
+//            object_setClass(UIKitSettings.bundle, CometChatLanguageBundle.self)
+//        }
+//        objc_setAssociatedObject(Bundle.main, &bundleKey,    Bundle.main.path(forResource: language, ofType: "lproj"), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }
 

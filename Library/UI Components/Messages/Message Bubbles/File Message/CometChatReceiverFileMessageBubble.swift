@@ -11,7 +11,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatReceiverFileMessageBubble: UITableViewCell {
+class CometChatReceiverFileMessageBubble: UITableViewCell, CometChatCell {
     
     // MARK: - Declaration of IBOutlets
     

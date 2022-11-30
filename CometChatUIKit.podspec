@@ -32,9 +32,8 @@ I had to do it myself because Comet Chat suck ass!
 
   s.source_files = 'Library/**/*'
   
-  # s.resource_bundles = {
-  #   'CometChatUIKit' => ['CometChatUIKit/Assets/*.png']
-  # }
+#  s.resource_bundles = {
+#      'CometChatUIKit' => ['SDK/*/*.{xib,storyboard,xcassets}'] }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'#, 'MapKit'

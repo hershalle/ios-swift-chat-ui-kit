@@ -34,13 +34,13 @@ public protocol ConversationListDelegate : AnyObject {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-public final class CometChatConversationList: UIViewController {
+open class CometChatConversationList: UIViewController {
     
     // MARK: - Declaration of Variables
     var conversationRequest: ConversationRequest?
-    var tableView: UITableView! = nil
+    public var tableView: UITableView! = nil
     var safeArea: UILayoutGuide!
-    var conversations: [Conversation] = [Conversation]()
+    public var conversations: [Conversation] = [Conversation]()
     var filteredConversations: [Conversation] = [Conversation]()
     weak var conversationlistdelegate : ConversationListDelegate?
     var activityIndicator:UIActivityIndicatorView?
@@ -268,9 +268,8 @@ public final class CometChatConversationList: UIViewController {
      [CometChatUserList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-1-comet-chat-user-list)
      */
     private func registerCells(){
-      
-        let CometChatConversationListItem  =  UINib(nibName: "CometChatConversationListItem", bundle: UIKitSettings.bundle)
-        self.tableView.register(CometChatConversationListItem, forCellReuseIdentifier: "CometChatConversationListItem")
+        let cometChatConversationListItem  =  UINib(nibName: "CometChatConversationListItem", bundle: UIKitSettings.bundle)
+        self.tableView.register(cometChatConversationListItem, forCellReuseIdentifier: "CometChatConversationListItem")
     }
     
     /**

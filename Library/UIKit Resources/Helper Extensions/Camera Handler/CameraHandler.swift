@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-class CameraHandler: NSObject{
-    static let shared = CameraHandler()
+public class CameraHandler: NSObject{
+    public static let shared = CameraHandler()
     
     fileprivate var currentVC: UIViewController!
     
     //MARK: Internal Properties
     
-    var imagePickedBlock: ((String) -> Void)?
+    public var imagePickedBlock: ((String) -> Void)?
     var videoPickedBlock: ((String) -> Void)?
     func presentCamera(for view: UIViewController)
     {
@@ -58,12 +58,12 @@ class CameraHandler: NSObject{
 
 
 extension CameraHandler: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         currentVC.dismiss(animated: true, completion: nil)
     }
     
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         switch picker.sourceType {
         case .photoLibrary:
             

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum SwitchMode {
+public enum SwitchMode {
     case enabled
     case disabled
 
@@ -47,7 +47,7 @@ enum ChatDisplayMode {
 open class UIKitSettings {
     private init() {}
     
-    public static var bundle = Bundle.main
+    public static var bundle = Bundle(for: CometChatConversationListItem.classForCoder())//Bundle.main
     
     // Keys
     public static var googleApiKey = "ENTER YOUR GOOGLE API KEY HERE"
@@ -79,88 +79,152 @@ open class UIKitSettings {
     
      
     //Main
-    static var publicGroup: SwitchMode = .enabled
-    static var privateGroup: SwitchMode = .enabled
-    static var passwordGroup: SwitchMode = .enabled
-    static var sendTextMessage: SwitchMode = .enabled
-    static var sendMessageInOneOnOne: SwitchMode = .enabled
-    static var sendMessageInGroup: SwitchMode = .enabled
-    static var sendPhotoVideos: SwitchMode = .enabled
-    static var sendFiles: SwitchMode = .enabled
-    static var sendVoiceNotes: SwitchMode = .enabled
-    static var sendEmojis: SwitchMode = .enabled
-    static var sendEmojisInLargerSize: SwitchMode = .enabled
-    static var sendStickers: SwitchMode = .enabled
-    static var sendGifs: SwitchMode = .enabled //not added (feature not available)
-    static var sendTypingIndicator: SwitchMode = .enabled
-    static var sendMessageReaction: SwitchMode = .enabled
-    static var sendLiveReaction: SwitchMode = .enabled
-    static var editMessage: SwitchMode = .enabled
-    static var deleteMessage: SwitchMode = .enabled
-    static var shareCopyForwardMessage: SwitchMode = .enabled
-    static var replyToMessage: SwitchMode = .enabled
-    static var threadedChats: SwitchMode = .enabled
-    static var userVideoCall: SwitchMode = .enabled
-    static var userAudioCall: SwitchMode = .enabled
-    static var groupAudioCall: SwitchMode = .enabled
-    static var groupVideoCall: SwitchMode = .enabled
-    static var groupCreation: SwitchMode = .enabled
-    static var joinOrLeaveGroup: SwitchMode = .enabled
-    static var viewGroupMembers: SwitchMode = .enabled
-    static var allowDeleteGroup: SwitchMode = .enabled
-    static var allowAddMembers: SwitchMode = .enabled
-    static var allowModeratorToDeleteMemberMessages: SwitchMode = .enabled
-    static var kickMember: SwitchMode = .enabled
-    static var banMember: SwitchMode = .enabled
-    static var allowPromoteDemoteMembers: SwitchMode = .enabled
-    static var setGroupInQnaModeByModerators: SwitchMode = .enabled //not added (feature not available)
-    static var hideDeletedMessages: SwitchMode = .disabled
-    static var highlightMessageFromModerators: SwitchMode = .enabled //not added (feature not available)
-    static var shareLocation: SwitchMode = .enabled
-    static var viewShareMedia: SwitchMode = .enabled
-    static var showReadDeliveryReceipts: SwitchMode = .enabled
-    static var showUserPresence: SwitchMode = .enabled
-    static var blockUser: SwitchMode = .enabled
-    static var polls: SwitchMode = .enabled
-    static var enableSoundForCalls: SwitchMode = .enabled
-    static var enableSoundForMessages: SwitchMode = .enabled
-    static var enableActionsForCalls: SwitchMode = .enabled
-    static var enableActionsForGroupNotifications: SwitchMode = .enabled
-    static var collaborativeDocument: SwitchMode = .enabled
-    static var collaborativeWhiteboard: SwitchMode = .enabled
-    static var messageTranslation: SwitchMode = .enabled
-    static var messageHistory: SwitchMode =  .enabled
-    static var unreadCount: SwitchMode =  .enabled
-    static var searchChats: SwitchMode =  .enabled
-    static var searchUsers: SwitchMode =  .enabled
-    static var searchGroups: SwitchMode =  .enabled
-    static var searchMessages: SwitchMode =  .enabled
-    static var callRecording: SwitchMode =  .enabled
-    static var callLiveStreaming: SwitchMode =  .enabled
-    static var callTranscription: SwitchMode =  .enabled
-    static var dataMasking : SwitchMode =  .enabled
-    static var profanityFilter : SwitchMode =  .enabled
-    static var thumbnailGeneration : SwitchMode =  .enabled
-    static var linkPreview : SwitchMode =  .enabled
-    static var richMediaPreview : SwitchMode =  .enabled
-    static var smartReplies: SwitchMode =  .enabled
-    static var saveMessages: SwitchMode =  .enabled
-    static var pinMessages: SwitchMode =  .enabled
-    static var voiceTranscription: SwitchMode =  .enabled
-    static var mentions: SwitchMode =  .enabled
-    static var emailReplies: SwitchMode =  .enabled
-    static var xssFilter: SwitchMode =  .enabled
-    static var imageModeration: SwitchMode =  .enabled
-    static var sentimentAnalysis: SwitchMode =  .enabled
-    static var connectionIndicator: SwitchMode =  .disabled
-    static var messageInPrivate: SwitchMode =  .enabled
-    static var clearConversation: SwitchMode =  .enabled
-    static var replyInPrivate: SwitchMode =  .enabled
-    static var messageInformation: SwitchMode =  .enabled
-    static var viewProfile: SwitchMode =  .enabled
-    static var startConversation: SwitchMode =  .enabled
+    public static var publicGroup: SwitchMode = .enabled
+    public static var privateGroup: SwitchMode = .enabled
+    public static var passwordGroup: SwitchMode = .enabled
+    public static var sendTextMessage: SwitchMode = .enabled
+    public static var sendMessageInOneOnOne: SwitchMode = .enabled
+    public static var sendMessageInGroup: SwitchMode = .enabled
+    public static var sendPhotoVideos: SwitchMode = .enabled
+    public static var sendFiles: SwitchMode = .enabled
+    public static var sendVoiceNotes: SwitchMode = .enabled
+    public static var sendEmojis: SwitchMode = .enabled
+    public static var sendEmojisInLargerSize: SwitchMode = .enabled
+    public static var sendStickers: SwitchMode = .enabled
+    public static var sendGifs: SwitchMode = .enabled //not added (feature not available)
+    public static var sendTypingIndicator: SwitchMode = .enabled
+    public static var sendMessageReaction: SwitchMode = .enabled
+    public static var sendLiveReaction: SwitchMode = .enabled
+    public static var editMessage: SwitchMode = .enabled
+    public static var deleteMessage: SwitchMode = .enabled
+    public static var shareCopyForwardMessage: SwitchMode = .enabled
+    public static var replyToMessage: SwitchMode = .enabled
+    public static var threadedChats: SwitchMode = .enabled
+    public static var userVideoCall: SwitchMode = .enabled
+    public static var userAudioCall: SwitchMode = .enabled
+    public static var groupAudioCall: SwitchMode = .enabled
+    public static var groupVideoCall: SwitchMode = .enabled
+    public static var groupCreation: SwitchMode = .enabled
+    public static var joinOrLeaveGroup: SwitchMode = .enabled
+    public static var viewGroupMembers: SwitchMode = .enabled
+    public static var allowDeleteGroup: SwitchMode = .enabled
+    public static var allowAddMembers: SwitchMode = .enabled
+    public static var allowModeratorToDeleteMemberMessages: SwitchMode = .enabled
+    public static var kickMember: SwitchMode = .enabled
+    public static var banMember: SwitchMode = .enabled
+    public static var allowPromoteDemoteMembers: SwitchMode = .enabled
+    public static var setGroupInQnaModeByModerators: SwitchMode = .enabled //not added (feature not available)
+    public static var hideDeletedMessages: SwitchMode = .disabled
+    public static var highlightMessageFromModerators: SwitchMode = .enabled //not added (feature not available)
+    public static var shareLocation: SwitchMode = .enabled
+    public static var viewShareMedia: SwitchMode = .enabled
+    public static var showReadDeliveryReceipts: SwitchMode = .enabled
+    public static var showUserPresence: SwitchMode = .enabled
+    public static var blockUser: SwitchMode = .enabled
+    public static var polls: SwitchMode = .enabled
+    public static var enableSoundForCalls: SwitchMode = .enabled
+    public static var enableSoundForMessages: SwitchMode = .enabled
+    public static var enableActionsForCalls: SwitchMode = .enabled
+    public static var enableActionsForGroupNotifications: SwitchMode = .enabled
+    public static var collaborativeDocument: SwitchMode = .enabled
+    public static var collaborativeWhiteboard: SwitchMode = .enabled
+    public static var messageTranslation: SwitchMode = .enabled
+    public static var messageHistory: SwitchMode =  .enabled
+    public static var unreadCount: SwitchMode =  .enabled
+    public static var searchChats: SwitchMode =  .enabled
+    public static var searchUsers: SwitchMode =  .enabled
+    public static var searchGroups: SwitchMode =  .enabled
+    public static var searchMessages: SwitchMode =  .enabled
+    public static var callRecording: SwitchMode =  .enabled
+    public static var callLiveStreaming: SwitchMode =  .enabled
+    public static var callTranscription: SwitchMode =  .enabled
+    public static var dataMasking : SwitchMode =  .enabled
+    public static var profanityFilter : SwitchMode =  .enabled
+    public static var thumbnailGeneration : SwitchMode =  .enabled
+    public static var linkPreview : SwitchMode =  .enabled
+    public static var richMediaPreview : SwitchMode =  .enabled
+    public static var smartReplies: SwitchMode =  .enabled
+    public static var saveMessages: SwitchMode =  .enabled
+    public static var pinMessages: SwitchMode =  .enabled
+    public static var voiceTranscription: SwitchMode =  .enabled
+    public static var mentions: SwitchMode =  .enabled
+    public static var emailReplies: SwitchMode =  .enabled
+    public static var xssFilter: SwitchMode =  .enabled
+    public static var imageModeration: SwitchMode =  .enabled
+    public static var sentimentAnalysis: SwitchMode =  .enabled
+    public static var connectionIndicator: SwitchMode =  .disabled
+    public static var messageInPrivate: SwitchMode =  .enabled
+    public static var clearConversation: SwitchMode =  .enabled
+    public static var replyInPrivate: SwitchMode =  .enabled
+    public static var messageInformation: SwitchMode =  .enabled
+    public static var viewProfile: SwitchMode =  .enabled
+    public static var startConversation: SwitchMode =  .enabled
     public static var tabs: [Controller] = [.chats, .calls, .users , .groups, .settings]
+    
     
     public static var openURL: ((URL) -> Void)?
     public static var applicationShared: UIApplication?
+    
+    public static var localizable: Localizable!
+    public static var image: Images!
+    
+    public struct Localizable {
+        public let txt_community_manager: String
+        public let txt__community_manager: String
+        public let no_messages_say_hi: String
+        public let downloadAppPath: String
+        public let tit_safeup_slogan: String
+        
+        public init(txt_community_manager: String,
+                    txt__community_manager: String,
+                    no_messages_say_hi: String,
+                    downloadAppPath: String,
+                    tit_safeup_slogan: String) {
+            self.txt_community_manager = txt_community_manager
+            self.txt__community_manager = txt__community_manager
+            self.no_messages_say_hi = no_messages_say_hi
+            self.downloadAppPath = downloadAppPath
+            self.tit_safeup_slogan = tit_safeup_slogan
+        }
+    }
+    
+    public struct Images {
+        public let bundle: Bundle
+        public let send_message: String
+        
+        public init(bundle: Bundle, send_message: String) {
+            self.bundle = bundle
+            self.send_message = send_message
+        }
+    }
+}
+
+@objc public protocol CometChatCell {
+    @objc optional var name: UILabel! { get }
+    @objc optional var messageView: UIView! { get }
+    @objc optional var avatar: CometChatAvatar! { get }
+}
+
+extension CometChatCell {
+    public func setSafeUpStyle(isCurrentUser: Bool) {
+        name?.font = UIFont.boldSystemFont(ofSize: 12)
+        name?.textColor = UIColor(named: "grey")
+        messageView?.backgroundColor = isCurrentUser ? UIKitSettings.primaryColor : UIColor(named: "bubbleGrey")
+    }
+    
+    public func addCommunityManagerTitle() {
+        let text = name??.text ?? ""
+        
+        if !text.hasSuffix(UIKitSettings.localizable.txt__community_manager) {
+            name??.text = text + UIKitSettings.localizable.txt__community_manager
+        }
+    }
+    
+    public func removeCommunityManagerTitle() {
+        let text = name??.text ?? ""
+        
+        if text.hasSuffix(UIKitSettings.localizable.txt__community_manager) {
+            name??.text = text.replacingOccurrences(of: UIKitSettings.localizable.txt__community_manager, with: "")
+        }
+    }
 }
