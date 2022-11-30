@@ -167,24 +167,22 @@ open class UIKitSettings {
     
     public static var localizable: Localizable!
     public static var image: Images!
+    public static var colors: Colors!
     
     public struct Localizable {
         public let txt_community_manager: String
         public let txt__community_manager: String
         public let no_messages_say_hi: String
         public let downloadAppPath: String
-        public let tit_safeup_slogan: String
         
         public init(txt_community_manager: String,
                     txt__community_manager: String,
                     no_messages_say_hi: String,
-                    downloadAppPath: String,
-                    tit_safeup_slogan: String) {
+                    downloadAppPath: String) {
             self.txt_community_manager = txt_community_manager
             self.txt__community_manager = txt__community_manager
             self.no_messages_say_hi = no_messages_say_hi
             self.downloadAppPath = downloadAppPath
-            self.tit_safeup_slogan = tit_safeup_slogan
         }
     }
     
@@ -195,6 +193,14 @@ open class UIKitSettings {
         public init(bundle: Bundle, send_message: String) {
             self.bundle = bundle
             self.send_message = send_message
+        }
+    }
+    
+    public struct Colors {
+        public let darkPurple: UIColor
+        
+        public init(darkPurple: UIColor) {
+            self.darkPurple = darkPurple
         }
     }
 }

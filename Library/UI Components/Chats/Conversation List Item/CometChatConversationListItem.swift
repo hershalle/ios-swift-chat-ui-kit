@@ -275,6 +275,10 @@ class CometChatConversationListItem: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // SafeUp changes:
+        typing.textColor = UIKitSettings.colors.darkPurple
+        timeStamp.font = .systemFont(ofSize: 12)
+        timeStamp.textColor = .black
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
