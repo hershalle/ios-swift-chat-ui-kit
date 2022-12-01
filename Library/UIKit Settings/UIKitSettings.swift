@@ -174,15 +174,18 @@ open class UIKitSettings {
         public let txt__community_manager: String
         public let no_messages_say_hi: String
         public let downloadAppPath: String
+        public let system: String
         
         public init(txt_community_manager: String,
                     txt__community_manager: String,
                     no_messages_say_hi: String,
-                    downloadAppPath: String) {
+                    downloadAppPath: String,
+                    system: String) {
             self.txt_community_manager = txt_community_manager
             self.txt__community_manager = txt__community_manager
             self.no_messages_say_hi = no_messages_say_hi
             self.downloadAppPath = downloadAppPath
+            self.system = system
         }
     }
     

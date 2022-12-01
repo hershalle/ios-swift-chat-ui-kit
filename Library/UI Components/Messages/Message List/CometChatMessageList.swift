@@ -744,9 +744,7 @@ open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAu
      [CometChatMessageList Documentation](https://prodocs.cometchat.com/docs/ios-ui-screens#section-4-comet-chat-message-list)
      */
     private func setupSuperview() {
-        
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "CometChatMessageList", bundle: bundle)
+        let nib = UINib(nibName: "CometChatMessageList", bundle: UIKitSettings.bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view  = view

@@ -55,21 +55,36 @@ class CometChatActionMessageBubble: UITableViewCell {
                 case .scopeChanged:
                     if let actionBy = (actionMessage?.actionBy as? CometChatPro.User)?.name,let actionOn = (actionMessage?.actionOn as? CometChatPro.User)?.name, let scope = actionMessage?.newScope  {
                         
+//                        switch scope {
+//
+//                        case .admin:
+//                            let admin = "ADMIN".localized()
+//                            message.text = actionBy + " " + "MADE".localized() + " \(actionOn) \(admin)"
+//                        case .moderator:
+//                            let moderator = "MODERATOR".localized()
+//                            message.text = actionBy + " " + "MADE".localized() + " \(actionOn) \(moderator)"
+//                        case .participant:
+//                            let participant = "PARTICIPANT".localized()
+//                            message.text = actionBy + " " + "MADE".localized() + " \(actionOn) \(participant)"
+//                        @unknown default:
+//                            break
+//                        }
+                        // SafeUp change
+                        let scopeText: String
                         switch scope {
-                        
                         case .admin:
-                            let admin = "ADMIN".localized()
-                            message.text = actionBy + " " + "MADE".localized() + " \(actionOn) \(admin)"
+                            scopeText = "ADMIN".localized()
                         case .moderator:
-                            let moderator = "MODERATOR".localized()
-                            message.text = actionBy + " " + "MADE".localized() + " \(actionOn) \(moderator)"
+                            scopeText = "MODERATOR".localized()
                         case .participant:
-                            let participant = "PARTICIPANT".localized()
-                            message.text = actionBy + " " + "MADE".localized() + " \(actionOn) \(participant)"
+                            scopeText = "PARTICIPANT".localized()
                         @unknown default:
-                            break
+                            print("Error: Unhandeled case: \(scope)")
+                            scopeText = ""
                         }
                         
+                        // SafeUp change
+                        message.text = actionBy.localized() + " " + "CHANGED_ROLE".localized() + " " + actionOn + "ROLE_TO".localized() + " " + scopeText
                     }
                 case .messageEdited:
                     message.text = actionMessage?.message
@@ -77,7 +92,8 @@ class CometChatActionMessageBubble: UITableViewCell {
                     message.text = actionMessage?.message
                 case .added:
                     if let actionBy = (actionMessage?.actionBy as? CometChatPro.User)?.name,let actionOn = (actionMessage?.actionOn as? CometChatPro.User)?.name  {
-                        message.text = actionBy + " " + "ADDED".localized() +  " " + actionOn
+                        let actionByLocalized = actionBy.localized() // SafeUp change
+                        message.text = actionByLocalized + " " + "ADDED".localized() +  " " + actionOn
                     }
                 @unknown default:
                     message.text = "ACTION_MESSAGE".localized()
