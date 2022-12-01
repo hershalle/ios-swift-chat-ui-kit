@@ -119,7 +119,7 @@
             case .takeAPhoto:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell", for: indexPath) as? ActionsCell {
                     cell.name.text =  "TAKE_A_PHOTO".localized()
-                    cell.icon.image = UIImage(named: UIKitSettings.image.take_a_photo, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.take_a_photo, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
                     cell.fullScreenSwitch.isHidden = true
                     cell.badgeCountSwitch.isHidden = true
 //                    cell.icon.tintColor = UIKitSettings.secondaryColor // SafeUp change
@@ -128,7 +128,7 @@
             case .photoAndVideoLibrary:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell", for: indexPath) as? ActionsCell {
                     cell.name.text = "PHOTO_VIDEO_LIBRARY".localized()
-                    cell.icon.image = UIImage(named: UIKitSettings.image.photo_and_video_library, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.photo_and_video_library, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
                     cell.fullScreenSwitch.isHidden = true
                     cell.badgeCountSwitch.isHidden = true
 //                    cell.icon.tintColor = UIKitSettings.secondaryColor // SafeUp change
@@ -137,7 +137,7 @@
             case .document:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell", for: indexPath) as? ActionsCell {
                     cell.name.text = "DOCUMENT".localized()
-                    cell.icon.image = UIImage(named: UIKitSettings.image.send_message, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.send_message, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
                     cell.fullScreenSwitch.isHidden = true
                     cell.badgeCountSwitch.isHidden = true
 //                    cell.icon.tintColor = UIKitSettings.secondaryColor // SafeUp change
@@ -160,7 +160,7 @@
                     }else{
                         cell.name.textColor = .black
                     }
-                    cell.icon.image = UIImage(named: UIKitSettings.image.edit_message, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.edit_message, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
                     cell.fullScreenSwitch.isHidden = true
                     cell.badgeCountSwitch.isHidden = true
 //                    cell.icon.tintColor = UIKitSettings.secondaryColor // SafeUp change
@@ -174,7 +174,7 @@
                     }else{
                         cell.name.textColor = .black
                     }
-                    cell.icon.image = UIImage(named: UIKitSettings.image.delete_message, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.delete_message, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
 //                    cell.icon.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
                     cell.fullScreenSwitch.isHidden = true
                     cell.badgeCountSwitch.isHidden = true
@@ -183,7 +183,7 @@
             case .reply:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell", for: indexPath) as? ActionsCell {
                     cell.name.text = "REPLY_MESSAGE".localized()
-                    cell.icon.image = UIImage(named: UIKitSettings.image.reply_message, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.reply_message, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
                     if #available(iOS 13.0, *) {
                         cell.name.textColor = .label
                     }else{
@@ -202,7 +202,7 @@
                     }else{
                         cell.name.textColor = .black
                     }
-                    cell.icon.image = UIImage(named: UIKitSettings.image.forward_message, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.forward_message, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
                     if #available(iOS 13.0, *) {
                         cell.name.textColor = .label
                     }else{
@@ -229,7 +229,7 @@
                 }
             case .share:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell", for: indexPath) as? ActionsCell {
-                    cell.icon.image = UIImage(named: UIKitSettings.image.share_message, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.share_message, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
                     cell.name.text = "SHARE_MESSAGE".localized()
                     if #available(iOS 13.0, *) {
                         cell.name.textColor = .label
@@ -258,7 +258,7 @@
             case .copy:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell", for: indexPath) as? ActionsCell {
                     cell.name.text = "COPY_MESSAGE".localized()
-                    cell.icon.image = UIImage(named: UIKitSettings.image.copy_message, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.copy_message, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
                     cell.fullScreenSwitch.isHidden = true
                     cell.badgeCountSwitch.isHidden = true
 //                    cell.icon.tintColor = UIKitSettings.secondaryColor // SafeUp change
@@ -340,7 +340,7 @@
             case .replyInPrivate:
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell", for: indexPath) as? ActionsCell {
                     cell.name.text = "REPLY_IN_PRIVATE".localized()
-                    cell.icon.image = UIImage(named: UIKitSettings.image.reply_privately, in: UIKitSettings.image.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+                    cell.icon.image = UIImage(named: UIKitSettings.image.reply_privately, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate) // SafeUp change
                     if #available(iOS 13.0, *) {
                         cell.name.textColor = .label
                     }else{
