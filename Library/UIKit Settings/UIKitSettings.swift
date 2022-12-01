@@ -234,3 +234,11 @@ extension CometChatCell {
         }
     }
 }
+
+// SafeUp Changes:
+public extension Notification.Name {
+    static let safeUpUserLoggedIn = NSNotification.Name("CometChatUserLoggedIn")
+    static let safeUpConversationsDidLoad = NSNotification.Name("CometChatConversationsDidLoad")
+    static let safeUpGroupMembersDidLoad = NSNotification.Name("CometChatGroupMembersDidLoad")
+}
+

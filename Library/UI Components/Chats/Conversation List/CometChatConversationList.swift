@@ -157,13 +157,19 @@ open class CometChatConversationList: UIViewController {
                 self.activityIndicator?.stopAnimating()
                 self.tableView.tableFooterView?.isHidden = true
                 self.tableView.reloadData()
+                
+                // SafeUp change:
+                NotificationCenter.default.post(name: .safeUpConversationsDidLoad, object: fetchedConversations)
             }
         }) { (error) in
             DispatchQueue.main.async {
-                if let error = error {
-                    CometChatSnackBoard.showErrorMessage(for: error)
-                }
+                // SafeUp change:
+//                if let error = error {
+//                    CometChatSnackBoard.showErrorMessage(for: error)
+//                }
+                NotificationCenter.default.post(name: .safeUpConversationsDidLoad, object: [])
             }
+            
         }
     }
     
@@ -196,11 +202,12 @@ open class CometChatConversationList: UIViewController {
                 self.activityIndicator?.stopAnimating()
                 self.tableView.tableFooterView?.isHidden = true}
         }) { (error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    CometChatSnackBoard.showErrorMessage(for: error)
-                }
-            }
+            // SafeUp changes:
+//            DispatchQueue.main.async {
+//                if let error = error {
+//                    CometChatSnackBoard.showErrorMessage(for: error)
+//                }
+//            }
         }
     }
     
@@ -475,29 +482,45 @@ extension CometChatConversationList: UITableViewDelegate , UITableViewDataSource
     ///   - indexPath: specifies current index for TableViewCell.
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        if let selectedConversation = tableView.cellForRow(at: indexPath) as? CometChatConversationListItem, let conversation = selectedConversation.conversation ,let user = conversation.conversationWith as? CometChatPro.User  {
+        // SafeUp changes:
+        if let selectedConversation = tableView.cellForRow(at: indexPath) as? CometChatConversationListItem,
+           let conversation = selectedConversation.conversation {
             
             selectedConversation.unreadBadgeCount.removeCount()
-            let messageList: CometChatMessageList = CometChatMessageList()
-            messageList.set(conversationWith: user, type: .user)
-            messageList.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(messageList, animated: true)
             
-            conversationlistdelegate?.didSelectConversationAtIndexPath(conversation: conversation, indexPath: indexPath)
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-        }else if let selectedConversation = tableView.cellForRow(at: indexPath) as? CometChatConversationListItem, let conversation = selectedConversation.conversation ,let group = conversation.conversationWith as? CometChatPro.Group  {
-            
-            selectedConversation.unreadBadgeCount.removeCount()
-            let messageList: CometChatMessageList = CometChatMessageList()
-            messageList.set(conversationWith: group, type: .group)
-            messageList.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(messageList, animated: true)
+            if let community = conversation.conversationWith as? Group {
+                parent?.performSegue(withIdentifier: "SegueToChat", sender: community)
+            } else if let user = conversation.conversationWith as? User {
+                parent?.performSegue(withIdentifier: "SegueToChat", sender: user)
+            }
             
             conversationlistdelegate?.didSelectConversationAtIndexPath(conversation: conversation, indexPath: indexPath)
             tableView.deselectRow(at: indexPath, animated: true)
         }
+        
+        // SafeUp changes:
+//        if let selectedConversation = tableView.cellForRow(at: indexPath) as? CometChatConversationListItem, let conversation = selectedConversation.conversation ,let user = conversation.conversationWith as? CometChatPro.User  {
+//
+//            selectedConversation.unreadBadgeCount.removeCount()
+//            let messageList: CometChatMessageList = CometChatMessageList()
+//            messageList.set(conversationWith: user, type: .user)
+//            messageList.hidesBottomBarWhenPushed = true
+//            navigationController?.pushViewController(messageList, animated: true)
+//
+//            conversationlistdelegate?.didSelectConversationAtIndexPath(conversation: conversation, indexPath: indexPath)
+//            tableView.deselectRow(at: indexPath, animated: true)
+//
+//        }else if let selectedConversation = tableView.cellForRow(at: indexPath) as? CometChatConversationListItem, let conversation = selectedConversation.conversation ,let group = conversation.conversationWith as? CometChatPro.Group  {
+//
+//            selectedConversation.unreadBadgeCount.removeCount()
+//            let messageList: CometChatMessageList = CometChatMessageList()
+//            messageList.set(conversationWith: group, type: .group)
+//            messageList.hidesBottomBarWhenPushed = true
+//            navigationController?.pushViewController(messageList, animated: true)
+//
+//            conversationlistdelegate?.didSelectConversationAtIndexPath(conversation: conversation, indexPath: indexPath)
+//            tableView.deselectRow(at: indexPath, animated: true)
+//        }
     }
     
     
@@ -687,6 +710,7 @@ extension CometChatConversationList : CometChatMessageDelegate {
                             cell.parseMaskedData(forMessage: textMessage)
                             cell.parseSentimentAnalysis(forMessage: textMessage)
                             cell.unreadBadgeCount.incrementCount()
+                            cell.conversation?.unreadMessageCount = cell.unreadBadgeCount.getCount
                             self.tableView.endUpdates()
                         }
                     }
