@@ -192,10 +192,41 @@ open class UIKitSettings {
     public struct Images {
         public let bundle: Bundle
         public let send_message: String
+        public let take_a_photo: String
+        public let photo_and_video_library: String
+        public let send_document: String
+        public let edit_message: String
+        public let delete_message: String
+        public let reply_message: String
+        public let forward_message: String
+        public let share_message: String
+        public let copy_message: String
+        public let reply_privately: String
         
-        public init(bundle: Bundle, send_message: String) {
+        public init(bundle: Bundle,
+                    send_message: String,
+                    take_a_photo: String,
+                    photo_and_video_library: String,
+                    send_document: String,
+                    edit_message: String,
+                    delete_message: String,
+                    reply_message: String,
+                    forward_message: String,
+                    share_message: String,
+                    copy_message: String,
+                    reply_privately: String) {
             self.bundle = bundle
             self.send_message = send_message
+            self.take_a_photo = take_a_photo
+            self.photo_and_video_library = photo_and_video_library
+            self.send_document = send_document
+            self.edit_message = edit_message
+            self.delete_message = delete_message
+            self.reply_message = reply_message
+            self.forward_message = forward_message
+            self.share_message = share_message
+            self.copy_message = copy_message
+            self.reply_privately = reply_privately
         }
     }
     
