@@ -17,7 +17,7 @@ protocol CometChatReceiverTextMessageBubbleDelegate: AnyObject {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatReceiverTextMessageBubble: UITableViewCell {
+class CometChatReceiverTextMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     
@@ -124,7 +124,7 @@ class CometChatReceiverTextMessageBubble: UITableViewCell {
                 }
                 
                 message.customize { label in
-                    label.URLColor = UIKitSettings.URLColor
+                    label.URLColor = UIKitSettings.primaryColor// URLColor // SafeUp change
                     label.URLSelectedColor  = UIKitSettings.URLSelectedColor
                     label.customColor[phoneParser1] = UIKitSettings.PhoneNumberColor
                     label.customSelectedColor[phoneParser1] = UIKitSettings.PhoneNumberSelectedColor

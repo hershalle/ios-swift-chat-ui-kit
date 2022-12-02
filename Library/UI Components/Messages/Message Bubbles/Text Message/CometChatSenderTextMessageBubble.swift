@@ -14,7 +14,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatSenderTextMessageBubble: UITableViewCell {
+class CometChatSenderTextMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBInspectable
     
@@ -145,7 +145,7 @@ class CometChatSenderTextMessageBubble: UITableViewCell {
              }
              
             message.customize { label in
-                label.URLColor = UIKitSettings.URLColor
+                label.URLColor = UIKitSettings.white//URLColor // SafeUp change
                 label.URLSelectedColor  = UIKitSettings.URLSelectedColor
                 label.customColor[phoneParser1] = UIKitSettings.PhoneNumberColor
                 label.customSelectedColor[phoneParser1] = UIKitSettings.PhoneNumberSelectedColor
