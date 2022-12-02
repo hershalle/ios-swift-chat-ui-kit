@@ -39,7 +39,7 @@ open class CometChatIncomingCall: UIViewController {
     }
     
     public override func loadView() {
-        let bundle = Bundle(for: type(of: self))
+        let bundle = UIKitSettings.bundle //Bundle(for: type(of: self)) // SafeUp change
         let nib = UINib(nibName: "CometChatIncomingCall", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]

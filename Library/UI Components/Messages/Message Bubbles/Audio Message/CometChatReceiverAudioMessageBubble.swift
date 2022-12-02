@@ -11,7 +11,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatReceiverAudioMessageBubble: UITableViewCell {
+class CometChatReceiverAudioMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     
@@ -62,7 +62,7 @@ class CometChatReceiverAudioMessageBubble: UITableViewCell {
                 nameView.isHidden = true
             }
             if let userName = audioMessage.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
             }
             
             timeStamp.text = String().setMessageTime(time: Int(audioMessage?.sentAt ?? 0))
@@ -101,7 +101,7 @@ class CometChatReceiverAudioMessageBubble: UITableViewCell {
             receiptStack.isHidden = true
             nameView.isHidden = false
             if let userName = audioMessageinThread.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
             }
             self.reactionView.parseMessageReactionForMessage(message: audioMessageinThread) { (success) in
                 if success == true {
@@ -130,12 +130,12 @@ class CometChatReceiverAudioMessageBubble: UITableViewCell {
                 timeStamp.text = String().setMessageTime(time: Int(audioMessageinThread?.sentAt ?? 0))
             }else if audioMessageinThread.sentAt == 0 {
                 timeStamp.text = "SENDING".localized()
-                name.text = LoggedInUser.name.capitalized + ":"
+                name.text = LoggedInUser.name.capitalized // + ":" // SafeUp change
             }
              nameView.isHidden = false
              replybutton.isHidden = true
             if let userName = audioMessageinThread?.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" SafeUp change
             }
             if let avatarURL = audioMessageinThread?.sender?.avatar  {
                 avatar.set(image: avatarURL, with: audioMessageinThread?.sender?.name ?? "")

@@ -789,7 +789,7 @@ open class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDelega
      */
     private func setupSuperview() {
         //        UIFont.loadAllFonts(bundleIdentifierString: Bundle.main.bundleIdentifier ?? "")
-        let bundle = Bundle(for: type(of: self))
+        let bundle = UIKitSettings.bundle //Bundle(for: type(of: self)) // SafeUp change
         let nib = UINib(nibName: "CometChatThreadedMessageList", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]

@@ -35,7 +35,7 @@ class CometChatCreatePoll: UIViewController {
     
     // MARK: - View controller lifecycle methods
     override func loadView() {
-        let bundle = Bundle(for: type(of: self))
+        let bundle = UIKitSettings.bundle //Bundle(for: type(of: self)) // SafeUp change
         let nib = UINib(nibName: "CometChatCreatePoll", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]

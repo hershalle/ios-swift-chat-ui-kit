@@ -239,13 +239,13 @@ open class UIKitSettings {
     }
 }
 
-@objc public protocol CometChatCell {
+@objc public protocol SafeUpCometChatCell {
     @objc optional var name: UILabel! { get }
     @objc optional var messageView: UIView! { get }
     @objc optional var avatar: CometChatAvatar! { get }
 }
 
-extension CometChatCell {
+extension SafeUpCometChatCell {
     public func setSafeUpStyle(isCurrentUser: Bool) {
         name?.font = UIFont.boldSystemFont(ofSize: 12)
         name?.textColor = UIColor(named: "grey")
