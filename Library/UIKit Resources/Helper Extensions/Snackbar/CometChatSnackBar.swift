@@ -838,6 +838,7 @@ private extension CometChatSnackbar {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.CometChatDefaultBackground
         layer.cornerRadius = cornerRadius
+        layer.masksToBounds = true // SafeUp change
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
         
