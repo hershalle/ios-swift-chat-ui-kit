@@ -45,7 +45,7 @@ class CometChatReceiverStickerMessageBubble: UITableViewCell {
         didSet {
 
             if let userName = stickerMessage.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
             }
             if stickerMessage.receiverType == .group {
                 nameView.isHidden = false
@@ -129,7 +129,7 @@ class CometChatReceiverStickerMessageBubble: UITableViewCell {
             timeStamp.text = String().setMessageTime(time: Int(stickerMessageInThread?.sentAt ?? 0))
             }else if stickerMessageInThread.sentAt == 0 {
                timeStamp.text = "SENDING".localized()
-                 name.text = LoggedInUser.name.capitalized + ":"
+                 name.text = LoggedInUser.name.capitalized // + ":" // SafeUp change
             }
             replyButton.isHidden = true
             if let avatarURL = stickerMessageInThread.sender?.avatar  {

@@ -64,7 +64,7 @@ class CometChatReceiverMeetingMessageBubble: UITableViewCell {
             joinButton.setTitle("JOIN".localized(), for: .normal)
             joinButton.tintColor = UIKitSettings.primaryColor
             if let userName = meetingMessage.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
                 
                 
                 if let data = meetingMessage.customData, let type = data["callType"] as? String{

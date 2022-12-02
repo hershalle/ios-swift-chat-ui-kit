@@ -81,7 +81,7 @@ class CometChatReceiverPollMessageBubble: UITableViewCell {
                 nameView.isHidden = true
             }
             if let userName = pollMessage.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
             }
             
             self.parsePollsExtension(forMessage: pollMessage)

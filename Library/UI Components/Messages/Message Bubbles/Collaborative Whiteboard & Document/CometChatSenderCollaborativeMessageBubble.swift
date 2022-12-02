@@ -17,7 +17,7 @@ protocol  CollaborativeDelegate: NSObject {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatSenderCollaborativeMessageBubble: UITableViewCell {
+class CometChatSenderCollaborativeMessageBubble: UITableViewCell, SafeUpCometChatCell {
 
     // MARK: - Declaration of IBOutlets
     @IBOutlet weak var reactionView: CometChatMessageReactions!

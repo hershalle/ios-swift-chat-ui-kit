@@ -11,7 +11,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-open class CometChatSenderFileMessageBubble: UITableViewCell {
+open class CometChatSenderFileMessageBubble: UITableViewCell, SafeUpCometChatCell {
 
     // MARK: - Declaration of IBOutlets
     @IBOutlet weak var reactionView: CometChatMessageReactions!
@@ -24,7 +24,7 @@ open class CometChatSenderFileMessageBubble: UITableViewCell {
     @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var receipt: UIImageView!
     @IBOutlet weak var receiptStack: UIStackView!
-    @IBOutlet weak var messageView: UIView!
+    @IBOutlet public weak var messageView: UIView!
     
      // MARK: - Declaration of Variables
     var indexPath: IndexPath?

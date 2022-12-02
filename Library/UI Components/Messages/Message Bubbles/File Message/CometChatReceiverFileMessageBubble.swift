@@ -58,7 +58,7 @@ class CometChatReceiverFileMessageBubble: UITableViewCell, SafeUpCometChatCell {
                 nameView.isHidden = true
             }
             if let userName = fileMessage.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
             }
             
             timeStamp.text = String().setMessageTime(time: Int(fileMessage?.sentAt ?? 0))
@@ -126,7 +126,7 @@ class CometChatReceiverFileMessageBubble: UITableViewCell, SafeUpCometChatCell {
                 timeStamp.text = String().setMessageTime(time: Int(fileMessageInThread?.sentAt ?? 0))
             }else if fileMessageInThread.sentAt == 0 {
                 timeStamp.text = "SENDING".localized()
-                 name.text = LoggedInUser.name.capitalized + ":"
+                 name.text = LoggedInUser.name.capitalized // + ":" // SafeUp change
             }
             replybutton.isHidden = true
             if let avatarURL = fileMessageInThread.sender?.avatar  {

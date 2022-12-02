@@ -67,7 +67,7 @@ class CometChatReceiverReplyMessageBubble: UITableViewCell {
             if let currentMessage = textMessage {
                 sentimentAnalysisView.dropShadow()
                 if let userName = currentMessage.sender?.name {
-                    name.text = userName + ":"
+                    name.text = userName // + ":" // SafeUp change
                 }
                 
                 if let metaData = currentMessage.metaData, let replyToMessage = metaData["reply-message"] as? [String:Any], let baseMessage = CometChat.processMessage(replyToMessage).0 as? BaseMessage {
@@ -401,10 +401,10 @@ class CometChatReceiverReplyMessageBubble: UITableViewCell {
                     timeStamp.text = String().setMessageTime(time: Int(textMessage?.sentAt ?? 0))
                 }else if textmessage.sentAt == 0 {
                     timeStamp.text = "SENDING".localized()
-                    name.text = LoggedInUser.name.capitalized + ":"
+                    name.text = LoggedInUser.name.capitalized // + ":" // SafeUp change
                 }
                 if let userName = textmessage.sender?.name {
-                    name.text = userName + ":"
+                    name.text = userName // + ":" // SafeUp change
                 }
                 if let avatarURL = textmessage.sender?.avatar  {
                     avatar.set(image: avatarURL, with: textmessage.sender?.name ?? "")
@@ -462,7 +462,7 @@ class CometChatReceiverReplyMessageBubble: UITableViewCell {
             if let currentMessage = deletedMessage {
                 self.replybutton.isHidden = true
                 if let userName = currentMessage.sender?.name {
-                    name.text = userName + ":"
+                    name.text = userName // + ":" // SafeUp change
                 }
                 if (currentMessage.sender?.name) != nil {
                     switch currentMessage.messageType {

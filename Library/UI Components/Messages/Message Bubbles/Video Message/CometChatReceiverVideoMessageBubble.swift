@@ -55,7 +55,7 @@ class CometChatReceiverVideoMessageBubble: UITableViewCell {
                 }
             }
             if let userName = mediaMessage.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
             }
             if mediaMessage.receiverType == .group {
                 nameView.isHidden = false
@@ -116,7 +116,7 @@ class CometChatReceiverVideoMessageBubble: UITableViewCell {
               timeStamp.text = String().setMessageTime(time: Int(mediaMessageInThread?.sentAt ?? 0))
               }else if mediaMessageInThread.sentAt == 0 {
                  timeStamp.text = "SENDING".localized()
-                 name.text = LoggedInUser.name.capitalized + ":"
+                 name.text = LoggedInUser.name.capitalized // + ":" // SafeUp change
               }
               parseThumbnailForVideo(forMessage: mediaMessageInThread)
             if let avatarURL = mediaMessageInThread.sender?.avatar  {

@@ -11,7 +11,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatSenderAudioMessageBubble: UITableViewCell {
+class CometChatSenderAudioMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     

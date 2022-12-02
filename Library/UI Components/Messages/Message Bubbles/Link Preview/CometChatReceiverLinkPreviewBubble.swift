@@ -74,7 +74,7 @@ class CometChatReceiverLinkPreviewBubble: UITableViewCell, WKNavigationDelegate 
                 avatar.set(image: "", with: linkPreviewMessage.sender?.name ?? "")
             }
             if let userName = linkPreviewMessage.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
             }
             if linkPreviewMessage.receiverType == .group {
               nameView.isHidden = false
@@ -164,7 +164,7 @@ class CometChatReceiverLinkPreviewBubble: UITableViewCell, WKNavigationDelegate 
               receiptStack.isHidden = true
             
             if let userName = linkPreviewMessageInThread.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
             }
             if let avatarURL = linkPreviewMessageInThread.sender?.avatar  {
                 avatar.set(image: avatarURL, with: linkPreviewMessageInThread.sender?.name ?? "")
@@ -207,7 +207,7 @@ class CometChatReceiverLinkPreviewBubble: UITableViewCell, WKNavigationDelegate 
                   timeStamp.text = String().setMessageTime(time: Int(linkPreviewMessageInThread?.sentAt ?? 0))
               }else if linkPreviewMessageInThread.sentAt == 0 {
                   timeStamp.text = "SENDING".localized()
-                  name.text = LoggedInUser.name.capitalized + ":"
+                  name.text = LoggedInUser.name.capitalized // + ":" // SafeUp change
               }
                nameView.isHidden = false
               replyButton.isHidden = true

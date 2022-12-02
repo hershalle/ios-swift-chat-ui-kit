@@ -11,7 +11,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatReceiverCollaborativeMessageBubble: UITableViewCell {
+class CometChatReceiverCollaborativeMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     
@@ -62,7 +62,7 @@ class CometChatReceiverCollaborativeMessageBubble: UITableViewCell {
             joinButton.setTitle("JOIN".localized(), for: .normal)
             joinButton.tintColor = UIKitSettings.primaryColor
             if let userName = whiteboardMessage.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
                 title.text = "\(userName) " + "HAS_SHARED_WHITEBOARD".localized()
                 if #available(iOS 13.0, *) {
                     icon.image = UIImage(named: "messages-collaborative-whiteboard", in: UIKitSettings.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate).withTintColor(.systemGray)
@@ -125,7 +125,7 @@ class CometChatReceiverCollaborativeMessageBubble: UITableViewCell {
             joinButton.setTitle("JOIN".localized(), for: .normal)
             joinButton.tintColor = UIKitSettings.primaryColor
             if let userName = writeboardMessage.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
                 title.text = "\(userName) " +  "HAS_SHARED_COLLABORATIVE_DOCUMENT".localized()
                 if #available(iOS 13.0, *) {
                     icon.image = UIImage(named: "messages-collaborative-document", in: UIKitSettings.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate).withTintColor(.systemGray)
@@ -177,7 +177,7 @@ class CometChatReceiverCollaborativeMessageBubble: UITableViewCell {
                 }
             }
             if let userName = whiteboardMessageInThread.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
                 title.text = "\(userName) " + "HAS_SHARED_WHITEBOARD".localized()
                 if #available(iOS 13.0, *) {
                     icon.image = UIImage(named: "messages-collaborative-whiteboard", in: UIKitSettings.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
@@ -203,7 +203,7 @@ class CometChatReceiverCollaborativeMessageBubble: UITableViewCell {
                 timeStamp.text = String().setMessageTime(time: Int(whiteboardMessageInThread.sentAt))
             }else if whiteboardMessageInThread.sentAt == 0 {
                 timeStamp.text = "SENDING".localized()
-                 name.text = LoggedInUser.name.capitalized + ":"
+                 name.text = LoggedInUser.name.capitalized // + ":" // SafeUp changes
             }
             replybutton.isHidden = true
                 
@@ -228,7 +228,7 @@ class CometChatReceiverCollaborativeMessageBubble: UITableViewCell {
                 }
             }
             if let userName = whiteboardMessageInThread.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
                 title.text = "\(userName) " + "HAS_SHARED_COLLABORATIVE_DOCUMENT".localized()
                 icon.image = UIImage(named: "messages-collaborative-document", in: UIKitSettings.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
                 icon.tintColor = UIKitSettings.primaryColor
@@ -255,7 +255,7 @@ class CometChatReceiverCollaborativeMessageBubble: UITableViewCell {
                 timeStamp.text = String().setMessageTime(time: Int(whiteboardMessageInThread.sentAt))
             }else if whiteboardMessageInThread.sentAt == 0 {
                 timeStamp.text = "SENDING".localized()
-                 name.text = LoggedInUser.name.capitalized + ":"
+                 name.text = LoggedInUser.name.capitalized // + ":" // SafeUp change
             }
             replybutton.isHidden = true
             }

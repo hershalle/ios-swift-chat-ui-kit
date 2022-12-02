@@ -60,7 +60,7 @@ class CometChatReceiverTextMessageBubble: UITableViewCell {
             if let currentMessage = textMessage {
                 receiptStack.isHidden = true
                 if let userName = currentMessage.sender?.name {
-                    name.text = userName + ":"
+                    name.text = userName // + ":" // SafeUp change
                 }
                 self.parseProfanityFilter(forMessage: currentMessage)
                 self.parseMaskedData(forMessage: currentMessage)
@@ -161,7 +161,7 @@ class CometChatReceiverTextMessageBubble: UITableViewCell {
                     timeStamp.text = String().setMessageTime(time: Int(textMessage?.sentAt ?? 0))
                 }else if textmessage.sentAt == 0 {
                     timeStamp.text = "SENDING".localized()
-                    name.text = LoggedInUser.name.capitalized + ":"
+                    name.text = LoggedInUser.name.capitalized // + ":" // SafeUp change
                 }
             }
             receiptStack.isHidden = true
@@ -173,7 +173,7 @@ class CometChatReceiverTextMessageBubble: UITableViewCell {
             nameView.isHidden = false
             replybutton.isHidden = true
             if let userName = textMessageInThread?.sender?.name {
-                name.text = userName + ":"
+                name.text = userName // + ":" // SafeUp change
             }
             if let avatarURL = textMessageInThread?.sender?.avatar  {
                 avatar.set(image: avatarURL, with: textMessageInThread?.sender?.name ?? "")
@@ -224,7 +224,7 @@ class CometChatReceiverTextMessageBubble: UITableViewCell {
             widthconstraint.constant = 0
             if let currentMessage = deletedMessage {
                 if let userName = currentMessage.sender?.name {
-                    name.text = userName + ":"
+                    name.text = userName // + ":" // SafeUp change
                 }
                 
                 if (currentMessage.sender?.name) != nil {
