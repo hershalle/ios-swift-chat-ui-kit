@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="WP2-G6-8Ii">
-                        <rect key="frame" x="38" y="3" width="458" height="450"/>
+                        <rect key="frame" x="42" y="3" width="454" height="450"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NLZ-D3-64x">
                                 <rect key="frame" x="0.0" y="-19" width="458" height="19"/>
@@ -42,7 +42,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="CbI-Rb-km6">
-                                <rect key="frame" x="0.0" y="0.0" width="458" height="382"/>
+                                <rect key="frame" x="0.0" y="0.0" width="438" height="382"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jix-DQ-9tZ">
                                         <rect key="frame" x="0.0" y="0.0" width="131" height="382"/>
@@ -99,7 +99,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEN-Kr-vvP">
-                                        <rect key="frame" x="131" y="0.0" width="327" height="382"/>
+                                        <rect key="frame" x="131" y="0.0" width="307" height="382"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -153,18 +153,18 @@
                         </subviews>
                     </stackView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultAvatar.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="PyW-mZ-4Vq" customClass="CometChatAvatar" customModule="CometChatUIKit" customModuleProvider="target">
-                        <rect key="frame" x="5" y="3" width="30" height="30"/>
+                        <rect key="frame" x="5" y="3" width="34" height="34"/>
                         <color key="backgroundColor" systemColor="systemFillColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="XxA-ag-eZw"/>
-                            <constraint firstAttribute="width" constant="30" id="Z7L-XK-94E"/>
+                            <constraint firstAttribute="height" constant="34" id="XxA-ag-eZw"/>
+                            <constraint firstAttribute="width" constant="34" id="Z7L-XK-94E"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="10"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="15"/>
+                                <integer key="value" value="17"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                 <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -172,7 +172,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNK-91-8wg">
-                        <rect key="frame" x="174" y="364" width="37" height="21"/>
+                        <rect key="frame" x="178" y="364" width="37" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="pTb-T1-V6b"/>
                         </constraints>

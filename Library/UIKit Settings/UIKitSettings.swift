@@ -257,8 +257,9 @@ extension SafeUpCometChatCell {
         if let messageView = messageView {
             messageView?.backgroundColor = isCurrentUser ? UIKitSettings.primaryColor : UIColor(named: "bubbleGrey")
         }
-        
-        
+        if let avatar = avatar {
+            avatar?.contentMode = .scaleAspectFill
+        }
     }
     
     public func addCommunityManagerTitle() {
