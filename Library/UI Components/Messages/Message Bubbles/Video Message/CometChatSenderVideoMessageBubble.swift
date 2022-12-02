@@ -13,7 +13,7 @@ import CoreMedia
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatSenderVideoMessageBubble: UITableViewCell {
+class CometChatSenderVideoMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
      // MARK: - Declaration of IBInspectable
     
