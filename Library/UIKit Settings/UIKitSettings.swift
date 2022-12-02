@@ -250,9 +250,15 @@ open class UIKitSettings {
 
 extension SafeUpCometChatCell {
     public func setSafeUpStyle(isCurrentUser: Bool) {
-        name?.font = UIFont.boldSystemFont(ofSize: 12)
-        name?.textColor = UIColor(named: "grey")
-        messageView?.backgroundColor = isCurrentUser ? UIKitSettings.primaryColor : UIColor(named: "bubbleGrey")
+        if let name = self.name {
+            name?.font = UIFont.boldSystemFont(ofSize: 12)
+            name?.textColor = UIColor(named: "grey")
+        }
+        if let messageView = messageView {
+            messageView?.backgroundColor = isCurrentUser ? UIKitSettings.primaryColor : UIColor(named: "bubbleGrey")
+        }
+        
+        
     }
     
     public func addCommunityManagerTitle() {
