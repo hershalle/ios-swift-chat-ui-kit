@@ -213,29 +213,35 @@ class CometChatReceiverImageMessageBubble: UITableViewCell, SafeUpCometChatCell 
          imageMessage.image = nil
          if let metaData = forMessage?.metaData , let injected = metaData["@injected"] as? [String : Any], let cometChatExtension =  injected["extensions"] as? [String : Any], let thumbnailGenerationDictionary = cometChatExtension["thumbnail-generation"] as? [String : Any] {
              if let url = URL(string: thumbnailGenerationDictionary["url_medium"] as? String ?? "") {
-                 self.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                 imageRequest = imageService.image(for: url) { [weak self] image in
-                     guard let strongSelf = self else { return }
-                     // Update Thumbnail Image View
-                     if let image = image {
-                         strongSelf.imageMessage.image = image
-                     }else{
-                         strongSelf.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                     }
-                 }
+                 imageService.set(imageView: imageMessage,
+                                  imageURL: url,
+                                  placeHolderImageName: "default-image.png")
+//                 self.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                 imageRequest = imageService.image(for: url) { [weak self] image in
+//                     guard let strongSelf = self else { return }
+//                     // Update Thumbnail Image View
+//                     if let image = image {
+//                         strongSelf.imageMessage.image = image
+//                     }else{
+//                         strongSelf.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                     }
+//                 }
              }
          }else{
              if let url = URL(string: mediaMessage.attachment?.fileUrl ?? "") {
-                 self.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                 imageRequest = imageService.image(for: url) { [weak self] image in
-                     guard let strongSelf = self else { return }
-                     // Update Thumbnail Image View
-                     if let image = image {
-                         strongSelf.imageMessage.image = image
-                     }else{
-                         strongSelf.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                     }
-                 }
+                 imageService.set(imageView: imageMessage,
+                                  imageURL: url,
+                                  placeHolderImageName: "default-image.png")
+//                 self.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                 imageRequest = imageService.image(for: url) { [weak self] image in
+//                     guard let strongSelf = self else { return }
+//                     // Update Thumbnail Image View
+//                     if let image = image {
+//                         strongSelf.imageMessage.image = image
+//                     }else{
+//                         strongSelf.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                     }
+//                 }
              }
          }
      }

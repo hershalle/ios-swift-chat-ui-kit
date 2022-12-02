@@ -39,4 +39,5 @@ I had to do it myself because Comet Chat suck ass!
   s.frameworks = 'UIKit'#, 'MapKit'
   s.dependency 'CometChatPro', '3.0.910'
   s.dependency 'CometChatCalls', '2.2.0'
+  s.dependency 'Kingfisher', '~> 7.0'
 end

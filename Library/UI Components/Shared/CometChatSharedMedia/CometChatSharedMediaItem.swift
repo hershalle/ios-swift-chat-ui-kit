@@ -37,15 +37,18 @@ class CometChatSharedMediaItem: UICollectionViewCell {
                 self.docsView.isHidden = true
                 self.play.isHidden = true
                 if let url = URL(string: message.attachment?.fileUrl ?? "") {
-                    imageRequest = imageService.image(for: url) { [weak self] image in
-                        guard let strongSelf = self else { return }
-                        // Update Thumbnail Image View
-                        if let image = image {
-                            strongSelf.photo.image = image
-                        }else{
-                            strongSelf.photo.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                        }
-                    }
+                    imageService.set(imageView: photo,
+                                     imageURL: url,
+                                     placeHolderImageName: "default-image.png")
+//                    imageRequest = imageService.image(for: url) { [weak self] image in
+//                        guard let strongSelf = self else { return }
+//                        // Update Thumbnail Image View
+//                        if let image = image {
+//                            strongSelf.photo.image = image
+//                        }else{
+//                            strongSelf.photo.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                        }
+//                    }
                 }
             case .video:
                 self.photo.image = nil

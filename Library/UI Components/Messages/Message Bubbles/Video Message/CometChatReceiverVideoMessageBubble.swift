@@ -174,15 +174,18 @@ class CometChatReceiverVideoMessageBubble: UITableViewCell, SafeUpCometChatCell 
         imageMessage.image = nil
         if let metaData = forMessage?.metaData , let injected = metaData["@injected"] as? [String : Any], let cometChatExtension =  injected["extensions"] as? [String : Any], let thumbnailGenerationDictionary = cometChatExtension["thumbnail-generation"] as? [String : Any] {
             if let url = URL(string: thumbnailGenerationDictionary["url_medium"] as? String ?? "") {
-                imageRequest = imageService.image(for: url) { [weak self] image in
-                    guard let strongSelf = self else { return }
-                    // Update Thumbnail Image View
-                    if let image = image {
-                        strongSelf.imageMessage.image = image
-                    }else{
-                        strongSelf.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                    }
-                }
+                imageService.set(imageView: imageMessage,
+                                 imageURL: url,
+                                 placeHolderImageName: "default-image.png")
+//                imageRequest = imageService.image(for: url) { [weak self] image in
+//                    guard let strongSelf = self else { return }
+//                    // Update Thumbnail Image View
+//                    if let image = image {
+//                        strongSelf.imageMessage.image = image
+//                    }else{
+//                        strongSelf.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                    }
+//                }
             }
         }else{
          imageMessage.image = UIImage(color: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1))

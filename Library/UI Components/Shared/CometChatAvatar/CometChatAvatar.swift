@@ -16,7 +16,6 @@ import Foundation
 import  UIKit
 import  CometChatPro
 
-
 /*  ----------------------------------------------------------------------------------------- */
 
 @IBDesignable
@@ -102,7 +101,6 @@ import  CometChatPro
         return self
     }
     
-    
     /**
      This method used to set the image for CometChatAvatar class
      - Parameter image: This specifies a `URL` for  the CometChatAvatar.
@@ -112,20 +110,28 @@ import  CometChatPro
      [Avatar Documentation](https://prodocs.cometchat.com/docs/ios-ui-components#section-1-avatar)
      */
     @objc func set(image: String?, with name: String? = nil) {
-        /// This method is for set the name label to the image view.
-        setImage(string: name?.uppercased() ?? "")
-        if let urlString = image, let url = URL(string: urlString) {
-            /// This method will fetch the image from remote.
-            imageRequest = imageService.image(for: url) { [weak self] image in
-                guard let strongSelf = self else { return }
-                // Update Thumbnail Image View
-                if let image = image {
-                    strongSelf.image = image
-                }else{
-                    strongSelf.setImage(string: name?.uppercased() ?? "")
-                }
-            }
-        }
+        // Safe up change: Revert to using kingfisher
+        
+        let placeHolderImageView  = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        placeHolderImageView.setImage(string: (name ?? "").uppercased())
+        imageService.set(imageView: self,
+                         imageURL: URL(string: image ?? ""),
+                         placeHolderImage: placeHolderImageView.image)
+        
+//        /// This method is for set the name label to the image view.
+//        setImage(string: name?.uppercased() ?? "")
+//        if let urlString = image, let url = URL(string: urlString) {
+//            /// This method will fetch the image from remote.
+//            imageRequest = imageService.image(for: url) { [weak self] image in
+//                guard let strongSelf = self else { return }
+//                // Update Thumbnail Image View
+//                if let image = image {
+//                    strongSelf.image = image
+//                }else{
+//                    strongSelf.setImage(string: name?.uppercased() ?? "")
+//                }
+//            }
+//        }
     }
 
     @objc func cancel() {
@@ -134,37 +140,47 @@ import  CometChatPro
     }
     
     @objc func set(entity: AppEntity) {
-        
         if let user = entity as? CometChatPro.User {
-            setImage(string: user.name?.uppercased() ?? "")
-            if  let url = URL(string: user.avatar ?? "") {
-                /// This method will fetch the image from remote.
-                imageRequest = imageService.image(for: url) { [weak self] image in
-                    guard let strongSelf = self else { return }
-                    // Update Thumbnail Image View
-                    if let image = image {
-                        strongSelf.image = image
-                    }else{
-                        strongSelf.setImage(string: user.name?.uppercased() ?? "")
-                    }
-                }
-            }
+            let placeHolderImageView  = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            placeHolderImageView.setImage(string: user.name?.uppercased() ?? "")
+            imageService.set(imageView: self,
+                             imageURL: URL(string: user.avatar ?? ""),
+                             placeHolderImage: placeHolderImageView.image)
+//            setImage(string: user.name?.uppercased() ?? "")
+//            if  let url = URL(string: user.avatar ?? "") {
+                // This method will fetch the image from remote.
+//                imageRequest = imageService.image(for: url) { [weak self] image in
+//                    guard let strongSelf = self else { return }
+//                    // Update Thumbnail Image View
+//                    if let image = image {
+//                        strongSelf.image = image
+//                    }else{
+//                        strongSelf.setImage(string: user.name?.uppercased() ?? "")
+//                    }
+//                }
+//            }
         }
         
         if let group = entity as? CometChatPro.Group {
-            setImage(string: group.name?.uppercased() ?? "")
-            if let url = URL(string: group.icon ?? "") {
-                /// This method will fetch the image from remote.
-                imageRequest = imageService.image(for: url) { [weak self] image in
-                    guard let strongSelf = self else { return }
-                    // Update Thumbnail Image View
-                    if let image = image {
-                        strongSelf.image = image
-                    }else{
-                        strongSelf.setImage(string: group.name?.uppercased() ?? "")
-                    }
-                }
-            }
+            let placeHolderImageView  = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            placeHolderImageView.setImage(string: group.name?.uppercased() ?? "")
+            imageService.set(imageView: self,
+                             imageURL: URL(string: group.icon ?? ""),
+                             placeHolderImage: placeHolderImageView.image)
+            
+//            setImage(string: group.name?.uppercased() ?? "")
+//            if let url = URL(string: group.icon ?? "") {
+//                /// This method will fetch the image from remote.
+//                imageRequest = imageService.image(for: url) { [weak self] image in
+//                    guard let strongSelf = self else { return }
+//                    // Update Thumbnail Image View
+//                    if let image = image {
+//                        strongSelf.image = image
+//                    }else{
+//                        strongSelf.setImage(string: group.name?.uppercased() ?? "")
+//                    }
+//                }
+//            }
         }
     }
 }

@@ -43,15 +43,18 @@ class CometChatSenderStickerMessageBubble: UITableViewCell, SafeUpCometChatCell 
         didSet {
             receiptStack.isHidden = true
             if let url = URL(string: stickerMessage.customData?["sticker_url"] as? String ?? "") {
-                imageRequest = imageService.image(for: url) { [weak self] image in
-                    guard let strongSelf = self else { return }
-                    // Update Thumbnail Image View
-                    if let image = image {
-                        strongSelf.imageMessage.image = image
-                    }else{
-                        strongSelf.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                    }
-                }
+                imageService.set(imageView: imageMessage,
+                                 imageURL: url,
+                                 placeHolderImageName: "default-image.png")
+//                imageRequest = imageService.image(for: url) { [weak self] image in
+//                    guard let strongSelf = self else { return }
+//                    // Update Thumbnail Image View
+//                    if let image = image {
+//                        strongSelf.imageMessage.image = image
+//                    }else{
+//                        strongSelf.imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                    }
+//                }
             }else{
                 imageMessage.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
             }

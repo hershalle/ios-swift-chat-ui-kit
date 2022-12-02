@@ -112,15 +112,18 @@ class CometChatReceiverReplyMessageBubble: UITableViewCell, SafeUpCometChatCell 
                                         
                                         if let url = self.getMapFromLocatLon(from: latitude, and: longitude, googleApiKey: UIKitSettings.googleApiKey) {
                                             self.thumbnail.image = UIImage(named: "location-map.png.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                                            imageRequest = imageService.image(for: url) { [weak self] image in
-                                                guard let strongSelf = self else { return }
-                                                // Update Thumbnail Image View
-                                                if let image = image {
-                                                    strongSelf.thumbnail.image = image
-                                                }else{
-                                                    strongSelf.thumbnail.image = UIImage(named: "location-map.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                                                }
-                                            }
+                                            imageService.set(imageView: thumbnail,
+                                                             imageURL: url,
+                                                             placeHolderImageName: "location-map.png")
+//                                            imageRequest = imageService.image(for: url) { [weak self] image in
+//                                                guard let strongSelf = self else { return }
+//                                                // Update Thumbnail Image View
+//                                                if let image = image {
+//                                                    strongSelf.thumbnail.image = image
+//                                                }else{
+//                                                    strongSelf.thumbnail.image = UIImage(named: "location-map.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                                                }
+//                                            }
                                         }else{
                                         }
                                     }
@@ -156,16 +159,19 @@ class CometChatReceiverReplyMessageBubble: UITableViewCell, SafeUpCometChatCell 
                                 if let data = customMessage.customData , let latitude = data["latitude"] as? Double, let longitude =  data["longitude"] as? Double{
                                     
                                     if let url = self.getMapFromLocatLon(from: latitude, and: longitude, googleApiKey: UIKitSettings.googleApiKey) {
-                                        self.thumbnail.image = UIImage(named: "location-map.png.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                                        imageRequest = imageService.image(for: url) { [weak self] image in
-                                            guard let strongSelf = self else { return }
-                                            // Update Thumbnail Image View
-                                            if let image = image {
-                                                strongSelf.thumbnail.image = image
-                                            }else{
-                                                strongSelf.thumbnail.image = UIImage(named: "location-map.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                                            }
-                                        }
+                                        self.thumbnail.image = UIImage(named: "location-map.png", in: UIKitSettings.bundle, compatibleWith: nil)
+                                        imageService.set(imageView: thumbnail,
+                                                         imageURL: url,
+                                                         placeHolderImageName: "location-map.png")
+//                                        imageRequest = imageService.image(for: url) { [weak self] image in
+//                                            guard let strongSelf = self else { return }
+//                                            // Update Thumbnail Image View
+//                                            if let image = image {
+//                                                strongSelf.thumbnail.image = image
+//                                            }else{
+//                                                strongSelf.thumbnail.image = UIImage(named: "location-map.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                                            }
+//                                        }
                                     }else{
                                     }
                                 }
@@ -304,15 +310,18 @@ class CometChatReceiverReplyMessageBubble: UITableViewCell, SafeUpCometChatCell 
                                     if let data = customMessage.customData , let latitude = data["latitude"] as? Double, let longitude =  data["longitude"] as? Double{
                                         
                                         if let url = self.getMapFromLocatLon(from: latitude, and: longitude, googleApiKey: UIKitSettings.googleApiKey) {
-                                            imageRequest = imageService.image(for: url) { [weak self] image in
-                                                guard let strongSelf = self else { return }
-                                                // Update Thumbnail Image View
-                                                if let image = image {
-                                                    strongSelf.thumbnail.image = image
-                                                }else{
-                                                    strongSelf.thumbnail.image = UIImage(named: "location-map.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                                                }
-                                            }
+                                            imageService.set(imageView: thumbnail,
+                                                             imageURL: url,
+                                                             placeHolderImageName: "location-map.png")
+//                                            imageRequest = imageService.image(for: url) { [weak self] image in
+//                                                guard let strongSelf = self else { return }
+//                                                // Update Thumbnail Image View
+//                                                if let image = image {
+//                                                    strongSelf.thumbnail.image = image
+//                                                }else{
+//                                                    strongSelf.thumbnail.image = UIImage(named: "location-map.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                                                }
+//                                            }
                                         }else{
                                         }
                                     }
@@ -348,15 +357,18 @@ class CometChatReceiverReplyMessageBubble: UITableViewCell, SafeUpCometChatCell 
                                 if let data = customMessage.customData , let latitude = data["latitude"] as? Double, let longitude =  data["longitude"] as? Double{
                                     
                                     if let url = self.getMapFromLocatLon(from: latitude, and: longitude, googleApiKey: UIKitSettings.googleApiKey) {
-                                        imageRequest = imageService.image(for: url) { [weak self] image in
-                                            guard let strongSelf = self else { return }
-                                            // Update Thumbnail Image View
-                                            if let image = image {
-                                                strongSelf.thumbnail.image = image
-                                            }else{
-                                                strongSelf.thumbnail.image = UIImage(named: "location-map.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                                            }
-                                        }
+                                        imageService.set(imageView: thumbnail,
+                                                         imageURL: url,
+                                                         placeHolderImageName: "location-map.png")
+//                                        imageRequest = imageService.image(for: url) { [weak self] image in
+//                                            guard let strongSelf = self else { return }
+//                                            // Update Thumbnail Image View
+//                                            if let image = image {
+//                                                strongSelf.thumbnail.image = image
+//                                            }else{
+//                                                strongSelf.thumbnail.image = UIImage(named: "location-map.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                                            }
+//                                        }
                                     }else{
                                     }
                                 }

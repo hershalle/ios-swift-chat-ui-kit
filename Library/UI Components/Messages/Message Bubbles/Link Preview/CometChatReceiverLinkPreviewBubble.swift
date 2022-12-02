@@ -315,19 +315,25 @@ class CometChatReceiverLinkPreviewBubble: UITableViewCell, WKNavigationDelegate,
             self.icon.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
             
             if let thumbnail = linkPreview["image"] as? String , let url = URL(string: thumbnail) {
-                imageRequest = imageService.image(for: url) { [weak self] image in
-                    guard let strongSelf = self else { return }
-                    if let image = image {
-                        strongSelf.icon.image = image
-                    }
-                }
+                imageService.set(imageView: icon,
+                                 imageURL: url,
+                                 placeHolderImage: nil)
+//                imageRequest = imageService.image(for: url) { [weak self] image in
+//                    guard let strongSelf = self else { return }
+//                    if let image = image {
+//                        strongSelf.icon.image = image
+//                    }
+//                }
             }else if let favIcon = linkPreview["favicon"] as? String , let url = URL(string: favIcon) {
-                imageRequest = imageService.image(for: url) { [weak self] image in
-                    guard let strongSelf = self else { return }
-                    if let image = image {
-                        strongSelf.icon.image = image
-                    }
-                }
+                imageService.set(imageView: icon,
+                                 imageURL: url,
+                                 placeHolderImage: nil)
+//                imageRequest = imageService.image(for: url) { [weak self] image in
+//                    guard let strongSelf = self else { return }
+//                    if let image = image {
+//                        strongSelf.icon.image = image
+//                    }
+//                }
             }
             
             if let linkURL = linkPreview["url"] as? String {

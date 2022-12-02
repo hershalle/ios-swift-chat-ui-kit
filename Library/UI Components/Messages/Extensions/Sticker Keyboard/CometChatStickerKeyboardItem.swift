@@ -25,15 +25,18 @@ class CometChatStickerKeyboardItem: UICollectionViewCell {
     var stickerSet: CometChatStickerSet! {
         didSet {
             if let url = URL(string: stickerSet.thumbnail ?? "") {
-                imageRequest = imageService.image(for: url) { [weak self] image in
-                    guard let strongSelf = self else { return }
-                    // Update Thumbnail Image View
-                    if let image = image {
-                        strongSelf.stickerIcon.image = image
-                    }else{
-                        strongSelf.stickerIcon.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                    }
-                }
+                imageService.set(imageView: stickerIcon,
+                                 imageURL: url,
+                                 placeHolderImageName: "default-image.png")
+//                imageRequest = imageService.image(for: url) { [weak self] image in
+//                    guard let strongSelf = self else { return }
+//                    // Update Thumbnail Image View
+//                    if let image = image {
+//                        strongSelf.stickerIcon.image = image
+//                    }else{
+//                        strongSelf.stickerIcon.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                    }
+//                }
                
             }
         }
@@ -42,15 +45,18 @@ class CometChatStickerKeyboardItem: UICollectionViewCell {
     var sticker: CometChatSticker! {
         didSet {
             if let url = URL(string: sticker.url ?? "") {
-                imageRequest = imageService.image(for: url) { [weak self] image in
-                    guard let strongSelf = self else { return }
-                    // Update Thumbnail Image View
-                    if let image = image {
-                        strongSelf.stickerIcon.image = image
-                    }else{
-                        strongSelf.stickerIcon.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
-                    }
-                }
+                imageService.set(imageView: stickerIcon,
+                                 imageURL: url,
+                                 placeHolderImageName: "default-image.png")
+//                imageRequest = imageService.image(for: url) { [weak self] image in
+//                    guard let strongSelf = self else { return }
+//                    // Update Thumbnail Image View
+//                    if let image = image {
+//                        strongSelf.stickerIcon.image = image
+//                    }else{
+//                        strongSelf.stickerIcon.image = UIImage(named: "default-image.png", in: UIKitSettings.bundle, compatibleWith: nil)
+//                    }
+//                }
             }
         }
     }
