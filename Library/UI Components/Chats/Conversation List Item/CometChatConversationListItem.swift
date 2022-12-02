@@ -18,7 +18,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatConversationListItem: UITableViewCell {
+class CometChatConversationListItem: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     
