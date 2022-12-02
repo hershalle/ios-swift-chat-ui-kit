@@ -13,7 +13,7 @@ import CometChatPro
 /*  ----------------------------------------------------------------------------------------- */
 
 
-class CometChatSenderReplyMessageBubble: UITableViewCell {
+class CometChatSenderReplyMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBInspectable
     

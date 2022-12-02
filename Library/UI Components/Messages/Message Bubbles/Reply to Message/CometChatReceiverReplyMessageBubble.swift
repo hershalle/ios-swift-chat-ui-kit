@@ -14,7 +14,7 @@ protocol CometChatReceiverReplyMessageBubbleDelegate: AnyObject {
     func didTapOnSentimentAnalysisViewForLeftReplyBubble(indexPath: IndexPath)
 }
 
-class CometChatReceiverReplyMessageBubble: UITableViewCell {
+class CometChatReceiverReplyMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     
