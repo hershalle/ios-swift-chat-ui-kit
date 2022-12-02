@@ -15,7 +15,7 @@ public class CameraHandler: NSObject{
     fileprivate var currentVC: UIViewController!
     
     //MARK: Internal Properties
-    
+    open var safeUpPhotoViewController: ((_ imagePath: String) -> UIViewController)?
     public var imagePickedBlock: ((String) -> Void)?
     var videoPickedBlock: ((String) -> Void)?
     func presentCamera(for view: UIViewController)
@@ -64,6 +64,9 @@ extension CameraHandler: UIImagePickerControllerDelegate, UINavigationController
     
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var safeUpImagePickedURLString: String? // SafeUp change
+        
         switch picker.sourceType {
         case .photoLibrary:
             
@@ -72,7 +75,8 @@ extension CameraHandler: UIImagePickerControllerDelegate, UINavigationController
             }
             
             if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? NSURL {
-                self.imagePickedBlock?(imageURL.absoluteString ?? "")
+//                self.imagePickedBlock?(imageURL.absoluteString ?? "")
+                safeUpImagePickedURLString = imageURL.absoluteString ?? "" // SafeUp change
             }
         case .camera:
             guard let image = info[.originalImage] as? UIImage else {
@@ -80,11 +84,20 @@ extension CameraHandler: UIImagePickerControllerDelegate, UINavigationController
             }
             saveImage(imageName: "image_\(Int(Date().timeIntervalSince1970 * 100)).png", image: image)
         case .savedPhotosAlbum:
-            self.imagePickedBlock?("\(String(describing: info[UIImagePickerController.InfoKey.imageURL]!))")
+//            self.imagePickedBlock?("\(String(describing: info[UIImagePickerController.InfoKey.imageURL]!))")
+            safeUpImagePickedURLString = "\(String(describing: info[UIImagePickerController.InfoKey.imageURL]!))" // SafeUp change
         @unknown default:
             break
         }
         currentVC.dismiss(animated: true, completion: nil)
+        
+        // SafeUp change
+        if let safeUpImagePickedURLString = safeUpImagePickedURLString,
+            let vc = safeUpPhotoViewController?(safeUpImagePickedURLString) {
+            DispatchQueue.main.async {
+                self.currentVC.present(vc, animated: true, completion: nil)
+            }
+        }
     }
     
     func saveImage(imageName: String, image: UIImage) {
