@@ -12,7 +12,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatReceiverImageMessageBubble: UITableViewCell {
+class CometChatReceiverImageMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     
     // MARK: - Declaration of IBInspectable

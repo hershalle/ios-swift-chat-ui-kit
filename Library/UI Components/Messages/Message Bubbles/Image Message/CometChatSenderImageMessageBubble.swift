@@ -16,7 +16,7 @@ protocol MediaDelegate: NSObject {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatSenderImageMessageBubble: UITableViewCell {
+class CometChatSenderImageMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
      // MARK: - Declaration of IBInspectable
     
