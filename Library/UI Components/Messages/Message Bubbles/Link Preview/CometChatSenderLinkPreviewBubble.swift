@@ -11,7 +11,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatSenderLinkPreviewBubble: UITableViewCell {
+class CometChatSenderLinkPreviewBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     

@@ -19,7 +19,7 @@ protocol LinkPreviewDelegate {
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatReceiverLinkPreviewBubble: UITableViewCell, WKNavigationDelegate {
+class CometChatReceiverLinkPreviewBubble: UITableViewCell, WKNavigationDelegate, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     
