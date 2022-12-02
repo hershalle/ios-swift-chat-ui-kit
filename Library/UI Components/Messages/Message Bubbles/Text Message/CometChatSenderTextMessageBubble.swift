@@ -145,7 +145,7 @@ class CometChatSenderTextMessageBubble: UITableViewCell, SafeUpCometChatCell {
              }
              
             message.customize { label in
-                label.URLColor = UIKitSettings.white//URLColor // SafeUp change
+                label.URLColor = UIColor.white//UIKitSettings.URLColor // SafeUp change
                 label.URLSelectedColor  = UIKitSettings.URLSelectedColor
                 label.customColor[phoneParser1] = UIKitSettings.PhoneNumberColor
                 label.customSelectedColor[phoneParser1] = UIKitSettings.PhoneNumberSelectedColor

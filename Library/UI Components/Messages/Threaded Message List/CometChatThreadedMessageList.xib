@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CometChatThreadedMessageList" customModule="CometChat_KitchenSink" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CometChatThreadedMessageList" customModule="CometChatUIKit" customModuleProvider="target">
             <connections>
+                <outlet property="attachmentButton" destination="0dF-UV-gaF" id="uWg-JM-mTu"/>
                 <outlet property="audioNoteActionView" destination="trD-Pd-vrO" id="7yU-dh-wkd"/>
                 <outlet property="audioNoteDeleteButton" destination="Jtw-wc-hyO" id="tFr-Fb-evi"/>
                 <outlet property="audioNotePauseButton" destination="Nif-zK-2HQ" id="kF9-YF-XS1"/>
@@ -59,10 +60,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I7K-c9-nQW">
-                    <rect key="frame" x="0.0" y="152" width="414" height="670"/>
+                    <rect key="frame" x="0.0" y="156" width="414" height="666"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OER-dD-HiA" customClass="CometChatSmartRepliesPreview" customModule="CometChat_KitchenSink" customModuleProvider="target">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OER-dD-HiA" customClass="CometChatSmartRepliesPreview" customModule="CometChatUIKit" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="764" width="414" height="58"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dwa-X9-v0W">
@@ -134,7 +135,7 @@
                         <userDefinedRuntimeAttribute type="image" keyPath="floaterImage1" value="heart.png"/>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5m-at-Prg" customClass="CometChatMessageComposer" customModule="CometChat_KitchenSink" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5m-at-Prg" customClass="CometChatMessageComposer" customModule="CometChatUIKit" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="822" width="414" height="40"/>
                     <subviews>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dF-UV-gaF">
@@ -153,7 +154,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEI-9E-QbO">
                             <rect key="frame" x="54" y="7" width="348" height="27"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xe3-lM-oFY" customClass="GrowingTextView" customModule="CometChat_KitchenSink" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xe3-lM-oFY" customClass="GrowingTextView" customModule="CometChatUIKit" customModuleProvider="target">
                                     <rect key="frame" x="8" y="-7" width="300" height="39"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -249,7 +250,7 @@
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOQ-Im-IIm">
                     <rect key="frame" x="0.0" y="822" width="414" height="40"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLy-tA-jTT" customClass="AudioVisualizationView" customModule="CometChat_KitchenSink" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLy-tA-jTT" customClass="AudioVisualizationView" customModule="CometChatUIKit" customModuleProvider="target">
                             <rect key="frame" x="55" y="5" width="304" height="40"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -453,7 +454,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkt-fk-qa0">
-                    <rect key="frame" x="0.0" y="44" width="414" height="108"/>
+                    <rect key="frame" x="0.0" y="48" width="414" height="108"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8S3-fC-nDP">
                             <rect key="frame" x="10" y="10" width="394" height="48"/>
@@ -461,8 +462,8 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Btc-H0-UDY">
                                     <rect key="frame" x="0.0" y="0.0" width="394" height="40"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v87-MD-pkT" customClass="CometChatAvatar" customModule="CometChat_KitchenSink" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="198" height="40"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v87-MD-pkT" customClass="CometChatAvatar" customModule="CometChatUIKit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="340.5" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="F8z-mT-IFj"/>
                                                 <constraint firstAttribute="height" constant="40" id="cf6-iN-pLk"/>
@@ -474,16 +475,16 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="sis-0y-qpb">
-                                            <rect key="frame" x="206" y="0.0" width="188" height="40"/>
+                                            <rect key="frame" x="348.5" y="0.0" width="45.5" height="40"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hn4-w6-jw9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="188" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="45.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93b-Wx-xEi">
-                                                    <rect key="frame" x="0.0" y="23.5" width="188" height="16.5"/>
+                                                    <rect key="frame" x="0.0" y="23.5" width="45.5" height="16.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
@@ -681,10 +682,10 @@
         <image name="messages-delete.png" width="24" height="24"/>
         <image name="microphone-circle.png" width="28" height="28"/>
         <image name="more_vertical.png" width="24" height="24"/>
-        <image name="pause.fill" catalog="system" width="116" height="128"/>
+        <image name="pause.fill" catalog="system" width="117" height="128"/>
         <image name="send-message-filled.png" width="27" height="27"/>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

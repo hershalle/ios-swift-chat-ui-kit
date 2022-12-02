@@ -202,6 +202,7 @@ open class UIKitSettings {
         public let share_message: String
         public let copy_message: String
         public let reply_privately: String
+        public let plus_add_file: String
         
         public init(bundle: Bundle,
                     send_message: String,
@@ -214,7 +215,8 @@ open class UIKitSettings {
                     forward_message: String,
                     share_message: String,
                     copy_message: String,
-                    reply_privately: String) {
+                    reply_privately: String,
+                    plus_add_file: String) {
             self.bundle = bundle
             self.send_message = send_message
             self.take_a_photo = take_a_photo
@@ -227,6 +229,7 @@ open class UIKitSettings {
             self.share_message = share_message
             self.copy_message = copy_message
             self.reply_privately = reply_privately
+            self.plus_add_file = plus_add_file
         }
     }
     

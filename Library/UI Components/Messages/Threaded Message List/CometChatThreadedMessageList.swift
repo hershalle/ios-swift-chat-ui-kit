@@ -115,6 +115,7 @@ open class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDelega
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var smartRepliesView: CometChatSmartRepliesPreview!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var attachmentButton: UIButton!
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout! {
         didSet{
             collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -185,7 +186,7 @@ open class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDelega
         registerCells()
         configureGrowingTextView()
         setupKeyboard()
-        setupRecorder()
+//        setupRecorder() //SafeUp changes
         self.addObsevers()
     }
     
@@ -194,12 +195,20 @@ open class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDelega
             setupThreadedView(forMessage: message)
         }
         hideSystemBackButton(bool: true)
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+//        locationManager.distanceFilter = kCLDistanceFilterNone //SafeUp changes
+//        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters //SafeUp changes
         setupDelegates()
-        locationAuthStatus()
+//        locationAuthStatus() //SafeUp changes
         hideSystemBackButton(bool: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didThreadOpened"), object: nil, userInfo: nil)
+        
+        
+        // SafeUp Changes:
+        let audioNoteSendButtonImage = UIImage(named: UIKitSettings.image.send_message, in: UIKitSettings.image.bundle, compatibleWith: nil)
+        audioNoteSendButton.setImage(audioNoteSendButtonImage, for: .normal)
+        
+        let attachmentButtonImage = UIImage(named: UIKitSettings.image.plus_add_file, in: UIKitSettings.image.bundle, compatibleWith: nil)
+        attachmentButton.setImage(attachmentButtonImage, for: .normal)
     }
     
     
@@ -1761,7 +1770,8 @@ open class CometChatThreadedMessageList: UIViewController, AVAudioRecorderDelega
         textView.delegate = self
         
         if #available(iOS 13.0, *) {
-            let sendImage = UIImage(named: "send-message-filled.png", in: UIKitSettings.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            // SafeUp change
+            let sendImage = UIImage(named: UIKitSettings.image.send_message, in: UIKitSettings.image.bundle, compatibleWith: nil)//?.withRenderingMode(.alwaysTemplate)
             send.setImage(sendImage, for: .normal)
             send.tintColor = UIKitSettings.primaryColor
         } else {}
