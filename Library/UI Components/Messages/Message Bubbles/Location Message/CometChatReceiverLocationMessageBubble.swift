@@ -12,7 +12,7 @@ import CometChatPro
 
 /*  ----------------------------------------------------------------------------------------- */
 
-class CometChatReceiverLocationMessageBubble: UITableViewCell {
+class CometChatReceiverLocationMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     
@@ -48,7 +48,7 @@ class CometChatReceiverLocationMessageBubble: UITableViewCell {
         didSet{
             if locationMessage.receiverType == .group {
                 if let name = locationMessage.sender?.name {
-                    userName.text = name + ":"
+                    userName.text = name // + ":" // SafeUp change
                 }
                 nameView.isHidden = false
             }else {

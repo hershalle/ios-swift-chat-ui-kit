@@ -18,7 +18,7 @@ protocol  LocationCellDelegate: NSObject {
 }
 
 
-class CometChatSenderLocationMessageBubble: UITableViewCell {
+class CometChatSenderLocationMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     // MARK: - Declaration of IBOutlets
     
