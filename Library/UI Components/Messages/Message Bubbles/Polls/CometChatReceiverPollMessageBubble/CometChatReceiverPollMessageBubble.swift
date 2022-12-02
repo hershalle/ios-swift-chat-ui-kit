@@ -13,11 +13,11 @@ protocol PollExtensionDelegate: NSObject {
     func voteForPoll(pollID: String, with option: String, cell: UITableViewCell)
 }
 
-class CometChatReceiverPollMessageBubble: UITableViewCell {
+class CometChatReceiverPollMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     @IBOutlet weak var reactionView: CometChatMessageReactions!
     @IBOutlet weak var heightReactions: NSLayoutConstraint!
-    @IBOutlet weak var messgeView: UIView!
+    @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var receiptStack: UIStackView!
@@ -742,7 +742,7 @@ class CometChatReceiverPollMessageBubble: UITableViewCell {
         if #available(iOS 13.0, *) {
             
         } else {
-            messgeView.backgroundColor =  .lightGray
+            messageView.backgroundColor =  .lightGray
         }
         
     }
@@ -752,7 +752,7 @@ class CometChatReceiverPollMessageBubble: UITableViewCell {
         if #available(iOS 13.0, *) {
             
         } else {
-            messgeView.backgroundColor =  .lightGray
+            messageView.backgroundColor =  .lightGray
         }
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 import CometChatPro
 
-class CometChatSenderPollMessageBubble: UITableViewCell {
+class CometChatSenderPollMessageBubble: UITableViewCell, SafeUpCometChatCell {
     
     @IBOutlet weak var reactionView: CometChatMessageReactions!
     @IBOutlet weak var heightReactions: NSLayoutConstraint!
