@@ -120,6 +120,7 @@ open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAu
     @IBOutlet weak var inputBarHeight: NSLayoutConstraint!
     @IBOutlet weak var reactionButtonSpace: NSLayoutConstraint!
     @IBOutlet weak var reactionButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var attachment: UIButton!
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout! {
         didSet{
             collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -205,6 +206,17 @@ open class CometChatMessageList: UIViewController, AVAudioRecorderDelegate, AVAu
         }
     }
     
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // SafeUp change
+        let attachmentImage = UIImage(named: UIKitSettings.image.plus_add_file, in: UIKitSettings.image.bundle, compatibleWith: nil)
+        attachment.setImage(attachmentImage, for: .normal)
+        
+        // SafeUp change
+        let sendImage = UIImage(named: UIKitSettings.image.send_message, in: UIKitSettings.image.bundle, compatibleWith: nil)
+        send.setImage(sendImage, for: .normal)
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)

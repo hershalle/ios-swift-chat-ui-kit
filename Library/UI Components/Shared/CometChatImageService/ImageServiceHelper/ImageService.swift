@@ -13,7 +13,7 @@ import Kingfisher
 final class ImageService {
 
     // MARK: - Public API
-
+    
     func set(imageView: UIImageView, imageURL: URL?, placeHolderImage: UIImage?) {
         DispatchQueue.main.async {
             imageView.kf.setImage(with: imageURL, placeholder: placeHolderImage)
